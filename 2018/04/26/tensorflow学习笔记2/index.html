@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="My way to better!" />
+  
+
+  
+  <meta name="keywords" content="AI ML DL life" />
+  
+  
+  
+  
+  
+  
+  <title>tensorflow学习笔记2 | 山风之行</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上期我们说到tensorflow分两步，Graph和run。在公司用tensorflow搭了下lstm做分类的模型，结果很奇怪。同样的模型结构，我用Keras跑出来auc为0.7,而用tensorflow时loss一直跳，而且auc基本在0.5左右。然后在排错过程中，我想到了graph，把graph打出来后，发现了几个问题，如最后一层忘记加sigmoid激活。 尴尬！！！不过反映了tensorfl">
+<meta name="keywords" content="tensorflow, 深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tensorflow学习笔记2">
+<meta property="og:url" content="http://xurui.club/2018/04/26/tensorflow学习笔记2/index.html">
+<meta property="og:site_name" content="山风之行">
+<meta property="og:description" content="上期我们说到tensorflow分两步，Graph和run。在公司用tensorflow搭了下lstm做分类的模型，结果很奇怪。同样的模型结构，我用Keras跑出来auc为0.7,而用tensorflow时loss一直跳，而且auc基本在0.5左右。然后在排错过程中，我想到了graph，把graph打出来后，发现了几个问题，如最后一层忘记加sigmoid激活。 尴尬！！！不过反映了tensorfl">
+<meta property="og:locale" content="zh-Ch">
+<meta property="og:updated_time" content="2018-04-26T13:51:43.998Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tensorflow学习笔记2">
+<meta name="twitter:description" content="上期我们说到tensorflow分两步，Graph和run。在公司用tensorflow搭了下lstm做分类的模型，结果很奇怪。同样的模型结构，我用Keras跑出来auc为0.7,而用tensorflow时loss一直跳，而且auc基本在0.5左右。然后在排错过程中，我想到了graph，把graph打出来后，发现了几个问题，如最后一层忘记加sigmoid激活。 尴尬！！！不过反映了tensorfl">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="山风之行" rel="home">山风之行</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">山风之行</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">主页</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">文章</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-tensorflow学习笔记2" class="post-tensorflow学习笔记2 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      tensorflow学习笔记2
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记2/" data-id="cjgglmssz0001zcdaxjrx7gq7" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>上期我们说到tensorflow分两步，Graph和run。在公司用tensorflow搭了下lstm做分类的模型，结果很奇怪。同样的模型结构，我用Keras跑出来auc为0.7,而用tensorflow时loss一直跳，而且auc基本在0.5左右。然后在排错过程中，我想到了graph，把graph打出来后，发现了几个问题，如最后一层忘记加sigmoid激活。 尴尬！！！不过反映了tensorflow graph的一个好处，可以让我们像看图一样检查模型。。。 今天主要讲下常量，变量和占位符。</p>
+<p>常量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = tf.contant([3,6])#表示生成一个长度为2的向量a = [3,6]，此时a是一个op，在sess.run之后才有值</span><br><span class="line">#tf.zeros()</span><br><span class="line">#tf.ones()</span><br><span class="line">#都为常量</span><br><span class="line">######------------------</span><br><span class="line">#tf.random_normal(shape=,dtype=,name=&apos;&apos;)</span><br><span class="line">#tf.random_uniform()</span><br><span class="line">#以上也是常量，只不过是随机常量</span><br></pre></td></tr></table></figure></p>
+<p>变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">b = tf.Variable(2,name=&apos;scalar&apos;)#生成一个变量，并为该变量赋初值为2，仍在sess.run()后才有值为2。</span><br><span class="line">#变量在使用之前要初始化！！！初始化变量有三种方式</span><br><span class="line">#1）全部初始化</span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line">sess.run(init)</span><br><span class="line">#2)初始化部分变量</span><br><span class="line">init_ab = tf.variables_initializer([a,b],name =&apos;init_ab&apos;)</span><br><span class="line">#3)初始化单个变量</span><br><span class="line">sess.run(b.initializer)</span><br><span class="line">#当然，此时b被初始化后是个Tensor,</span><br><span class="line">print(b) #Tensor(&apos;Variable/....&apos;)</span><br><span class="line">print(b.eval()) #[[0.444,0.111,....],...,[...]],使用eval()输出变量内容a</span><br></pre></td></tr></table></figure></p>
+<p>记得常量为一个op,而Variable()是一个类<br>占位符placeholder()</p>
+<p><code>a = tf.placeholder(dtype,shape=,name=&#39;&#39;)</code>占位符就是个容器，先占个坑，里面什么都没有，在run的时候，可以通过 <code>sess.run([a,b],feed_dict={a:a_data,b:b_data})</code>来将值放到之前占的坑里。 一般我们用占位符来存放用于训练的数据，当然我们可以直接用数据来构建op，但是有点外行了。。用placeholder的方式，可以让我们数据送入的更自由，可以按自己需要的batch来送入。<br>简单总结一下，常量constant()用来构建一些在模型中不需要改变的量，变量Variable()一般用来构建权重等，需要不断更新，占位符placeholder一般用来作数据的容器。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/04/26/tensorflow学习笔记2/">
+    <time datetime="2018-04-26T13:43:27.000Z" class="entry-date">
+        2018-04-26
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow-深度学习/">tensorflow, 深度学习</a></li></ul>
+
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2018/04/26/tensorflow学习笔记1/" rel="next">tensorflow学习笔记1 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/心情/">心情</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/26/tensorflow学习笔记2/">tensorflow学习笔记2</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/26/tensorflow学习笔记1/">tensorflow学习笔记1</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/26/找实习/">找实习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/26/初来博客/">初来博客</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow-深度学习/">tensorflow, 深度学习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情-面试/">心情, 面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/tensorflow-深度学习/" style="font-size: 20px;">tensorflow, 深度学习</a> <a href="/tags/心情/" style="font-size: 10px;">心情</a> <a href="/tags/心情-面试/" style="font-size: 10px;">心情, 面试</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2018 Petrus Zhang
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

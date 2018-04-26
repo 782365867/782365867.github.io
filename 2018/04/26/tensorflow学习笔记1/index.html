@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="My way to better!" />
+  
+
+  
+  <meta name="keywords" content="AI ML DL life" />
+  
+  
+  
+  
+  
+  
+  <title>tensorflow学习笔记1 | 山风之行</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="明天要去实习了，心里有些激动，有些紧张，还有些舍不得，舍不得学校的样子，和某个人。 进入正题。 tensorflow是谷歌开源的一款深度学习框架，我用的是python，这个框架是目前最火的框架之一，很有学习的必要。 首先tensorflow，tensor +　flow，tensor –&amp;gt; 张量，flow –&amp;gt;流动, 也就是张量在图里流动。这里讲两点，张量就是，0维的叫标量（数字），1维">
+<meta name="keywords" content="tensorflow, 深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tensorflow学习笔记1">
+<meta property="og:url" content="http://xurui.club/2018/04/26/tensorflow学习笔记1/index.html">
+<meta property="og:site_name" content="山风之行">
+<meta property="og:description" content="明天要去实习了，心里有些激动，有些紧张，还有些舍不得，舍不得学校的样子，和某个人。 进入正题。 tensorflow是谷歌开源的一款深度学习框架，我用的是python，这个框架是目前最火的框架之一，很有学习的必要。 首先tensorflow，tensor +　flow，tensor –&amp;gt; 张量，flow –&amp;gt;流动, 也就是张量在图里流动。这里讲两点，张量就是，0维的叫标量（数字），1维">
+<meta property="og:locale" content="zh-Ch">
+<meta property="og:image" content="https://i.imgur.com/IUKRCUW.png">
+<meta property="og:updated_time" content="2018-04-26T13:51:43.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tensorflow学习笔记1">
+<meta name="twitter:description" content="明天要去实习了，心里有些激动，有些紧张，还有些舍不得，舍不得学校的样子，和某个人。 进入正题。 tensorflow是谷歌开源的一款深度学习框架，我用的是python，这个框架是目前最火的框架之一，很有学习的必要。 首先tensorflow，tensor +　flow，tensor –&amp;gt; 张量，flow –&amp;gt;流动, 也就是张量在图里流动。这里讲两点，张量就是，0维的叫标量（数字），1维">
+<meta name="twitter:image" content="https://i.imgur.com/IUKRCUW.png">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="山风之行" rel="home">山风之行</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">山风之行</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">主页</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">文章</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-tensorflow学习笔记1" class="post-tensorflow学习笔记1 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      tensorflow学习笔记1
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记1/" data-id="cjgglmssv0000zcda1mcq46yg" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>明天要去实习了，心里有些激动，有些紧张，还有些舍不得，舍不得学校的样子，和某个人。</p>
+<p>进入正题。</p>
+<p>tensorflow是谷歌开源的一款深度学习框架，我用的是python，这个框架是目前最火的框架之一，很有学习的必要。</p>
+<p>首先tensorflow，tensor +　flow，tensor –&gt; 张量，flow –&gt;流动, 也就是张量在图里流动。这里讲两点，张量就是，0维的叫标量（数字），1维的叫向量，2维的叫矩阵，那3+维只能叫张量了;而在图里流动，这里的图（graph）是tensorflow的重要思想之一，tensorflow把运算结构画成graph，其中有节点op，有边，边代表张量的流动，节点代表运算。</p>
+<p>在tensorflow代码中，分为两大块，第一块用来画图，即把所有的运算画在一张图上，并没有实际运算；第二块用来运算，Session().这样做看似很麻烦，其实有个好处，我们看到了图之后，可以有选择性的运算某些节点，而一些没必要的节点可以不运算，节约了大量的时间。如下面的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">x=2</span><br><span class="line"></span><br><span class="line">y=3</span><br><span class="line"></span><br><span class="line">add_op=tf.add(x,y)</span><br><span class="line"></span><br><span class="line">mul_op=tf.mul(x,y)</span><br><span class="line"></span><br><span class="line">useless=tf.mul(x,add_op)</span><br><span class="line"></span><br><span class="line">pow_op=tf.pow(add_op,mul_op)</span><br><span class="line"></span><br><span class="line">with tf.Session() as sess:</span><br><span class="line"></span><br><span class="line">     z=sess.run(pow_op)</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://i.imgur.com/IUKRCUW.png" alt=""></p>
+<p>可以看到如果只<code>run(pow_op)</code>,那么<code>useless</code>就不会被运算。原因是，当我们<code>run</code>时，会从图中找该op所依赖的op，而<code>pow_op</code>没有依赖<code>useless</code>,所以就没有执行啦。<br>记得查看graph的时候，可不是像打开jpg一样哟。。要<code>cd</code>到graph存放的目录下，<code>Tensorboard --logdir=&#39;目录 &#39;</code>才行。<br>待续。。。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/04/26/tensorflow学习笔记1/">
+    <time datetime="2018-04-26T13:43:20.000Z" class="entry-date">
+        2018-04-26
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow-深度学习/">tensorflow, 深度学习</a></li></ul>
+
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2018/04/26/tensorflow学习笔记2/" rel="prev"><span class="meta-nav">←</span> tensorflow学习笔记2</a></span>
+    
+    
+        <span class="nav-next"><a href="/2018/04/26/找实习/" rel="next">找实习 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/心情/">心情</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/26/tensorflow学习笔记2/">tensorflow学习笔记2</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/26/tensorflow学习笔记1/">tensorflow学习笔记1</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/26/找实习/">找实习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/26/初来博客/">初来博客</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow-深度学习/">tensorflow, 深度学习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情-面试/">心情, 面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/tensorflow-深度学习/" style="font-size: 20px;">tensorflow, 深度学习</a> <a href="/tags/心情/" style="font-size: 10px;">心情</a> <a href="/tags/心情-面试/" style="font-size: 10px;">心情, 面试</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2018 Petrus Zhang
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
