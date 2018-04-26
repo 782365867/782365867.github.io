@@ -18,14 +18,14 @@
   <title>tensorflow学习笔记2 | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="上期我们说到tensorflow分两步，Graph和run。在公司用tensorflow搭了下lstm做分类的模型，结果很奇怪。同样的模型结构，我用Keras跑出来auc为0.7,而用tensorflow时loss一直跳，而且auc基本在0.5左右。然后在排错过程中，我想到了graph，把graph打出来后，发现了几个问题，如最后一层忘记加sigmoid激活。 尴尬！！！不过反映了tensorfl">
-<meta name="keywords" content="tensorflow, 深度学习">
+<meta name="keywords" content="tensorflow,深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tensorflow学习笔记2">
 <meta property="og:url" content="http://xurui.club/2018/04/26/tensorflow学习笔记2/index.html">
 <meta property="og:site_name" content="山风之行">
 <meta property="og:description" content="上期我们说到tensorflow分两步，Graph和run。在公司用tensorflow搭了下lstm做分类的模型，结果很奇怪。同样的模型结构，我用Keras跑出来auc为0.7,而用tensorflow时loss一直跳，而且auc基本在0.5左右。然后在排错过程中，我想到了graph，把graph打出来后，发现了几个问题，如最后一层忘记加sigmoid激活。 尴尬！！！不过反映了tensorfl">
 <meta property="og:locale" content="zh-Ch">
-<meta property="og:updated_time" content="2018-04-26T13:51:43.998Z">
+<meta property="og:updated_time" content="2018-04-26T14:18:44.076Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tensorflow学习笔记2">
 <meta name="twitter:description" content="上期我们说到tensorflow分两步，Graph和run。在公司用tensorflow搭了下lstm做分类的模型，结果很奇怪。同样的模型结构，我用Keras跑出来auc为0.7,而用tensorflow时loss一直跳，而且auc基本在0.5左右。然后在排错过程中，我想到了graph，把graph打出来后，发现了几个问题，如最后一层忘记加sigmoid激活。 尴尬！！！不过反映了tensorfl">
@@ -84,7 +84,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记2/" data-id="cjggm0n6h0001ocda7u279twz" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记2/" data-id="cjggm6dw00000bcdapg9wjcfu" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -108,7 +108,7 @@
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow-深度学习/">tensorflow, 深度学习</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
 
     </footer>
 </article>
@@ -181,7 +181,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow-深度学习/">tensorflow, 深度学习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情-面试/">心情, 面试</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </aside>
 
@@ -190,7 +190,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/tensorflow-深度学习/" style="font-size: 20px;">tensorflow, 深度学习</a> <a href="/tags/心情/" style="font-size: 10px;">心情</a> <a href="/tags/心情-面试/" style="font-size: 10px;">心情, 面试</a>
+      <a href="/tags/tensorflow/" style="font-size: 20px;">tensorflow</a> <a href="/tags/心情/" style="font-size: 20px;">心情</a> <a href="/tags/深度学习/" style="font-size: 20px;">深度学习</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
     </div>
   </aside>
 
@@ -200,7 +200,7 @@
       <footer id="colophon" role="contentinfo">
     <p>&copy; 2018 Petrus Zhang
     All rights reserved.</p>
-    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+    <p>My Way to Better!</p>
 </footer>
     <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
