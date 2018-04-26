@@ -82,34 +82,25 @@
             <div class="slider-wrapper theme-default">
                 <div id="slider" class="nivoSlider">
                     <img src="assets/img/owl.jpg" data-thumb="assets/img/owl.jpg" alt="" />
-                    <!-- <a href="assets/img/owl2.jpg"><img src="assets/img/owl2.jpg" alt="" /></a> -->
+                    <a href="assets/img/owl2.jpg"><img src="assets/img/owl2.jpg" alt="" /></a>
                     <img src="assets/img/owl.jpg" data-thumb="assets/img/owl.jpg" alt="" />
                     <img src="assets/img/owl2.jpg" data-thumb="assets/img/owl2.jpg" alt="" />
-                    <!-- <img src="assets/img/1.jpg" data-thumb="assets/img/1.jpg" alt="" />
-
-                    <img src="assets/img/31.jpg" data-thumb="assets/img/o2.jpg" alt="" />
-
-                    <img src="assets/img/o3.jpg" data-thumb="assets/img/o3.jpg" alt="" />
-                    <img src="assets/img/o4.jpg" data-thumb="assets/img/o4.jpg" alt="" />
-                    <img src="assets/img/owl2.jpg" data-thumb="assets/img/owl2.jpg" alt="" />
- -->
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!--End banner img-->
-<!--主要内容 -->
-    <div class="container-fluid main-container" id="main-container">
-        <div class="row top-title">
-            <div class="col-md-12">
-                <h1 class="page-title">
-                    最新文章
-                </h1>
-            </div>
-        </div>
-    <!--main Start-->
+<div class="container-fluid main-container" id="main-container">
     <div class="row">
+        <div class="col-md-12 top-title">
+            <h2 class="page-title">
+                博客文章
+            </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row">
         <div class="col-md-12 post-container">
             <h2 class="post-title">
                 <a href="初来博客.html" title="">初来博客</a>
@@ -148,7 +139,6 @@
             </div>
             <div class="post-content">
                 
-
 <p>说件开心的事，我种的海棠花开了。</p>
 
 <p>再说件开心的事，讯飞实习录用了，上午接到的电话，下周二入职。</p>
@@ -157,10 +147,10 @@
         </div>
     </div>
 
-    <div class="row">
+     <div class="row">
         <div class="col-md-12 post-container">
             <h2 class="post-title">
-                <a href="blogs/machine/tensorflow学习心得1.html" title="">tensorflow心学习笔记1</a>
+                <a href="blogs/machine/tensorflow学习心得1.html" title="">tensorflow心得(1)</a>
             </h2>
             <div class="meta-box">
             <span class="m-post-date">
@@ -179,8 +169,7 @@
             </div>
            
         </div>
-    </div>
-        <div class="row">
+    </div>   <div class="row">
         <div class="col-md-12 post-container">
             <h2 class="post-title">
                 <a href="blogs/machine/tensorflow学习笔记2.html" title="">tensorflow学习笔记2</a>
@@ -217,70 +206,34 @@
             </div>
         </div>
     </div>
-<!--     <div class="container-fluid main-container" id="main-container">
-        <div class="row top-title">
-            <div class="col-md-12">
-                <h1 class="page-title">
-                    最新文章
-                </h1>
-            </div>
-        </div>
-       </div> -->
+    <div class="container-fluid main-container" id="main-container">
+  </div>
+        
     <!--main Start-->
-
-    <!--更多内容-->
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="page-title">
-                <a href="blog.html" title="">更多内容</a>
-            </h2>
-        </div>
-    </div>
-    <!--跳转至博客页面-->
  
-    <!--推荐阅读-->
-    <div class="row">
-        <div class="col-md-12 post-container m-recommend-page">
-            <div class="row">
-                <!--<div class="col-md-4">
-                    <a href="" class="thumbnail">
-                        <img src="assets/img/works.png" alt="作品展示">
-                    </a>
-                </div>-->
-                <div class="col-md-4">
-                    <a href="" class="thumbnail">
-                        <img src="assets/img/about.jpeg" alt="行歌无情">
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <blockquote class="contact-list" id="about-list">
-                            <ul>
-                                <li>
-                                    电子邮箱:
-                                    <kbd>
-                                        782365867@163.com
-                                    </kbd>
-                                </li>
-                                <li>
-                                    腾讯QQ:
-                                    <kbd>
-                                        782365867
-                                    </kbd>
-                                </li>
-                                
-                                <li>
-                                    Github:
-                                    <kbd>
-                                    github.com/782365867
-                                    </kbd>
-                                </li>
-                            </ul>
-                        </blockquote>
-                </div>
-            </div>
+    <!--分页进入第二页，一页多少可分配-->
+    <div class="row post-pagination">
+        <div class="col-md-12">
+            <p>
+                <a href="" class="btn btn-primary btn-sm">
+              <span class="glyphicon glyphicon-refresh">
+              </span>
+              <span>
+                浏览之前的文章
+              </span>
+                </a>
+            </p>
         </div>
     </div>
-    <!-- 网站底部 -->
+    <!--评论内容-->
+    <div class="row page-comments-container">
+        <div class="col-md-12">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+    </div>
     <footer>
         <!--版权信息-->
         <div class="copyright">
@@ -290,28 +243,31 @@
 </div>
 <script src="assets/js/bootstrap.min.js"></script>
 <script>
-        /*banner 初始化*/
-        $(window).load(function() {
-         $('#slider').nivoSlider({
-            effect: 'random',        // 过渡效果
-            controlNav: false,       // 是否显示图片导航控制按钮（,2,3... ）
-            pauseOnHover: true,      // 鼠标县浮时是否停止动画
-            manualAdvance: false,    // 是否手动切换 
-            animSpeed: 100,          // 图片过渡时间   
-            pauseTime: 2000,         // 图片显示时间
-            pauseOnHover: false,
-            manualAdvance: false,
-        });
-        });
+    /*banner 初始化*/
+    $(window).load(function(){
+      $('#slider').nivoSlider({
+        effect: 'random',        // 过渡效果
+        controlNav: false,       // 是否显示图片导航控制按钮（,2,3... ）
+        pauseOnHover: true,      // 鼠标县浮时是否停止动画
+        manualAdvance: false,    // 是否手动切换 
+        animSpeed: 100,          // 图片过渡时间   
+        pauseTime: 2000,         // 图片显示时间
+        pauseOnHover: false,
+        manualAdvance: false,
+      });
+    });
     $(document).ready(function(){
-        $('body').show();
-        $('.version').text(NProgress.version);
-        NProgress.start();
-        setTimeout(function() { NProgress.done(); $('.fade').removeClass('out'); }, 1000);
+      $('body').show();
+      $('.version').text(NProgress.version);
+      NProgress.start();
+      setTimeout(function() { NProgress.done(); $('.fade').removeClass('out'); }, 1000);
+      var style2 = $(".style2")
+      style2.click(function(){
+        
+      })
     })
     
 </script>
-
 </body>
 
 </html>
