@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="本人目前从事机器学习相关研究和工作，对机器学习和深度学习仍在入门阶段。开此博客，希望记录学习路上的一些体会，还有对生活的一些思考。" />
+  
+
+  
+  <meta name="keywords" content="AI ML DL life" />
+  
+  
+  
+  
+  
+  
+  <title>tensorflow学习笔记3 | 山风之行</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="实战,今天给大家举个回归例子，来说明下tensorflow的训练过程。 先贴上代码和注释。 123456789101112131415# 引入包import numpy as npimport tensorflow as tfimport matplotlib.pyplot as plt#准备好数据，x为生成-1到1之间的100个数，y为2*x+1+噪声data_x = np.linspace(-">
+<meta name="keywords" content="tensorflow,深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tensorflow学习笔记3">
+<meta property="og:url" content="http://xurui.club/2018/04/27/tensorflow学习笔记3/index.html">
+<meta property="og:site_name" content="山风之行">
+<meta property="og:description" content="实战,今天给大家举个回归例子，来说明下tensorflow的训练过程。 先贴上代码和注释。 123456789101112131415# 引入包import numpy as npimport tensorflow as tfimport matplotlib.pyplot as plt#准备好数据，x为生成-1到1之间的100个数，y为2*x+1+噪声data_x = np.linspace(-">
+<meta property="og:locale" content="zh-Ch">
+<meta property="og:image" content="https://i.imgur.com/96MSzxY.png">
+<meta property="og:updated_time" content="2018-05-02T13:27:13.716Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tensorflow学习笔记3">
+<meta name="twitter:description" content="实战,今天给大家举个回归例子，来说明下tensorflow的训练过程。 先贴上代码和注释。 123456789101112131415# 引入包import numpy as npimport tensorflow as tfimport matplotlib.pyplot as plt#准备好数据，x为生成-1到1之间的100个数，y为2*x+1+噪声data_x = np.linspace(-">
+<meta name="twitter:image" content="https://i.imgur.com/96MSzxY.png">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="山风之行" rel="home">山风之行</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">—— 修养 风范 血性 胆识</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">主页</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">文章</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/about">关于</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-tensorflow学习笔记3" class="post-tensorflow学习笔记3 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      tensorflow学习笔记3
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/27/tensorflow学习笔记3/" data-id="cjgp4z61k00002oda1wf6tgha" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>实战,今天给大家举个回归例子，来说明下tensorflow的训练过程。</p>
+<p>先贴上代码和注释。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 引入包</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment">#准备好数据，x为生成-1到1之间的100个数，y为2*x+1+噪声</span></span><br><span class="line">data_x = np.linspace(<span class="number">-1</span>, <span class="number">1</span>, <span class="number">100</span>)</span><br><span class="line">data_y = np.multiply(data_x, <span class="number">2</span>) + <span class="number">1</span> + np.random.uniform(<span class="number">-0.5</span>, <span class="number">0.5</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#画图，将x,y的数据投上去</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax = fig.add_subplot(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">ax.scatter(data_x, data_y)</span><br><span class="line">plt.ion()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>这里看下图吧<br><img src="https://i.imgur.com/96MSzxY.png" alt=""><br>这里的点点就是我们的数据，大概按一条斜线分布，所以我们找到一条回归线来拟合这些数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#准备好placeholder,占位符，也叫容器，也就是个坑，用来放数据的</span></span><br><span class="line">x_placeholder = tf.placeholder(tf.float32, name=<span class="string">'X'</span>)</span><br><span class="line">y_placeholder = tf.placeholder(tf.float32, name=<span class="string">'Y'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#变量，</span></span><br><span class="line">W = tf.Variable(dtype=tf.float32,name=<span class="string">'W'</span>,initial_value=tf.random_normal([<span class="number">1</span>]))</span><br><span class="line">b = tf.Variable(dtype=tf.float32,name=<span class="string">'W'</span>,initial_value=tf.random_normal([<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment">#y_pred 给出回归式的Op</span></span><br><span class="line">y_pred = tf.add(tf.multiply(x_placeholder,W),b)</span><br><span class="line"></span><br><span class="line"><span class="comment">#求loss,给出优化器</span></span><br><span class="line">loss = tf.reduce_mean(tf.square(y_placeholder-y_pred,name=<span class="string">'loss'</span>))</span><br><span class="line"></span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(learning_rate=<span class="number">0.1</span>).minimize(loss)</span><br><span class="line"></span><br><span class="line"><span class="comment">#初始化变量</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="comment">#session会话</span></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init)</span><br><span class="line">	<span class="comment">#迭代100次</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">        total_loss = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> x, y <span class="keyword">in</span> zip(data_x,data_y ):</span><br><span class="line">			<span class="comment">#将之前graph中的loss和optimizer跑起来，训练过程就在这，因为有个minimize(loss)的操作	</span></span><br><span class="line">            _, los = sess.run([optimizer, loss], feed_dict=&#123;x_placeholder: x, y_placeholder: y&#125;)</span><br><span class="line">            total_loss += los</span><br><span class="line">		<span class="comment">#求预测值</span></span><br><span class="line">        yp = sess.run(y_pred,feed_dict=&#123;x_placeholder:data_x, y_placeholder: data_y&#125;)</span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">5</span> == <span class="number">0</span>:</span><br><span class="line">			<span class="comment">#每5步画一次线</span></span><br><span class="line">            lines = ax.plot(data_x, yp, <span class="string">'r-'</span>, lw=<span class="number">5</span>)</span><br><span class="line">            print(<span class="string">'Epoch &#123;0&#125;: &#123;1&#125;'</span>.format(i, total_loss / <span class="number">100</span>))</span><br><span class="line">            plt.pause(<span class="number">0.1</span>)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">			<span class="comment">#为了不让线一直赖着不走，我们每画完就要删除。</span></span><br><span class="line">                ax.lines.pop(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">except</span> Exception:</span><br><span class="line">                print(<span class="string">'error'</span>)</span><br></pre></td></tr></table></figure>
+<p>这里总结一下。本例解决的是一个线性回归问题，用tensorflow仍先画图，再运行。当然，还有准备数据。<br>其中画图部分包括：占位符定义，变量（权重）定义，运算式定义，loss定义，再加上一个让Loss减小的优化器<br>运行部分包括：将数据喂给相应的op，并run起来，画图操作是为了让大家更直观。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/04/27/tensorflow学习笔记3/">
+    <time datetime="2018-04-27T13:43:27.000Z" class="entry-date">
+        2018-04-27
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
+
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2018/04/26/tensorflow学习笔记2/" rel="next">tensorflow学习笔记2 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/心情/">心情</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/27/tensorflow学习笔记3/">tensorflow学习笔记3</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/26/tensorflow学习笔记2/">tensorflow学习笔记2</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/26/tensorflow学习笔记1/">tensorflow学习笔记1</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/26/找实习/">找实习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/26/初来博客/">初来博客</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/tensorflow/" style="font-size: 20px;">tensorflow</a> <a href="/tags/心情/" style="font-size: 15px;">心情</a> <a href="/tags/深度学习/" style="font-size: 20px;">深度学习</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2018 Petrus Zhang
+    All rights reserved.</p>
+    <p>My Way to Better!</p>
+</footer>
+
+
+  <span>Hosted by <a href="https://pages.coding.me" >Coding Pages</a></span>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
