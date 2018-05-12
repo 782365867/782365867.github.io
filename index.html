@@ -72,6 +72,62 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="post-keras-mask" class="post-keras-mask post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/05/12/keras-mask/">Keras 笔记之Mask层</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/12/keras-mask/" data-id="cjh3bj46700020kda98dknc62" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>keras 的Mask层<br>先看下官方文档的解释</p>
+<hr>
+<p>Masking层<br>keras.layers.core.Masking(mask_value=0.0)<br>使用给定的值对输入的序列信号进行“屏蔽”，用以定位需要跳过的时间步</p>
+<p>对于输入张量的时间步，即输入张量的第1维度（维度从0开始算，见例子），如果输入张量在该时间步上都等于mask_value，则该时间步将在模型接下来的所有层（只要支持masking）被跳过（屏蔽）。</p>
+<p>如果模型接下来的一些层不支持masking，却接受到masking过的数据，则抛出异常。</p>
+<p>例子<br>考虑输入数据x是一个形如(samples,timesteps,features)的张量，现将其送入LSTM层。因为你缺少时间步为3和5的信号，所以你希望将其掩盖。这时候应该：</p>
+<p>赋值x[:,3,:] = 0.，x[:,5,:] = 0.</p>
+<p>在LSTM层之前插入mask_value=0.的Masking层</p>
+<p>model = Sequential()<br>model.add(Masking(mask_value=0., input_shape=(timesteps, features)))<br>model.add(LSTM(32))</p>
+<hr>
+<p>在用LSTM等模型处理文本数据时，因为文本是变长的，所以在处理的过程中，要先进行长度的统一。常用的方法为<br><code>X_data = sequence.pad_sequence</code>(maxlen=10,value=0,padding=’post’)<br>此步骤将X_data统一长度为10.<br>如[1,2,3,4,5]–&gt;变为[1,2,3,4,5,0,0,0,0,0]<br>这样就可以把X_data 输入到model的Embedding等层。<br>然而，交给LSTM处理时，还有对数据进行反padding.也就是把后面的0去掉。<br>这个时候就是Mask层派上用场的时候了。Mask(0)经过Mask后，可以忽略X_data中所有的0，当然，把后面补的0去掉是可以理解的。那如果句中有0呢？一般情况下，如文本处理，会把文本映射成index，这样最大的好处就是节约空间。有些大文本数据，几百个G，经过了index映射，也就还剩几个G。这是题外话了，我们在keras的Embedding层会讲的。而这个时候index中的0,往往是一些无法转成词向量的低频词，这些词没有词向量，去掉对整个文本的处理也没有影响，所以在Mask中和补上的0一起忽略就好啦。<br>这里的忽略是什么意思呢？也就是不处理。<br>很多朋友以为Mask后会直接把0去掉。其实不是的。<br>可以做一些实验，如model的Mask后接个LSTM层，对LSTM输出每个时间步的值，发现，如果设置了Mask层，则上面[1,2,3,4,5,00000]的数据处理结果，前5位是经过了计算，补0的对应的位置的值，和第5位的值相同，也就是说LSTM对后面补0的位置并没有计算。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/05/12/keras-mask/">
+    <time datetime="2018-05-12T11:36:39.000Z" class="entry-date">
+        2018-05-12
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keras/">Keras</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-tensorflow学习笔记3" class="post-tensorflow学习笔记3 post type-post status-publish format-standard hentry">
     <!---->
 
@@ -87,7 +143,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/27/tensorflow学习笔记3/" data-id="cjgp4z61k00002oda1wf6tgha" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/27/tensorflow学习笔记3/" data-id="cjh3bj45z00000kda58unbwd5" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -138,7 +194,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记2/" data-id="cjgp4wtyn00045sdakmcmjhq2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记2/" data-id="cjh3bj46b00040kda45c0sdrc" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -188,7 +244,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记1/" data-id="cjgp4wtya00005sdao1w5x6sc" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记1/" data-id="cjh3bj46f00060kdag5hq19oy" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -240,7 +296,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/找实习/" data-id="cjgp4wtyo00055sdajxg0ranm" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/找实习/" data-id="cjh3bj46d00050kda1fmpmg7b" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -297,7 +353,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/初来博客/" data-id="cjgp4wtyi00025sdazvlhbhl8" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/初来博客/" data-id="cjh3bj46t000r0kdaw6w6unwc" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -366,6 +422,10 @@
       <ul>
         
           <li>
+            <a href="/2018/05/12/keras-mask/">Keras 笔记之Mask层</a>
+          </li>
+        
+          <li>
             <a href="/2018/04/27/tensorflow学习笔记3/">tensorflow学习笔记3</a>
           </li>
         
@@ -381,10 +441,6 @@
             <a href="/2018/04/26/找实习/">找实习</a>
           </li>
         
-          <li>
-            <a href="/2018/04/26/初来博客/">初来博客</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -394,7 +450,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </aside>
 
@@ -403,7 +459,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/tensorflow/" style="font-size: 20px;">tensorflow</a> <a href="/tags/心情/" style="font-size: 15px;">心情</a> <a href="/tags/深度学习/" style="font-size: 20px;">深度学习</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+      <a href="/tags/Keras/" style="font-size: 10px;">Keras</a> <a href="/tags/tensorflow/" style="font-size: 20px;">tensorflow</a> <a href="/tags/心情/" style="font-size: 15px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/深度学习/" style="font-size: 20px;">深度学习</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
     </div>
   </aside>
 

@@ -15,20 +15,20 @@
   
   
   
-  <title>找实习 | 山风之行</title>
+  <title>Keras 笔记之Mask层 | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说件开心的事，我种的海棠花开了。 再说件开心的事，讯飞实习录用了，上午接到的电话，下周二入职。 这个实习等好久了，前段时间看到大家都在找实习，心里发慌，于是自己也厚着脸皮找朋友内推。蚂蚁金服的一面，就给我拒了，心里的酸，每天早上天没亮就往外反，搞得每天都睡不好觉，感觉自己找不到工作了。可能从来没找过工作，没接受过这种刺激，那几天还在调整心情，也感激下我的小女友，一直给我鼓励。后来一边投实习，一边总">
-<meta name="keywords" content="心情,面试">
+  <meta name="description" content="keras 的Mask层先看下官方文档的解释  Masking层keras.layers.core.Masking(mask_value=0.0)使用给定的值对输入的序列信号进行“屏蔽”，用以定位需要跳过的时间步 对于输入张量的时间步，即输入张量的第1维度（维度从0开始算，见例子），如果输入张量在该时间步上都等于mask_value，则该时间步将在模型接下来的所有层（只要支持masking）被跳过">
+<meta name="keywords" content="Keras,技术">
 <meta property="og:type" content="article">
-<meta property="og:title" content="找实习">
-<meta property="og:url" content="http://xurui.club/2018/04/26/找实习/index.html">
+<meta property="og:title" content="Keras 笔记之Mask层">
+<meta property="og:url" content="http://xurui.club/2018/05/12/keras-mask/index.html">
 <meta property="og:site_name" content="山风之行">
-<meta property="og:description" content="说件开心的事，我种的海棠花开了。 再说件开心的事，讯飞实习录用了，上午接到的电话，下周二入职。 这个实习等好久了，前段时间看到大家都在找实习，心里发慌，于是自己也厚着脸皮找朋友内推。蚂蚁金服的一面，就给我拒了，心里的酸，每天早上天没亮就往外反，搞得每天都睡不好觉，感觉自己找不到工作了。可能从来没找过工作，没接受过这种刺激，那几天还在调整心情，也感激下我的小女友，一直给我鼓励。后来一边投实习，一边总">
+<meta property="og:description" content="keras 的Mask层先看下官方文档的解释  Masking层keras.layers.core.Masking(mask_value=0.0)使用给定的值对输入的序列信号进行“屏蔽”，用以定位需要跳过的时间步 对于输入张量的时间步，即输入张量的第1维度（维度从0开始算，见例子），如果输入张量在该时间步上都等于mask_value，则该时间步将在模型接下来的所有层（只要支持masking）被跳过">
 <meta property="og:locale" content="zh-Ch">
-<meta property="og:updated_time" content="2018-04-26T14:18:18.746Z">
+<meta property="og:updated_time" content="2018-05-12T11:39:18.369Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="找实习">
-<meta name="twitter:description" content="说件开心的事，我种的海棠花开了。 再说件开心的事，讯飞实习录用了，上午接到的电话，下周二入职。 这个实习等好久了，前段时间看到大家都在找实习，心里发慌，于是自己也厚着脸皮找朋友内推。蚂蚁金服的一面，就给我拒了，心里的酸，每天早上天没亮就往外反，搞得每天都睡不好觉，感觉自己找不到工作了。可能从来没找过工作，没接受过这种刺激，那几天还在调整心情，也感激下我的小女友，一直给我鼓励。后来一边投实习，一边总">
+<meta name="twitter:title" content="Keras 笔记之Mask层">
+<meta name="twitter:description" content="keras 的Mask层先看下官方文档的解释  Masking层keras.layers.core.Masking(mask_value=0.0)使用给定的值对输入的序列信号进行“屏蔽”，用以定位需要跳过的时间步 对于输入张量的时间步，即输入张量的第1维度（维度从0开始算，见例子），如果输入张量在该时间步上都等于mask_value，则该时间步将在模型接下来的所有层（只要支持masking）被跳过">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -71,7 +71,7 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-找实习" class="post-找实习 post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-keras-mask" class="post-keras-mask post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -79,45 +79,44 @@
         
   
     <h1 class="entry-title article-title">
-      找实习
+      Keras 笔记之Mask层
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/找实习/" data-id="cjh3bj46d00050kda1fmpmg7b" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/12/keras-mask/" data-id="cjh3bj46700020kda98dknc62" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <p>说件开心的事，我种的海棠花开了。</p>
-<p>再说件开心的事，讯飞实习录用了，上午接到的电话，下周二入职。</p>
-<p>这个实习等好久了，前段时间看到大家都在找实习，心里发慌，于是自己也厚着脸皮找朋友内推。蚂蚁金服的一面，就给我拒了，心里的酸，每天早上天没亮就往外反，搞得每天都睡不好觉，感觉自己找不到工作了。可能从来没找过工作，没接受过这种刺激，那几天还在调整心情，也感激下我的小女友，一直给我鼓励。后来一边投实习，一边总结经验，感觉没有实践经验是很大的减分项，所以又找朋友帮我推了下讯飞的实习，这个不是暑期实习，所以面试相对简单些，结束后朋友告诉我主管对我印象还不错，应该通过了。可是，人事部一直没给通知。总担心那边出什么意外情况，这两天脑海里上演了好多大戏，也被自己的戏给吓到过。不过还好，终于还是给了通知，虽然有点晚。</p>
-<p>晚上，本来想去科大参加腾讯的宣讲，谁曾想临时改了场地，在另一个校区，干脆不去了，坐下来老老实实的做携程的笔试题，前面的选择和问答题还好，选择题基本都是基础知识，考点也比较细。问答有个基因的条件概率题，大概做出来了，还一道讲一下深度学习中，relu比sigmoid和tanh好在什么地方。最后一个题，编程，没看懂题，这里记录一下。最长路径问题。</p>
-<p>现有ABCDE五个字符，以及M个字符串，每个字符串由这五个字符和1-9的整数间隔组成，如：A2B3D，表示存在A-&gt;B B-&gt;D的路径，且路径长为2和3，可以推出A-&gt;D的一条路径长为5.求最长的一条路径的长度，如果任何一处路径出现环（如A-&gt;…-&gt;A的路径），则返回-1.<br>输入： 第一行 为字符串的个数M 第二行 开始为M个字符串<br>输出： 最长的一条路径的长度，如果出现环，返回-1<br>如输入 4 A2B3D 、 A4C2E 、 A5D、 C3B<br>输出 10</p>
-<p>刚开始理解错了，所以信心满满写了20分钟代码，最后测试没通过。等读懂题，黄花菜早结冰了。。</p>
-<p>这些笔试编程题都比较奇葩，多做做应该会有不小进步。</p>
+        <p>keras 的Mask层<br>先看下官方文档的解释</p>
+<hr>
+<p>Masking层<br>keras.layers.core.Masking(mask_value=0.0)<br>使用给定的值对输入的序列信号进行“屏蔽”，用以定位需要跳过的时间步</p>
+<p>对于输入张量的时间步，即输入张量的第1维度（维度从0开始算，见例子），如果输入张量在该时间步上都等于mask_value，则该时间步将在模型接下来的所有层（只要支持masking）被跳过（屏蔽）。</p>
+<p>如果模型接下来的一些层不支持masking，却接受到masking过的数据，则抛出异常。</p>
+<p>例子<br>考虑输入数据x是一个形如(samples,timesteps,features)的张量，现将其送入LSTM层。因为你缺少时间步为3和5的信号，所以你希望将其掩盖。这时候应该：</p>
+<p>赋值x[:,3,:] = 0.，x[:,5,:] = 0.</p>
+<p>在LSTM层之前插入mask_value=0.的Masking层</p>
+<p>model = Sequential()<br>model.add(Masking(mask_value=0., input_shape=(timesteps, features)))<br>model.add(LSTM(32))</p>
+<hr>
+<p>在用LSTM等模型处理文本数据时，因为文本是变长的，所以在处理的过程中，要先进行长度的统一。常用的方法为<br><code>X_data = sequence.pad_sequence</code>(maxlen=10,value=0,padding=’post’)<br>此步骤将X_data统一长度为10.<br>如[1,2,3,4,5]–&gt;变为[1,2,3,4,5,0,0,0,0,0]<br>这样就可以把X_data 输入到model的Embedding等层。<br>然而，交给LSTM处理时，还有对数据进行反padding.也就是把后面的0去掉。<br>这个时候就是Mask层派上用场的时候了。Mask(0)经过Mask后，可以忽略X_data中所有的0，当然，把后面补的0去掉是可以理解的。那如果句中有0呢？一般情况下，如文本处理，会把文本映射成index，这样最大的好处就是节约空间。有些大文本数据，几百个G，经过了index映射，也就还剩几个G。这是题外话了，我们在keras的Embedding层会讲的。而这个时候index中的0,往往是一些无法转成词向量的低频词，这些词没有词向量，去掉对整个文本的处理也没有影响，所以在Mask中和补上的0一起忽略就好啦。<br>这里的忽略是什么意思呢？也就是不处理。<br>很多朋友以为Mask后会直接把0去掉。其实不是的。<br>可以做一些实验，如model的Mask后接个LSTM层，对LSTM输出每个时间步的值，发现，如果设置了Mask层，则上面[1,2,3,4,5,00000]的数据处理结果，前5位是经过了计算，补0的对应的位置的值，和第5位的值相同，也就是说LSTM对后面补0的位置并没有计算。</p>
 
       
     </div><!-- .entry-content -->
 
     <footer class="entry-meta">
-    <a href="/2018/04/26/找实习/">
-    <time datetime="2018-04-26T13:33:45.000Z" class="entry-date">
-        2018-04-26
+    <a href="/2018/05/12/keras-mask/">
+    <time datetime="2018-05-12T11:36:39.000Z" class="entry-date">
+        2018-05-12
     </time>
 </a>
     
-  <span class="article-delim">&#8226;</span>
-  <div class="article-category">
-  <a class="article-category-link" href="/categories/心情/">心情</a>
-  </div>
-
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/心情/">心情</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keras/">Keras</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
 
     </footer>
 </article>
@@ -127,10 +126,8 @@
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
     
-        <span class="nav-previous"><a href="/2018/04/26/tensorflow学习笔记1/" rel="prev"><span class="meta-nav">←</span> tensorflow学习笔记1</a></span>
     
-    
-        <span class="nav-next"><a href="/2018/04/26/初来博客/" rel="next">初来博客 <span class="meta-nav">→</span></a></span>
+        <span class="nav-next"><a href="/2018/04/27/tensorflow学习笔记3/" rel="next">tensorflow学习笔记3 <span class="meta-nav">→</span></a></span>
     
 </nav><!-- .nav-single -->
 
