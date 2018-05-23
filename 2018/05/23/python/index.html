@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="本人目前从事机器学习相关研究和工作，对机器学习和深度学习仍在入门阶段。开此博客，希望记录学习路上的一些体会，还有对生活的一些思考。" />
+  
+
+  
+  <meta name="keywords" content="AI ML DL life" />
+  
+  
+  
+  
+  
+  
+  <title>python之list。count()和Count()类 | 山风之行</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Count()类的使用同事给了我一堆文本数据，让我帮个小忙。他想统计下每个词的词频，看看文本中提到最多的是什么，然后做后面分析。 不就是统计词频吗，虽然之前不经常做这个。但是拍脑袋一想，先分词，去停用词，把所有词放到一个列表里，统计，搞定。 于是五分钟写了个代码，计数那个地方，我用的List里的count方法。不怕丢人，我把代码放这了。。。12345678910111213141516171819">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python之list。count()和Count()类">
+<meta property="og:url" content="http://xurui.club/2018/05/23/python/index.html">
+<meta property="og:site_name" content="山风之行">
+<meta property="og:description" content="Count()类的使用同事给了我一堆文本数据，让我帮个小忙。他想统计下每个词的词频，看看文本中提到最多的是什么，然后做后面分析。 不就是统计词频吗，虽然之前不经常做这个。但是拍脑袋一想，先分词，去停用词，把所有词放到一个列表里，统计，搞定。 于是五分钟写了个代码，计数那个地方，我用的List里的count方法。不怕丢人，我把代码放这了。。。12345678910111213141516171819">
+<meta property="og:locale" content="zh-Ch">
+<meta property="og:updated_time" content="2018-05-23T07:56:13.499Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python之list。count()和Count()类">
+<meta name="twitter:description" content="Count()类的使用同事给了我一堆文本数据，让我帮个小忙。他想统计下每个词的词频，看看文本中提到最多的是什么，然后做后面分析。 不就是统计词频吗，虽然之前不经常做这个。但是拍脑袋一想，先分词，去停用词，把所有词放到一个列表里，统计，搞定。 于是五分钟写了个代码，计数那个地方，我用的List里的count方法。不怕丢人，我把代码放这了。。。12345678910111213141516171819">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="山风之行" rel="home">山风之行</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">—— 修养 风范 血性 胆识</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">主页</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">文章</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/about">关于</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-python" class="post-python post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      python之list。count()和Count()类
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjhiteeii000c84davdfg7w3j" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>Count()类的使用<br>同事给了我一堆文本数据，让我帮个小忙。他想统计下每个词的词频，看看文本中提到最多的是什么，然后做后面分析。</p>
+<p>不就是统计词频吗，虽然之前不经常做这个。但是拍脑袋一想，先分词，去停用词，把所有词放到一个列表里，统计，搞定。</p>
+<p>于是五分钟写了个代码，计数那个地方，我用的List里的count方法。不怕丢人，我把代码放这了。。。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">count_word = []</span><br><span class="line">stop_words = []</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data/count.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    lines = f.readlines()</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data/stop_words_new.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    stop_lines = f.readlines()</span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> stop_lines:</span><br><span class="line">    stop_words.append(word.strip())</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">    words = jieba.lcut(line)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> words:</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> stop_words:</span><br><span class="line">            count_word.append(i)</span><br><span class="line">count_word_set = list(set(count_word))</span><br><span class="line">counts = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> count_word_set:</span><br><span class="line">    counts.append(count_word.count(i))</span><br><span class="line">print(len(count_word_set))</span><br><span class="line">print(len(counts))</span><br><span class="line">df = pd.DataFrame(data=&#123;<span class="string">'word'</span>: count_word_set, <span class="string">'count'</span>: counts&#125;)</span><br><span class="line">df.sort_values(by=<span class="string">'count'</span>)</span><br><span class="line">df.to_csv(<span class="string">'data/count.txt'</span>, sep=<span class="string">'\t'</span>, encoding=<span class="string">'utf-8'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>然而，等了一晚上，发现没出来结果。他说数据量不大，几百万条文本。我这里用的set去重，然后遍历set中的每个词，再用list.count(词)来得词频，笨方法行不通。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">所以今天试了Count()类。</span><br><span class="line"><span class="keyword">import</span> jieba</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line">count_word = []</span><br><span class="line">count = Counter()</span><br><span class="line">stop_words = []</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data/count.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    lines = f.readlines()</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data/stop_words_new.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    stop_lines = f.readlines()</span><br><span class="line">print(<span class="string">'data finish'</span>)</span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> stop_lines:</span><br><span class="line">    stop_words.append(word.strip())</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">    words = jieba.lcut(line)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> words:</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> stop_words:</span><br><span class="line">            count_word.append(i)</span><br><span class="line">print(<span class="string">'cut finish'</span>)</span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> count_word:</span><br><span class="line">    count[word] += <span class="number">1</span></span><br><span class="line">cou = count.most_common()</span><br><span class="line">print(cou)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data/common.txt'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    pickle.dump(cou, f)</span><br></pre></td></tr></table></figure></p>
+<p>分完词就结束了。。如果只是想看某个词的词频，用list的count()方法还好，如果统计所有的，还是用Count()类吧。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/05/23/python/">
+    <time datetime="2018-05-23T07:53:42.000Z" class="entry-date">
+        2018-05-23
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2018/05/22/java/" rel="next">java异常之java.sql.SQLException Illegal mix of collations (utf8_general_ci <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/心情/">心情</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/23/python/">python之list。count()和Count()类</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/22/java/">java异常之java.sql.SQLException Illegal mix of collations (utf8_general_ci</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/16/python1/">python异常之UnicodeEncodeError &#39;ascii&#39;</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/16/pandas1/">pandas之concat</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/16/linux1/">linux命令之grep</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/Keras/" style="font-size: 10px;">Keras</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/tensorflow/" style="font-size: 20px;">tensorflow</a> <a href="/tags/异常解决/" style="font-size: 15px;">异常解决</a> <a href="/tags/心情/" style="font-size: 15px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 20px;">深度学习</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2018 Petrus Zhang
+    All rights reserved.</p>
+    <p>My Way to Better!</p>
+</footer>
+
+
+  <span>Hosted by <a href="https://pages.coding.me" >Coding Pages</a></span>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
