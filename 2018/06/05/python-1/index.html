@@ -15,19 +15,20 @@
   
   
   
-  <title>Tag: 心情 | 山风之行</title>
+  <title>python数据存储利器之pickle | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本人目前从事机器学习相关研究和工作，对机器学习和深度学习仍在入门阶段。开此博客，希望记录学习路上的一些体会，还有对生活的一些思考。">
-<meta name="keywords" content="AI ML DL life">
-<meta property="og:type" content="website">
-<meta property="og:title" content="山风之行">
-<meta property="og:url" content="http://xurui.club/tags/心情/index.html">
+  <meta name="description" content="第一天上班那天，有位同事把部分工作交接给我，主要是处理过的一些数据，存的是txt格式。然后大概看了下，还挺整齐，用’,’分隔的。读进去才发现，本来应该是个List,然而由于存成了txt，所有的都变成了str。所以转来转去，费了两天时间。突然想起来好像有pickle这么个小玩意，就拿来试试。从此，再也不想用csv啥的存数据了 简单介绍下Picklepickle使用二进制协议完成对python对象的序">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python数据存储利器之pickle">
+<meta property="og:url" content="http://xurui.club/2018/06/05/python-1/index.html">
 <meta property="og:site_name" content="山风之行">
-<meta property="og:description" content="本人目前从事机器学习相关研究和工作，对机器学习和深度学习仍在入门阶段。开此博客，希望记录学习路上的一些体会，还有对生活的一些思考。">
+<meta property="og:description" content="第一天上班那天，有位同事把部分工作交接给我，主要是处理过的一些数据，存的是txt格式。然后大概看了下，还挺整齐，用’,’分隔的。读进去才发现，本来应该是个List,然而由于存成了txt，所有的都变成了str。所以转来转去，费了两天时间。突然想起来好像有pickle这么个小玩意，就拿来试试。从此，再也不想用csv啥的存数据了 简单介绍下Picklepickle使用二进制协议完成对python对象的序">
 <meta property="og:locale" content="zh-Ch">
+<meta property="og:updated_time" content="2018-06-05T01:58:35.407Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="山风之行">
-<meta name="twitter:description" content="本人目前从事机器学习相关研究和工作，对机器学习和深度学习仍在入门阶段。开此博客，希望记录学习路上的一些体会，还有对生活的一些思考。">
+<meta name="twitter:title" content="python数据存储利器之pickle">
+<meta name="twitter:description" content="第一天上班那天，有位同事把部分工作交接给我，主要是处理过的一些数据，存的是txt格式。然后大概看了下，还挺整齐，用’,’分隔的。读进去才发现，本来应该是个List,然而由于存成了txt，所有的都变成了str。所以转来转去，费了两天时间。突然想起来好像有pickle这么个小玩意，就拿来试试。从此，再也不想用csv啥的存数据了 简单介绍下Picklepickle使用二进制协议完成对python对象的序">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -70,77 +71,67 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-python-1" class="post-python-1 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2018/04/26/找实习/">找实习</a>
+    <h1 class="entry-title article-title">
+      python数据存储利器之pickle
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2018/04/26/找实习/">
-    <time datetime="2018-04-26T13:33:45.000Z" class="entry-date">
-        2018-04-26
-    </time>
-</a>
-    
-  <span class="article-delim">&#8226;</span>
-  <div class="article-category">
-  <a class="article-category-link" href="/categories/心情/">心情</a>
-  </div>
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cji11clyb0006b0damplh02vx" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
 
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/心情/">心情</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
-
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
+    <div class="entry-content">
       
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2018/04/26/初来博客/">初来博客</a>
-    </h1>
-  
+        <p>第一天上班那天，有位同事把部分工作交接给我，主要是处理过的一些数据，存的是txt格式。然后大概看了下，还挺整齐，用’,’分隔的。读进去才发现，本来应该是个List,然而由于存成了txt，所有的都变成了str。所以转来转去，费了两天时间。突然想起来好像有pickle这么个小玩意，就拿来试试。从此，再也不想用csv啥的存数据了</p>
+<p>简单介绍下Pickle<br>pickle使用二进制协议完成对python对象的序列化和反序列化。“picking”是将python对象转为字节流，而“unpickling”则是从字节流中转出来。<br>也就是说，无论你要存的内容是字符串、数字、数组、列表、矩阵、DataFrame、np.array()等等，当你进行picking操作时，统统将这些内容转换成字节流保存到文件中，一般是二进制文件。然后当你想使用这些内容时，再从二进制文件中读出来。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br></pre></td></tr></table></figure></p>
+<p>–picking–<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data = ...</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'name.txt'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    pickle.dump(data,f,protocol=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure></p>
+<p>这样就把数据写进name.txt文件里了，注意这里是二进制，你用记事本打开是乱码。有个参数，protocol,是你选用的协议，默认为3，在python2中默认为0，如果你在python3用dump写进文件，去python2里load读取文件,会报异常。当然这种奇怪的需求很少，如果遇到了，把dump里的<code>protocol=0</code>就可以了。<br>当然，你的data可以有多个<br>如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a= <span class="number">1</span></span><br><span class="line">b =<span class="number">3</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'name.txt'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    pickle.dump([a,b],f)</span><br></pre></td></tr></table></figure></p>
+<p>–unpicking–<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'name.txt'</span>,<span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = pickle.load(f)</span><br></pre></td></tr></table></figure></p>
+<p>如果你存的数据是多个<br>那么：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'name.txt'</span>,<span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data= pickle.load(f)</span><br><span class="line">    a,b = data</span><br></pre></td></tr></table></figure></p>
+<p>还有除了dump和load，还有dumps和loads。<br>dumps()和loads()用的不太多，简单说下，和dump类似，dumps把数据写成字节对象，但不用保存到文件。loads则是从字节对象中读出，不用读文件。</p>
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2018/04/26/初来博客/">
-    <time datetime="2018-04-26T12:46:40.000Z" class="entry-date">
-        2018-04-26
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/06/05/python-1/">
+    <time datetime="2018-06-05T01:52:11.000Z" class="entry-date">
+        2018-06-05
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/心情/">心情</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </footer>
 </article>
-  
-  
-    </div></section>
-  
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2018/06/01/lda/" rel="next">lda主题模型python实现篇 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
