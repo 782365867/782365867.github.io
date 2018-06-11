@@ -15,19 +15,20 @@
   
   
   
-  <title>Tag: 深度学习 | 山风之行</title>
+  <title>n阶乘后面有多少个0 | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本人目前从事机器学习相关研究和工作，对机器学习和深度学习仍在入门阶段。开此博客，希望记录学习路上的一些体会，还有对生活的一些思考。">
-<meta name="keywords" content="AI ML DL life">
-<meta property="og:type" content="website">
-<meta property="og:title" content="山风之行">
-<meta property="og:url" content="http://xurui.club/tags/深度学习/index.html">
+  <meta name="description" content="开始整理下面试题和心得，这一部分包含Lintcode和平时遇到的一些题目。 题目描述：给定一个正整数n,返回出n的阶乘尾部0的个数。linkcode链接：https://lintcode.com/problem/trailing-zeros/description 分析：看到这一题第一感觉先求阶乘，然后求出结果中尾部有多少0。提交代码，超时。 于是查了下资料，一个数尾部有多少个0，先看这个数的因子">
+<meta name="keywords" content="python,面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="n阶乘后面有多少个0">
+<meta property="og:url" content="http://xurui.club/2018/06/11/interview/index.html">
 <meta property="og:site_name" content="山风之行">
-<meta property="og:description" content="本人目前从事机器学习相关研究和工作，对机器学习和深度学习仍在入门阶段。开此博客，希望记录学习路上的一些体会，还有对生活的一些思考。">
+<meta property="og:description" content="开始整理下面试题和心得，这一部分包含Lintcode和平时遇到的一些题目。 题目描述：给定一个正整数n,返回出n的阶乘尾部0的个数。linkcode链接：https://lintcode.com/problem/trailing-zeros/description 分析：看到这一题第一感觉先求阶乘，然后求出结果中尾部有多少0。提交代码，超时。 于是查了下资料，一个数尾部有多少个0，先看这个数的因子">
 <meta property="og:locale" content="zh-Ch">
+<meta property="og:updated_time" content="2018-06-11T02:58:32.464Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="山风之行">
-<meta name="twitter:description" content="本人目前从事机器学习相关研究和工作，对机器学习和深度学习仍在入门阶段。开此博客，希望记录学习路上的一些体会，还有对生活的一些思考。">
+<meta name="twitter:title" content="n阶乘后面有多少个0">
+<meta name="twitter:description" content="开始整理下面试题和心得，这一部分包含Lintcode和平时遇到的一些题目。 题目描述：给定一个正整数n,返回出n的阶乘尾部0的个数。linkcode链接：https://lintcode.com/problem/trailing-zeros/description 分析：看到这一题第一感觉先求阶乘，然后求出结果中尾部有多少0。提交代码，超时。 于是查了下资料，一个数尾部有多少个0，先看这个数的因子">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -70,98 +71,69 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-interview" class="post-interview post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2018/04/27/tensorflow学习笔记3/">tensorflow学习笔记3</a>
+    <h1 class="entry-title article-title">
+      n阶乘后面有多少个0
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2018/04/27/tensorflow学习笔记3/">
-    <time datetime="2018-04-27T13:43:27.000Z" class="entry-date">
-        2018-04-27
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cji9o4m850000u0dafzzlqc1x" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>开始整理下面试题和心得，这一部分包含Lintcode和平时遇到的一些题目。</p>
+<p>题目描述：<br>给定一个正整数n,返回出n的阶乘尾部0的个数。linkcode链接：<br><a href="https://lintcode.com/problem/trailing-zeros/description" target="_blank" rel="noopener">https://lintcode.com/problem/trailing-zeros/description</a></p>
+<p>分析：<br>看到这一题第一感觉先求阶乘，然后求出结果中尾部有多少0。<br>提交代码，超时。</p>
+<p>于是查了下资料，一个数尾部有多少个0，先看这个数的因子，也就是因子分解，如10 分解为2 5，20 分解为2 2 5，100 分解为 2 2 5 5，多找几组数据，发现尾部0的个数为min{2的数，5的个数}。为什么会这样呢？因为尾部的0是由2<em>5得出的，当然也可以是4</em>5，但是4=2*2呀，最终0还是由2和5造出来的。一对2和5造出来一个0，n对2和5造出n个0，如果有10个2，8个5，则只能凑出8对，所以是min{…}.<br>阶乘也就是因子分解的过程，而且因子从小到大排好了。<br>2的个数肯定比5多，因为5大。<br>所以这个题，看因子中5出现的次数就可以啦。</p>
+<p>这里n阶乘用n!表示。<br>5！  –&gt; 1 2 3 4 5 有一个5<br>10!  –&gt; 1 2 3 4 5 6 7 8 9 10 有2个5（10=2<em>5）<br>…<br>25!  –&gt; 1 2 3 4 5 …10 ..15 ..20 ..24 25 有6个5（25=5</em>5）</p>
+<p>125！ = 5 10 15 …25 ..50 ..75 ..100 ..125 有多少呢？<br>我们发现每隔5个数出现一个5，隔25个数多出来1个5..隔125个数再多出一个5<br>也就是从n个抽出5<br>5 10 15 20 25 30 … = 5（<em>1 2 3 4 5 ）<br>然后从上面序列中再隔5抽<br>25 50 75 100 125 … = 5</em>5<em>（1 2 3 4 5 ）<br>再隔5抽<br>125 250 375 500 625 .. = 5</em>5*5（1 2 3 4 5 ）</p>
+<p>规律很明显了</p>
+<p>好了上代码 python3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    @param: n: An integer</span><br><span class="line">    @return: An integer, denote the number of trailing zeros in n!</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def trailingZeros(self, n):</span><br><span class="line">        zeros = 0</span><br><span class="line">        while n &gt; 0:</span><br><span class="line">            zeros += n // 5</span><br><span class="line">            n //= 5</span><br><span class="line">        return int(zeros)</span><br></pre></td></tr></table></figure>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/06/11/interview/">
+    <time datetime="2018-06-11T02:34:55.000Z" class="entry-date">
+        2018-06-11
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
 
     </footer>
 </article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2018/04/26/tensorflow学习笔记2/">tensorflow学习笔记2</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2018/04/26/tensorflow学习笔记2/">
-    <time datetime="2018-04-26T13:43:27.000Z" class="entry-date">
-        2018-04-26
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
 
-    </footer>
-</article>
-  
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
     
     
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2018/04/26/tensorflow学习笔记1/">tensorflow学习笔记1</a>
-    </h1>
-  
+        <span class="nav-next"><a href="/2018/06/05/python-1/" rel="next">python数据存储利器之pickle <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2018/04/26/tensorflow学习笔记1/">
-    <time datetime="2018-04-26T13:43:20.000Z" class="entry-date">
-        2018-04-26
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
 
-    </footer>
-</article>
-  
-  
-    </div></section>
-  
+
+
+
+
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
