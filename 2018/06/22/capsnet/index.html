@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh-Ch">
 <meta property="og:image" content="https://i.imgur.com/Y8T9FED.png">
 <meta property="og:image" content="https://i.imgur.com/qxWajRQ.png">
-<meta property="og:updated_time" content="2018-06-24T06:41:28.812Z">
+<meta property="og:updated_time" content="2018-06-24T07:04:33.817Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《揭开迷雾，来一顿美味的Capsule盛宴》">
 <meta name="twitter:description" content="由深度学习先驱 Hinton 开源的 Capsule 论文《Dynamic Routing Between Capsules》，无疑是去年深度学习界最热点的消息之一。得益于各种媒体的各种吹捧，Capsule 被冠以了各种神秘的色彩，诸如“抛弃了梯度下降”、“推倒深度学习重来”等字眼层出不穷，但也有人觉得 Capsule 不外乎是一个新的炒作概念。 本文试图揭开让人迷惘的云雾，领悟 Capsul">
@@ -89,7 +89,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjisgudhf001siwdakfc8kqg2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjishn47a001x40dal1rlfc9l" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -112,7 +112,11 @@
 </blockquote>
 <p>Capsule 就是针对着这个“层层递进”的目标来设计的，但坦白说，Capsule 论文的文笔真的不敢恭维，因此本文尽量不与论文中的符号相同，以免读者再次云里雾里。让我们来看个图。<br><img src="https://i.imgur.com/Y8T9FED.png" alt=""><br>如图所示，底层的胶囊和高层的胶囊构成一些连接关系。等等，什么是“胶囊”？其实，只要把一个向量当作一个整体来看，它就是一个“胶囊”，是的，你没看错，你可以这样理解：神经元就是标量，胶囊就是向量，就这么粗暴！Hinton 的理解是：每一个胶囊表示一个属性，而胶囊的向量则表示这个属性的“标架”。也就是说，我们以前只是用一个标量表示有没有这个特征（比如有没有羽毛），现在我们用一个向量来表示，不仅仅表示有没有，还表示“有什么样的”（比如有什么颜色、什么纹理的羽毛），如果这样理解，就是说在对单个特征的表达上更丰富了。</p>
 <p>说到这里，我感觉有点像 NLP 中的词向量，以前我们只是用 one hot 来表示一个词，也就是表示有没有这个词而已。现在我们用词向量来表示一个词，显然词向量表达的特征更丰富，不仅可以表示有没有，还可以表示哪些词有相近含义。词向量就是 NLP 中的“胶囊”？这个类比可能有点牵强，但我觉得意思已经对了。</p>
-<p>那么，这些胶囊要怎么运算，才能体现出“层层抽象”、“层层分类”的特性呢？让我们先看其中一部分连接：<br><img src="https://i.imgur.com/qxWajRQ.png" alt=""><br>图上只展示了 \(\mu\)的连接。这也就是说，目前已经有了\(\mu_1\)这个特征，（假设是羽毛），那么我想知道它属于上层特征\(\nu_{1}，\nu_{2}，\nu_{3}，\nu_{4}\)假设分别代表了鸡、鸭、鱼、狗）中的哪一个。分类问题我们显然已经是很熟悉了，不就是内积后 softmax 吗？于是单靠\(\mu_{1}\)这个特征，我们推导出它是属于鸡、鸭、鱼、狗的概率分别是$$(P_{1|1},P_{2|1},P_{3|1},P_{4|1})=\frac{1}{Z_1}(e^\left \langle \mu1,\nu1  \right \rangle,e^\left \langle \mu1,\nu2 \right \rangle,e^\left \langle \mu1,\nu3  \right \rangle,e^\left \langle \mu1,\nu4  \right \rangle)$$</p>
+<p>那么，这些胶囊要怎么运算，才能体现出“层层抽象”、“层层分类”的特性呢？让我们先看其中一部分连接：<br><img src="https://i.imgur.com/qxWajRQ.png" alt=""></p>
+<p>图上只展示了 \(\mu_1\)的连接。这也就是说，目前已经有了\(\mu_1\)这个特征，（假设是羽毛），那么我想知道它属于上层特征\(\nu_{1}，\nu_{2}，\nu_{3}，\nu_{4}\)假设分别代表了鸡、鸭、鱼、狗）中的哪一个。分类问题我们显然已经是很熟悉了，不就是内积后 softmax 吗？于是单靠\(\mu_{1}\)这个特征，我们推导出它是属于鸡、鸭、鱼、狗的概率分别是$$(P_{1|1},P_{2|1},P_{3|1},P_{4|1})=\frac{1}{Z_1}(e^\left \langle \mu1,\nu1  \right \rangle,e^\left \langle \mu1,\nu2 \right \rangle,e^\left \langle \mu1,\nu3  \right \rangle,e^\left \langle \mu1,\nu4  \right \rangle)$$<br>我们当然期望 \(P_{1|1}\)和\(P_{2|1}\)会明显大于 \(P_{3|1}\)和\(P_{4|1}\)。不过，单靠这个特征还不够，我们还需要综合各个特征，于是可以把上述操作对各个 \(\mu_i\)都做一遍，继而得到<br>\((P_{1|2},P_{2|2},P_{3|2},P_{4|2})\)、\((P_{1|3},P_{2|3},P_{3|3},P_{4|3})\)、…<br>问题是，现在得到这么多预测结果，那我究竟要选择哪个呢？而且我又不是真的要做分类，我要的是融合这些特征，构成更高级的特征。于是 Hinton 认为，既然\(\mu_i\)这个特征得到的概率分布是 \((P_{1|i},P_{2|i},P_{3|i},P_{4|i})\),那么我把这个特征切成四份，分别为 \((P_{1|i}\mu_i,P_{2|i}\mu_i,P_{3|i}\mu_i,P_{4|i}\mu_i)\)，然后把这几个特征分别传给 \(\nu_1,\nu_2,\nu_3,\nu_4\),最后\(\nu_1,\nu_2,\nu_3,\nu_4\)其实就是各个底层传入的特征的累加，这样不就好了？<br>$$\nu_j=squash(\sum_{i}p_{j|i}\mu_i) = squash(\sum_i\frac{e^\left \langle \mu_i,\nu_j \right \rangle}{Z_i}\mu_i)$$<br>从上往下看，那么 Capsule 就是每个底层特征分别做分类，然后将分类结果整合。这时 \(\nu_j\)应该尽量与所有\(\mu_i\)都比较靠近，靠近的度量是内积。因此，从下往上看的话，可以认为 \(\nu_j\)实际上就是各个\(\mu_i\)的某个聚类中心，而 Capsule 的核心思想就是输出是输入的某种聚类结果。</p>
+<p>现在来看这个 squash 是什么玩意，它怎么来的呢？<br>2.3 浓缩果汁<br>squash 在英文中也有浓缩果汁之意，我们就当它是一杯果汁品尝吧。这杯果汁的出现，是因为 Hinton 希望 Capsule 能有的一个性质是：胶囊的模长能够代表这个特征的概率。</p>
+<p>其实我不喜欢概率这个名词，因为概率让我们联想到归一化，而归一化事实上是一件很麻烦的事情。我觉得可以称为是特征的“显著程度”，这就好解释了，模长越大，这个特征越显著。而我们又希望有一个有界的指标来对这个“显著程度”进行衡量，所以就只能对这个模长进行压缩了，所谓“浓缩就是精华”嘛。Hinton 选取的压缩方案是：</p>
+<p>$$squash(x) = \frac{\left | x \right |^2}{1+\left | x \right |^2}\frac{x}{\left | x \right |}$$<br>其中\(x/\left | x \right |\)</p>
 
       
     </div><!-- .entry-content -->
