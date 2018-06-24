@@ -87,7 +87,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjissr3f6001y2kda7vquoyvq" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjisx1u84001xowda729uuvuy" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -135,7 +135,7 @@
 <p>这里用的原文中的算法，苏老师根据自己的理解进行了改写，可以参考其博客。</p>
 <h1 id="4-模型细节"><a href="#4-模型细节" class="headerlink" title="4 模型细节"></a>4 模型细节</h1><p>下面介绍 Capsule 实现的细节</p>
 <h2 id="4-1-全连接版"><a href="#4-1-全连接版" class="headerlink" title="4.1 全连接版"></a>4.1 全连接版</h2><p>先不管是 Hinton 版还是我的版本，按照这个动态路由的算法，<br>\(\nu_j\)能够迭代地算出来，那不就没有参数了吗？真的抛弃了反向传播了？</p>
-<p>非也非也～如果真的这样的话，各个 \(\nu_j\) 都一样了。前面已经说了，\(\nu_j\)是作为输入 \(\mu_i\)的某种聚类中心出现的，而从不同角度看输入，得到的聚类结果显然是不一样的。那么为了实现“多角度看特征”，于是可以在每个胶囊传入下一个胶囊之前，都要先乘上一个矩阵做变换，所以 (2)式实际上应该要变为<br>$$\nu_j = squash(\sum_i \frac{e ^\left \langle  \hat{\mu}_{j|i},\nu_j \right \rangle}{Z_i}\hat{\mu}<em>{j|i}),\hat{\mu}</em>{j|i} = W_{ji}\mu_i\tag{4}$$<br>这里的 \(W_{ji}\)是待训练的矩阵，这里的乘法是矩阵乘法，也就是矩阵乘以向量。所以，Capsule 变成了下图<img src="https://i.imgur.com/u30irii.png" alt=""></p>
+<p>非也非也～如果真的这样的话，各个 \(\nu_j\) 都一样了。前面已经说了，\(\nu_j\)是作为输入 \(\mu_i\)的某种聚类中心出现的，而从不同角度看输入，得到的聚类结果显然是不一样的。那么为了实现“多角度看特征”，于是可以在每个胶囊传入下一个胶囊之前，都要先乘上一个矩阵做变换，所以 (2)式实际上应该要变为<br>$$\nu_j = squash(\sum_i \frac{e ^\left \langle \hat{\mu}_{j|i},\nu_j \right \rangle}{Z_i}\hat{\mu}{j|i}),\hat{\mu}{j|i} = W_{ji}\mu_i\tag{4}$$<br>这里的 \(W_{ji}\)是待训练的矩阵，这里的乘法是矩阵乘法，也就是矩阵乘以向量。所以，Capsule 变成了下图<img src="https://i.imgur.com/u30irii.png" alt=""></p>
 <blockquote>
 <p>这时候就可以得到完整动态路由了</p>
 </blockquote>
@@ -189,7 +189,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjissr3dh00052kda89ictgg9" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjisx1u6d0004owdadm8a2gnw" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -244,7 +244,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjissr3d400002kdapa37hokv" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjisx1u610000owdat0zi7dlm" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -298,7 +298,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjissr3dr000b2kda9dpam1hw" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjisx1u6l000aowda31q69n1j" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -350,7 +350,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjissr3dj00062kdaw1ti7gmr" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjisx1u6h0007owda5di0q2da" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -407,7 +407,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjissr3dx000g2kda8w9v2y9o" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjisx1u6n000cowdath1shk6e" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -457,7 +457,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjissr3df00042kdaw7xy4sls" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjisx1u650001owdaw924y5u7" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -505,7 +505,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjissr3dt000d2kda0zof6ki9" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjisx1u6q000fowdanl1v249n" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -556,7 +556,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjissr3do00082kday4fnt7i5" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjisx1u6i0008owdaypkev0st" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -603,7 +603,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="cjissr3dq00092kday32eg1gx" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="cjisx1u6f0005owdaeog3apzk" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
