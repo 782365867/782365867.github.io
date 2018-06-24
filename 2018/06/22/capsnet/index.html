@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="本人目前从事机器学习相关研究和工作，对机器学习和深度学习仍在入门阶段。开此博客，希望记录学习路上的一些体会，还有对生活的一些思考。" />
+  
+
+  
+  <meta name="keywords" content="AI ML DL life" />
+  
+  
+  
+  
+  
+  
+  <title>《揭开迷雾，来一顿美味的Capsule盛宴》 | 山风之行</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="由深度学习先驱 Hinton 开源的 Capsule 论文《Dynamic Routing Between Capsules》，无疑是去年深度学习界最热点的消息之一。得益于各种媒体的各种吹捧，Capsule 被冠以了各种神秘的色彩，诸如“抛弃了梯度下降”、“推倒深度学习重来”等字眼层出不穷，但也有人觉得 Capsule 不外乎是一个新的炒作概念。 本文试图揭开让人迷惘的云雾，领悟 Capsule">
+<meta name="keywords" content="AI ML DL life">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《揭开迷雾，来一顿美味的Capsule盛宴》">
+<meta property="og:url" content="http://xurui.club/2018/06/22/capsnet/index.html">
+<meta property="og:site_name" content="山风之行">
+<meta property="og:description" content="由深度学习先驱 Hinton 开源的 Capsule 论文《Dynamic Routing Between Capsules》，无疑是去年深度学习界最热点的消息之一。得益于各种媒体的各种吹捧，Capsule 被冠以了各种神秘的色彩，诸如“抛弃了梯度下降”、“推倒深度学习重来”等字眼层出不穷，但也有人觉得 Capsule 不外乎是一个新的炒作概念。 本文试图揭开让人迷惘的云雾，领悟 Capsule">
+<meta property="og:locale" content="zh-Ch">
+<meta property="og:image" content="https://i.imgur.com/Y8T9FED.png">
+<meta property="og:image" content="https://i.imgur.com/qxWajRQ.png">
+<meta property="og:updated_time" content="2018-06-24T05:39:03.842Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《揭开迷雾，来一顿美味的Capsule盛宴》">
+<meta name="twitter:description" content="由深度学习先驱 Hinton 开源的 Capsule 论文《Dynamic Routing Between Capsules》，无疑是去年深度学习界最热点的消息之一。得益于各种媒体的各种吹捧，Capsule 被冠以了各种神秘的色彩，诸如“抛弃了梯度下降”、“推倒深度学习重来”等字眼层出不穷，但也有人觉得 Capsule 不外乎是一个新的炒作概念。 本文试图揭开让人迷惘的云雾，领悟 Capsule">
+<meta name="twitter:image" content="https://i.imgur.com/Y8T9FED.png">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="山风之行" rel="home">山风之行</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">—— 修养 风范 血性 胆识</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">主页</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">文章</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/about">关于</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-capsnet" class="post-capsnet post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      《揭开迷雾，来一顿美味的Capsule盛宴》
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjisel8dy0003fgdal1x6smtk" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>由深度学习先驱 Hinton 开源的 Capsule 论文《Dynamic Routing Between Capsules》，无疑是去年深度学习界最热点的消息之一。得益于各种媒体的各种吹捧，Capsule 被冠以了各种神秘的色彩，诸如“抛弃了梯度下降”、“推倒深度学习重来”等字眼层出不穷，但也有人觉得 Capsule 不外乎是一个新的炒作概念。</p>
+<p>本文试图揭开让人迷惘的云雾，领悟 Capsule 背后的原理和魅力，品尝这一顿 Capsule 盛宴。同时，笔者补做了一个自己设计的实验，这个实验能比原论文的实验更有力说明 Capsule 的确产生效果了。</p>
+<p>1 前言<br>Capsule 的论文已经放出几个月了，网上已经有很多大佬进行解读，也有大佬开源实现了 CapsuleNet，这些内容都加速了我对 Capsule 的理解。然而，我觉得美中不足的是，网上多数的解读，都只是在论文的翻译上粉饰了一点文字，并没有对 Capsule 的原理进行解读。比如“动态路由”那部分，基本上就是照搬论文的算法，然后说一下迭代 3 次就收敛了。但收敛出什么来？论文没有说，解读也没有说，这显然是不能让人满意的。也难怪知乎上有读者评论说：</p>
+<blockquote>
+<p>所谓的 capsule 为 dl 又贡献了一个花里胡哨的 trick 概念。说它是 trick，因为 hinton 没有说为什么 routing 算法为什么需要那么几步，循环套着循环，有什么理论依据吗？还是就是凑出来的？<br>如何评价深度学习之父 Hinton 发布的 Capsule 论文？ - 知乎<br>这个评论虽然过激，然而也是很中肯的：凭啥 Hinton 摆出来一套算法又不解释，我们就要稀里糊涂的跟着玩？<br>2 Capsule 盛宴<br>2.1 宴会特色<br>这次 Capsule 盛宴的特色是“vector in vector out”，取代了以往的“scaler in scaler out”，也就是神经元的输入输出都变成了向量，从而算是对神经网络理论的一次革命。然而真的是这样子吗？难道我们以往就没有做过“vector in vector out”的任务了吗？有，而且多的是！NLP 中，一个词向量序列的输入，不就可以看成“vector in”了吗？这个词向量序列经过 RNN/CNN/Attention 的编码，输出一个新序列，不就是“vector out”了吗？在目前的深度学习中，从来不缺乏“vector in vector out”的案例，因此显然这不能算是 Capsule 的革命。</p>
+</blockquote>
+<p>Capsule 的革命在于：它提出了一种新的“vector in vector out”的传递方案，并且这种方案在很大程度上是可解释的。</p>
+<p>如果问深度学习（神经网络）为什么有效，我一般会这样回答：神经网络通过层层叠加完成了对输入的层层抽象，这个过程某种程度上模拟了人的层次分类做法，从而完成对最终目标的输出，并且具有比较好的泛化能力。的确，神经网络应该是这样做的，然而它并不能告诉我们它确确实实是这样做的，这就是神经网络的难解释性，也就是很多人会将深度学习视为黑箱的原因之一。</p>
+<p>让我们来看 Hinton 是怎么来通过 Capsule 突破这一点的。</p>
+<p>2.2 大盆菜<br>如果要用一道菜来比如 Capsule，我想到了“大盆菜”：</p>
+<blockquote>
+<p>盆菜作为客家菜的菜式出现由来以久，一般也称为大盘菜，大盘菜源于客家人传统的“发财大盘菜”，顾名思义就是用一个大大的盘子，将食物都放到里面，融汇出一种特有滋味。丰富的材料一层层叠进大盘之中，最易吸收肴汁的材料通常放在下面。吃的时候每桌一盘，一层一层吃下去，汁液交融，味道馥郁而香浓，令人大有渐入佳景之快。</p>
+</blockquote>
+<p>Capsule 就是针对着这个“层层递进”的目标来设计的，但坦白说，Capsule 论文的文笔真的不敢恭维，因此本文尽量不与论文中的符号相同，以免读者再次云里雾里。让我们来看个图。<br><img src="https://i.imgur.com/Y8T9FED.png" alt=""><br>如图所示，底层的胶囊和高层的胶囊构成一些连接关系。等等，什么是“胶囊”？其实，只要把一个向量当作一个整体来看，它就是一个“胶囊”，是的，你没看错，你可以这样理解：神经元就是标量，胶囊就是向量，就这么粗暴！Hinton 的理解是：每一个胶囊表示一个属性，而胶囊的向量则表示这个属性的“标架”。也就是说，我们以前只是用一个标量表示有没有这个特征（比如有没有羽毛），现在我们用一个向量来表示，不仅仅表示有没有，还表示“有什么样的”（比如有什么颜色、什么纹理的羽毛），如果这样理解，就是说在对单个特征的表达上更丰富了。</p>
+<p>说到这里，我感觉有点像 NLP 中的词向量，以前我们只是用 one hot 来表示一个词，也就是表示有没有这个词而已。现在我们用词向量来表示一个词，显然词向量表达的特征更丰富，不仅可以表示有没有，还可以表示哪些词有相近含义。词向量就是 NLP 中的“胶囊”？这个类比可能有点牵强，但我觉得意思已经对了。</p>
+<p>那么，这些胶囊要怎么运算，才能体现出“层层抽象”、“层层分类”的特性呢？让我们先看其中一部分连接：<br><img src="https://i.imgur.com/qxWajRQ.png" alt=""><br>图上只展示了 $$ \mu $$ 的连接。这也就是说，目前已经有了<br>\mu , $\mu$ ls</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/06/22/capsnet/">
+    <time datetime="2018-06-22T02:21:37.000Z" class="entry-date">
+        2018-06-22
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2018/06/19/kmaxpooling/" rel="next">k-max-pooling的keras实现 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/心情/">心情</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2018/06/22/capsnet/">《揭开迷雾，来一顿美味的Capsule盛宴》</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/19/kmaxpooling/">k-max-pooling的keras实现</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/11/interview/">n阶乘后面有多少个0</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/05/python-1/">python数据存储利器之pickle</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/01/lda/">lda主题模型python实现篇</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lda/">lda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/Keras/" style="font-size: 13.33px;">Keras</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/lda/" style="font-size: 10px;">lda</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/tensorflow/" style="font-size: 16.67px;">tensorflow</a> <a href="/tags/异常解决/" style="font-size: 13.33px;">异常解决</a> <a href="/tags/心情/" style="font-size: 13.33px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 16.67px;">深度学习</a> <a href="/tags/面试/" style="font-size: 13.33px;">面试</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2018 Petrus Zhang
+    All rights reserved.</p>
+    <p>My Way to Better!</p>
+</footer>
+
+
+  <span>Hosted by <a href="https://pages.coding.me" >Coding Pages</a></span>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

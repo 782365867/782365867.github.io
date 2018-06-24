@@ -72,6 +72,64 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="post-capsnet" class="post-capsnet post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/06/22/capsnet/">《揭开迷雾，来一顿美味的Capsule盛宴》</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjisel8dy0003fgdal1x6smtk" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>由深度学习先驱 Hinton 开源的 Capsule 论文《Dynamic Routing Between Capsules》，无疑是去年深度学习界最热点的消息之一。得益于各种媒体的各种吹捧，Capsule 被冠以了各种神秘的色彩，诸如“抛弃了梯度下降”、“推倒深度学习重来”等字眼层出不穷，但也有人觉得 Capsule 不外乎是一个新的炒作概念。</p>
+<p>本文试图揭开让人迷惘的云雾，领悟 Capsule 背后的原理和魅力，品尝这一顿 Capsule 盛宴。同时，笔者补做了一个自己设计的实验，这个实验能比原论文的实验更有力说明 Capsule 的确产生效果了。</p>
+<p>1 前言<br>Capsule 的论文已经放出几个月了，网上已经有很多大佬进行解读，也有大佬开源实现了 CapsuleNet，这些内容都加速了我对 Capsule 的理解。然而，我觉得美中不足的是，网上多数的解读，都只是在论文的翻译上粉饰了一点文字，并没有对 Capsule 的原理进行解读。比如“动态路由”那部分，基本上就是照搬论文的算法，然后说一下迭代 3 次就收敛了。但收敛出什么来？论文没有说，解读也没有说，这显然是不能让人满意的。也难怪知乎上有读者评论说：</p>
+<blockquote>
+<p>所谓的 capsule 为 dl 又贡献了一个花里胡哨的 trick 概念。说它是 trick，因为 hinton 没有说为什么 routing 算法为什么需要那么几步，循环套着循环，有什么理论依据吗？还是就是凑出来的？<br>如何评价深度学习之父 Hinton 发布的 Capsule 论文？ - 知乎<br>这个评论虽然过激，然而也是很中肯的：凭啥 Hinton 摆出来一套算法又不解释，我们就要稀里糊涂的跟着玩？<br>2 Capsule 盛宴<br>2.1 宴会特色<br>这次 Capsule 盛宴的特色是“vector in vector out”，取代了以往的“scaler in scaler out”，也就是神经元的输入输出都变成了向量，从而算是对神经网络理论的一次革命。然而真的是这样子吗？难道我们以往就没有做过“vector in vector out”的任务了吗？有，而且多的是！NLP 中，一个词向量序列的输入，不就可以看成“vector in”了吗？这个词向量序列经过 RNN/CNN/Attention 的编码，输出一个新序列，不就是“vector out”了吗？在目前的深度学习中，从来不缺乏“vector in vector out”的案例，因此显然这不能算是 Capsule 的革命。</p>
+</blockquote>
+<p>Capsule 的革命在于：它提出了一种新的“vector in vector out”的传递方案，并且这种方案在很大程度上是可解释的。</p>
+<p>如果问深度学习（神经网络）为什么有效，我一般会这样回答：神经网络通过层层叠加完成了对输入的层层抽象，这个过程某种程度上模拟了人的层次分类做法，从而完成对最终目标的输出，并且具有比较好的泛化能力。的确，神经网络应该是这样做的，然而它并不能告诉我们它确确实实是这样做的，这就是神经网络的难解释性，也就是很多人会将深度学习视为黑箱的原因之一。</p>
+<p>让我们来看 Hinton 是怎么来通过 Capsule 突破这一点的。</p>
+<p>2.2 大盆菜<br>如果要用一道菜来比如 Capsule，我想到了“大盆菜”：</p>
+<blockquote>
+<p>盆菜作为客家菜的菜式出现由来以久，一般也称为大盘菜，大盘菜源于客家人传统的“发财大盘菜”，顾名思义就是用一个大大的盘子，将食物都放到里面，融汇出一种特有滋味。丰富的材料一层层叠进大盘之中，最易吸收肴汁的材料通常放在下面。吃的时候每桌一盘，一层一层吃下去，汁液交融，味道馥郁而香浓，令人大有渐入佳景之快。</p>
+</blockquote>
+<p>Capsule 就是针对着这个“层层递进”的目标来设计的，但坦白说，Capsule 论文的文笔真的不敢恭维，因此本文尽量不与论文中的符号相同，以免读者再次云里雾里。让我们来看个图。<br><img src="https://i.imgur.com/Y8T9FED.png" alt=""><br>如图所示，底层的胶囊和高层的胶囊构成一些连接关系。等等，什么是“胶囊”？其实，只要把一个向量当作一个整体来看，它就是一个“胶囊”，是的，你没看错，你可以这样理解：神经元就是标量，胶囊就是向量，就这么粗暴！Hinton 的理解是：每一个胶囊表示一个属性，而胶囊的向量则表示这个属性的“标架”。也就是说，我们以前只是用一个标量表示有没有这个特征（比如有没有羽毛），现在我们用一个向量来表示，不仅仅表示有没有，还表示“有什么样的”（比如有什么颜色、什么纹理的羽毛），如果这样理解，就是说在对单个特征的表达上更丰富了。</p>
+<p>说到这里，我感觉有点像 NLP 中的词向量，以前我们只是用 one hot 来表示一个词，也就是表示有没有这个词而已。现在我们用词向量来表示一个词，显然词向量表达的特征更丰富，不仅可以表示有没有，还可以表示哪些词有相近含义。词向量就是 NLP 中的“胶囊”？这个类比可能有点牵强，但我觉得意思已经对了。</p>
+<p>那么，这些胶囊要怎么运算，才能体现出“层层抽象”、“层层分类”的特性呢？让我们先看其中一部分连接：<br><img src="https://i.imgur.com/qxWajRQ.png" alt=""><br>图上只展示了 $$ \mu $$ 的连接。这也就是说，目前已经有了<br>\mu , $\mu$ ls</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/06/22/capsnet/">
+    <time datetime="2018-06-22T02:21:37.000Z" class="entry-date">
+        2018-06-22
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-kmaxpooling" class="post-kmaxpooling post type-post status-publish format-standard hentry">
     <!---->
 
@@ -87,7 +145,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjimhzspn001ddcdabgtbinra" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjisel8dt0001fgda1q926b29" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -142,7 +200,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjimhzsnj0000dcda7ea1qwvz" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjisel8dn0000fgdaj6agoaob" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -196,7 +254,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjimhzso90007dcdap5lubkte" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjisel8fh001jfgdaf85a4qxb" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -248,7 +306,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjimhzsnu0001dcdaroy0yn1e" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjisel8eg000kfgdaxjpyq0xu" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -305,7 +363,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjimhzsor000rdcdas6coneqj" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjisel8f90018fgdacgixgudz" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -355,7 +413,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjimhzso30003dcdariso6iy2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjisel8ec000gfgdabmwaj3ln" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -403,7 +461,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjimhzsou000tdcday4g5ti7m" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjisel8ef000jfgdafjrtppkh" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -454,7 +512,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjimhzso50004dcdacdoe66ek" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjisel8eb000ffgdaw8vchnwu" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -501,7 +559,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="cjimhzso70005dcdayc6b8u95" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="cjisel8ee000ifgdaayucx552" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -523,62 +581,6 @@
     
   <span class="article-delim">&#8226;</span>
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
-
-    </footer>
-</article>
-
-
-
-
-
-
-  
-    <article id="post-keras-mask" class="post-keras-mask post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2018/05/12/keras-mask/">Keras 笔记之Mask层</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/12/keras-mask/" data-id="cjimhzspl001cdcdac7wwtatm" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <p>keras 的Mask层<br>先看下官方文档的解释</p>
-<hr>
-<p>Masking层<br>keras.layers.core.Masking(mask_value=0.0)<br>使用给定的值对输入的序列信号进行“屏蔽”，用以定位需要跳过的时间步</p>
-<p>对于输入张量的时间步，即输入张量的第1维度（维度从0开始算，见例子），如果输入张量在该时间步上都等于mask_value，则该时间步将在模型接下来的所有层（只要支持masking）被跳过（屏蔽）。</p>
-<p>如果模型接下来的一些层不支持masking，却接受到masking过的数据，则抛出异常。</p>
-<p>例子<br>考虑输入数据x是一个形如(samples,timesteps,features)的张量，现将其送入LSTM层。因为你缺少时间步为3和5的信号，所以你希望将其掩盖。这时候应该：</p>
-<p>赋值x[:,3,:] = 0.，x[:,5,:] = 0.</p>
-<p>在LSTM层之前插入mask_value=0.的Masking层</p>
-<p>model = Sequential()<br>model.add(Masking(mask_value=0., input_shape=(timesteps, features)))<br>model.add(LSTM(32))</p>
-<hr>
-<p>在用LSTM等模型处理文本数据时，因为文本是变长的，所以在处理的过程中，要先进行长度的统一。常用的方法为<br><code>X_data = sequence.pad_sequence</code>(maxlen=10,value=0,padding=’post’)<br>此步骤将X_data统一长度为10.<br>如[1,2,3,4,5]–&gt;变为[1,2,3,4,5,0,0,0,0,0]<br>这样就可以把X_data 输入到model的Embedding等层。<br>然而，交给LSTM处理时，还有对数据进行反padding.也就是把后面的0去掉。<br>这个时候就是Mask层派上用场的时候了。Mask(0)经过Mask后，可以忽略X_data中所有的0，当然，把后面补的0去掉是可以理解的。那如果句中有0呢？一般情况下，如文本处理，会把文本映射成index，这样最大的好处就是节约空间。有些大文本数据，几百个G，经过了index映射，也就还剩几个G。这是题外话了，我们在keras的Embedding层会讲的。而这个时候index中的0,往往是一些无法转成词向量的低频词，这些词没有词向量，去掉对整个文本的处理也没有影响，所以在Mask中和补上的0一起忽略就好啦。<br>这里的忽略是什么意思呢？也就是不处理。<br>很多朋友以为Mask后会直接把0去掉。其实不是的。<br>可以做一些实验，如model的Mask后接个LSTM层，对LSTM输出每个时间步的值，发现，如果设置了Mask层，则上面[1,2,3,4,5,00000]的数据处理结果，前5位是经过了计算，补0的对应的位置的值，和第5位的值相同，也就是说LSTM对后面补0的位置并没有计算。</p>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2018/05/12/keras-mask/">
-    <time datetime="2018-05-12T11:36:39.000Z" class="entry-date">
-        2018-05-12
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keras/">Keras</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
 
     </footer>
 </article>
@@ -625,6 +627,10 @@
       <ul>
         
           <li>
+            <a href="/2018/06/22/capsnet/">《揭开迷雾，来一顿美味的Capsule盛宴》</a>
+          </li>
+        
+          <li>
             <a href="/2018/06/19/kmaxpooling/">k-max-pooling的keras实现</a>
           </li>
         
@@ -638,10 +644,6 @@
         
           <li>
             <a href="/2018/06/01/lda/">lda主题模型python实现篇</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/23/python/">python之list.count()和Count()类</a>
           </li>
         
       </ul>
