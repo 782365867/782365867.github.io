@@ -87,7 +87,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjism1vip001kusda9x7by9ne" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjism6bif001zo4daoe3whvyu" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -127,7 +127,7 @@
 <h2 id="3-2-小菜-2"><a href="#3-2-小菜-2" class="headerlink" title="3.2 小菜 2"></a>3.2 小菜 2</h2><p>再来看一个例子，这个例子可能在 NLP 中有很多对应的情景，但图像领域其实也不少。考虑一个向量序列 \(x_1,x_2,…x_n\)，我现在要想办法将这 n个向量整合成一个向量 x(encoder)，然后用这个向量来做分类。</p>
 <p>也许读者会想到用 LSTM。但我这里仅仅想要将它表示为原来向量的线性组合，也就是：<br>$$ x = \sum ^{n}_{i=1}\lambda_ix_i$$<br>这里的\(\lambda_i\)相当于衡量\(x\)与\(x_i\)的相似度。然而问题来了，在 x 出现之前，凭什么能够确定这个相似度呢？这不也是一个鸡生蛋、蛋生鸡的问题吗？解决这个问题的一个方案也是迭代。首先我们也可以定义一个基于 softmax 的相似度指标，然后让<br>$$x = \sum ^n_{i=1}\frac{e^\left \langle x,x_i \right \rangle}{Z}x_i$$<br>一开始，我们一无所知，所以只好取 x为各个 \(x_i\) 的均值，然后代入右边就可以算出一个，再把它代入右边，反复迭代就行，一般迭代有限次就可以收敛，于是就可以将这个迭代过程嵌入到神经网络中了。</p>
 <p>如果说小菜 1 跟动态路由只是神似，那么小菜 2 已经跟动态路由是神似＋形似了。不过我并没有看到已有的工作是这样做的，这个小菜只是我的头脑风暴。</p>
-<h2 id="3-3-上主菜～"><a href="#3-3-上主菜～" class="headerlink" title="3.3 上主菜～"></a>3.3 上主菜～</h2><p>其实有了这两个小菜，动态路由这道主菜根本就不神秘了。为了得到各个 \(nu_j\)，一开始先让它们全都等于\(mu_i\)的均值，然后反复迭代就好。说白了，输出是输入的聚类结果，而聚类通常都需要迭代算法，这个迭代算法就称为“动态路由”。至于这个动态路由的细节，其实是不固定的，取决于聚类的算法，比如关于 Capsule 的新文章《MATRIX CAPSULES WITH EM ROUTING》就使用了 Gaussian Mixture Model 来聚类。</p>
+<h2 id="3-3-上主菜～"><a href="#3-3-上主菜～" class="headerlink" title="3.3 上主菜～"></a>3.3 上主菜～</h2><p>其实有了这两个小菜，动态路由这道主菜根本就不神秘了。为了得到各个 \(\nu_j\)，一开始先让它们全都等于\(\mu_i\)的均值，然后反复迭代就好。说白了，输出是输入的聚类结果，而聚类通常都需要迭代算法，这个迭代算法就称为“动态路由”。至于这个动态路由的细节，其实是不固定的，取决于聚类的算法，比如关于 Capsule 的新文章《MATRIX CAPSULES WITH EM ROUTING》就使用了 Gaussian Mixture Model 来聚类。</p>
 <p>理解到这里，就可以写出本文的动态路由的算法了：</p>
 <blockquote>
 <p>动态路由算法<br>初始化\(b_{ij}=0\)<br>迭代r次：<br>  \(c_i = softmax(b_j)\)<br>  \(s_j = \sum _ic_{ij}\mu_i\)<br>  \(\nu_j = squash(s_j)\)<br>  \(b_{ij} = b_{ij}+\left \langle \mu_i,\nu_j \right \rangle\)<br>返回\(\nu_j\)</p>
@@ -140,7 +140,7 @@
 <p>这时候就可以得到完整动态路由了</p>
 </blockquote>
 <blockquote>
-<p>动态路由算法<br>初始化\(b_{ij}=0\)<br>迭代r次：<br>  \(c_i = softmax(b_j)\)<br>  \(s_j = \sum _ic_{ij}\hat{\mu}_{j\i}\)<br>  \(\nu_j = squash(s_j)\)<br>  \(b_{ij} = b_{ij}+\left \langle \hat{\mu}_{j}i},\nu_j \right \rangle\)<br>返回\(\nu_j\)<br>这样的 Capsule 层，显然相当于普通神经网络中的全连接层。</p>
+<p>动态路由算法<br>初始化\(b_{ij}=0\)<br>迭代r次：<br>  \(c_i = softmax(b_j)\)<br>  \(s_j = \sum_ic_{ij}\hat{\mu}_{j|i}\)<br>  \(\nu_j = squash(s_j)\)<br>  \(b_{ij} = b_{ij}+\left \langle \hat{\mu}_{j|i},\nu_j \right \rangle\)<br>返回\(\nu_j\)<br>这样的 Capsule 层，显然相当于普通神经网络中的全连接层。</p>
 </blockquote>
 <h2 id="4-2-共享版"><a href="#4-2-共享版" class="headerlink" title="4.2 共享版"></a>4.2 共享版</h2><p>众所周知，全连接层只能处理定长输入，全连接版的 Capsule 也不例外。而 CNN 处理的图像大小通常是不定的，提取的特征数目就不定了，这种情形下，全连接层的 Capsule 就不适用了。因为在前一图就可以看到，参数矩阵的个数等于输入输入胶囊数目乘以输出胶囊数目，既然输入数目不固定，那么就不能用全连接了。</p>
 <p>所以跟 CNN 的权值共享一样，我们也需要一个权值共享版的 Capsule。所谓共享版，是指对于固定的上层胶囊j，它与所有的底层胶囊的连接的变换矩阵是共用的，即\(W_{ji} = W_{j}，</p>
@@ -189,7 +189,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjism1vgl0003usdaxbq6sjkl" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjism6be20004o4da3sbjobrc" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -244,7 +244,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjism1vgq0007usda8xtn5y1l" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjism6be30005o4dawkiito1u" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -298,7 +298,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjism1vgu000ausdail93tppx" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjism6be80009o4da5ftmtvvb" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -350,7 +350,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjism1vgx000cusda76tgjbfu" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjism6bdw0002o4da6hy9q7gs" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -407,7 +407,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjism1vgs0008usdaund6dqba" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjism6bea000do4daxzik8d67" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -457,7 +457,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjism1vgh0001usdanhqyi313" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjism6bdp0000o4datskwkott" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -505,7 +505,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjism1vi30019usdaaoebu0yw" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjism6bek000jo4das27et2n8" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -556,7 +556,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjism1vgo0005usda6xwq2ipa" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjism6be9000bo4daeowspnz1" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -603,7 +603,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="cjism1vgm0004usdayamehh5a" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="cjism6be60008o4daljcsnh2u" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
