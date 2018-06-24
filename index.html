@@ -87,14 +87,15 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjisfccox001wg0dazz6izo5m" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjisgudhf001siwdakfc8kqg2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <p>\mu<br>\mu</p>
-<p><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><br>$ \sum_{i=0}^N\int_{a}^{b}g(t,i)\text{d}t $<br>$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$<br>\(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\)<br>由深度学习先驱 Hinton 开源的 Capsule 论文《Dynamic Routing Between Capsules》，无疑是去年深度学习界最热点的消息之一。得益于各种媒体的各种吹捧，Capsule 被冠以了各种神秘的色彩，诸如“抛弃了梯度下降”、“推倒深度学习重来”等字眼层出不穷，但也有人觉得 Capsule 不外乎是一个新的炒作概念。</p>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<p>由深度学习先驱 Hinton 开源的 Capsule 论文《Dynamic Routing Between Capsules》，无疑是去年深度学习界最热点的消息之一。得益于各种媒体的各种吹捧，Capsule 被冠以了各种神秘的色彩，诸如“抛弃了梯度下降”、“推倒深度学习重来”等字眼层出不穷，但也有人觉得 Capsule 不外乎是一个新的炒作概念。</p>
 <p>本文试图揭开让人迷惘的云雾，领悟 Capsule 背后的原理和魅力，品尝这一顿 Capsule 盛宴。同时，笔者补做了一个自己设计的实验，这个实验能比原论文的实验更有力说明 Capsule 的确产生效果了。</p>
 <p>1 前言<br>Capsule 的论文已经放出几个月了，网上已经有很多大佬进行解读，也有大佬开源实现了 CapsuleNet，这些内容都加速了我对 Capsule 的理解。然而，我觉得美中不足的是，网上多数的解读，都只是在论文的翻译上粉饰了一点文字，并没有对 Capsule 的原理进行解读。比如“动态路由”那部分，基本上就是照搬论文的算法，然后说一下迭代 3 次就收敛了。但收敛出什么来？论文没有说，解读也没有说，这显然是不能让人满意的。也难怪知乎上有读者评论说：</p>
 <blockquote>
@@ -109,7 +110,7 @@
 </blockquote>
 <p>Capsule 就是针对着这个“层层递进”的目标来设计的，但坦白说，Capsule 论文的文笔真的不敢恭维，因此本文尽量不与论文中的符号相同，以免读者再次云里雾里。让我们来看个图。<br><img src="https://i.imgur.com/Y8T9FED.png" alt=""><br>如图所示，底层的胶囊和高层的胶囊构成一些连接关系。等等，什么是“胶囊”？其实，只要把一个向量当作一个整体来看，它就是一个“胶囊”，是的，你没看错，你可以这样理解：神经元就是标量，胶囊就是向量，就这么粗暴！Hinton 的理解是：每一个胶囊表示一个属性，而胶囊的向量则表示这个属性的“标架”。也就是说，我们以前只是用一个标量表示有没有这个特征（比如有没有羽毛），现在我们用一个向量来表示，不仅仅表示有没有，还表示“有什么样的”（比如有什么颜色、什么纹理的羽毛），如果这样理解，就是说在对单个特征的表达上更丰富了。</p>
 <p>说到这里，我感觉有点像 NLP 中的词向量，以前我们只是用 one hot 来表示一个词，也就是表示有没有这个词而已。现在我们用词向量来表示一个词，显然词向量表达的特征更丰富，不仅可以表示有没有，还可以表示哪些词有相近含义。词向量就是 NLP 中的“胶囊”？这个类比可能有点牵强，但我觉得意思已经对了。</p>
-<p>那么，这些胶囊要怎么运算，才能体现出“层层抽象”、“层层分类”的特性呢？让我们先看其中一部分连接$\mu$：<br><img src="https://i.imgur.com/qxWajRQ.png" alt=""><br>图上只展示了 \(\mu\)的连接。这也就是说，目前已经有了 </p>
+<p>那么，这些胶囊要怎么运算，才能体现出“层层抽象”、“层层分类”的特性呢？让我们先看其中一部分连接：<br><img src="https://i.imgur.com/qxWajRQ.png" alt=""><br>图上只展示了 \(\mu\)的连接。这也就是说，目前已经有了\(\mu_1\)这个特征，（假设是羽毛），那么我想知道它属于上层特征\(\nu_{1}，\nu_{2}，\nu_{3}，\nu_{4}\)假设分别代表了鸡、鸭、鱼、狗）中的哪一个。分类问题我们显然已经是很熟悉了，不就是内积后 softmax 吗？于是单靠\(\mu_{1}\)这个特征，我们推导出它是属于鸡、鸭、鱼、狗的概率分别是$$(P_{1|1},P_{2|1},P_{3|1},P_{4|1})=\frac{1}{Z_1}(e^\left \langle \mu1,\nu1  \right \rangle,e^\left \langle \mu1,\nu2 \right \rangle,e^\left \langle \mu1,\nu3  \right \rangle,e^\left \langle \mu1,\nu4  \right \rangle)$$</p>
 
       
     </div><!-- .entry-content -->
@@ -146,7 +147,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjisfccmk0005g0da6i9auc80" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjisguder000fiwdafhcfj0n1" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -201,7 +202,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjisfccm60000g0dawbslv8nw" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjisgudc60000iwdaobtp7kwc" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -255,7 +256,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjisfccmt000dg0da8jdwwqkl" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjisgudee000biwdaf72so6c3" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -307,7 +308,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjisfccml0006g0dafvslt2d4" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjisgude30009iwda64zuwqfc" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -364,7 +365,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjisfccmp0009g0daoz9bg1qs" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjisgudel000diwdahipfpvg4" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -414,7 +415,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjisfccmc0002g0dateor9561" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjisguddo0005iwdax8o0pqes" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -462,7 +463,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjisfccn0000gg0da3mov2gex" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjisgudgt001ciwdarf24vs6t" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -513,7 +514,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjisfccmr000bg0dac3vghx1v" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjisgude8000aiwdasbis6fcv" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -560,7 +561,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="cjisfccmn0008g0da8dvoszpv" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="cjisguddw0007iwdafu12mklo" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
