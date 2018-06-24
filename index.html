@@ -87,7 +87,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjism6bif001zo4daoe3whvyu" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjisnj5vz001rw0dar7h0b2mn" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -135,7 +135,7 @@
 <p>这里用的原文中的算法，苏老师根据自己的理解进行了改写，可以参考其博客。</p>
 <h1 id="4-模型细节"><a href="#4-模型细节" class="headerlink" title="4 模型细节"></a>4 模型细节</h1><p>下面介绍 Capsule 实现的细节</p>
 <h2 id="4-1-全连接版"><a href="#4-1-全连接版" class="headerlink" title="4.1 全连接版"></a>4.1 全连接版</h2><p>先不管是 Hinton 版还是我的版本，按照这个动态路由的算法，<br>\(\nu_j\)能够迭代地算出来，那不就没有参数了吗？真的抛弃了反向传播了？</p>
-<p>非也非也～如果真的这样的话，各个 \(\nu_j\) 都一样了。前面已经说了，\(\nu_j\)是作为输入 \(\mu_i\)的某种聚类中心出现的，而从不同角度看输入，得到的聚类结果显然是不一样的。那么为了实现“多角度看特征”，于是可以在每个胶囊传入下一个胶囊之前，都要先乘上一个矩阵做变换，所以 (2)式实际上应该要变为$$v_j = squash(\sum_i \frac{e ^\left \langle  \hat{\mu}_{j|i},\nu_j \right \rangle}{Z_i}\hat{\mu}<em>{j|i}),\hat{\mu}</em>{j|i} = W_{ji}\mu_i$$<br>这里的 \(W_{ji}\)是待训练的矩阵，这里的乘法是矩阵乘法，也就是矩阵乘以向量。所以，Capsule 变成了下图<img src="https://i.imgur.com/u30irii.png" alt=""></p>
+<p>非也非也～如果真的这样的话，各个 \(\nu_j\) 都一样了。前面已经说了，\(\nu_j\)是作为输入 \(\mu_i\)的某种聚类中心出现的，而从不同角度看输入，得到的聚类结果显然是不一样的。那么为了实现“多角度看特征”，于是可以在每个胶囊传入下一个胶囊之前，都要先乘上一个矩阵做变换，所以 (2)式实际上应该要变为<br>$$\nu_j = squash(\sum_i \frac{e ^\left \langle  \hat{\mu}_{j|i},\nu_j \right \rangle}{Z_i}\hat{\mu}<em>{j|i}),\hat{\mu}</em>{j|i} = W_{ji}\mu_i$$<br>这里的 \(W_{ji}\)是待训练的矩阵，这里的乘法是矩阵乘法，也就是矩阵乘以向量。所以，Capsule 变成了下图<img src="https://i.imgur.com/u30irii.png" alt=""></p>
 <blockquote>
 <p>这时候就可以得到完整动态路由了</p>
 </blockquote>
@@ -143,7 +143,7 @@
 <p>动态路由算法<br>初始化\(b_{ij}=0\)<br>迭代r次：<br>  \(c_i = softmax(b_j)\)<br>  \(s_j = \sum_ic_{ij}\hat{\mu}_{j|i}\)<br>  \(\nu_j = squash(s_j)\)<br>  \(b_{ij} = b_{ij}+\left \langle \hat{\mu}_{j|i},\nu_j \right \rangle\)<br>返回\(\nu_j\)<br>这样的 Capsule 层，显然相当于普通神经网络中的全连接层。</p>
 </blockquote>
 <h2 id="4-2-共享版"><a href="#4-2-共享版" class="headerlink" title="4.2 共享版"></a>4.2 共享版</h2><p>众所周知，全连接层只能处理定长输入，全连接版的 Capsule 也不例外。而 CNN 处理的图像大小通常是不定的，提取的特征数目就不定了，这种情形下，全连接层的 Capsule 就不适用了。因为在前一图就可以看到，参数矩阵的个数等于输入输入胶囊数目乘以输出胶囊数目，既然输入数目不固定，那么就不能用全连接了。</p>
-<p>所以跟 CNN 的权值共享一样，我们也需要一个权值共享版的 Capsule。所谓共享版，是指对于固定的上层胶囊j，它与所有的底层胶囊的连接的变换矩阵是共用的，即\(W_{ji} = W_{j}，</p>
+<p>所以跟 CNN 的权值共享一样，我们也需要一个权值共享版的 Capsule。所谓共享版，是指对于固定的上层胶囊j，它与所有的底层胶囊的连接的变换矩阵是共用的，即\(W_{ji} = W_{j}\)，</p>
 <p>如图所示，共享版其实不难理解，就是自下而上地看，就是所有输入向量经过同一个矩阵进行映射后，完成聚类进行输出，将这个过程重复几次，就输出几个向量（胶囊）；又或者自上而下地看，将每个变换矩阵看成是上层胶囊的识别器，上层胶囊通过这个矩阵来识别出底层胶囊是不是有这个特征。因此很明显，这个版本的胶囊的参数量并不依赖于输入的胶囊个数，因此可以轻松接在 CNN 后面。对于共享版，(2)式要变为$$v_j = squash(\sum_i \frac{e ^\left \langle  \hat{\mu}_{j|i},\nu_j \right \rangle}{Z_i}\hat{\mu}<em>{j|i}),\hat{\mu}</em>{j|i} = W_{j}\mu_i$$<br>至于动态路由算法就没有改变了。</p>
 <h2 id="4-3-反向传播"><a href="#4-3-反向传播" class="headerlink" title="4.3 反向传播"></a>4.3 反向传播</h2><p>尽管我不是很喜欢反向传播这个名词，然而这里似乎不得不用上这个名字了。</p>
 <p>现在又有了 \(W_{ji}\)，那么这些参数怎么训练呢？答案是反向传播。读者也许比较晕的是：现在既有动态路由，又有反向传播了，究竟两者怎么配合？其实这个真的就最简单不过了。就好像“小菜 1”那样，把算法的迭代几步（论文中是 3 步），加入到模型中，从形式上来看，就是往模型中添加了三层罢了，剩下的该做什么还是什么，最后构建一个 loss 来反向传播。</p>
@@ -189,7 +189,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjism6be20004o4da3sbjobrc" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjisnj5ua0005w0dazb0sy2f6" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -244,7 +244,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjism6be30005o4dawkiito1u" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjisnj5tx0000w0da8k69g7b2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -298,7 +298,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjism6be80009o4da5ftmtvvb" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjisnj5ug000aw0danzjt6c1x" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -350,7 +350,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjism6bdw0002o4da6hy9q7gs" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjisnj5uc0007w0dagjwatyyv" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -407,7 +407,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjism6bea000do4daxzik8d67" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjisnj5uj000cw0da69rt5869" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -457,7 +457,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjism6bdp0000o4datskwkott" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjisnj5u20001w0dak6g3vv4a" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -505,7 +505,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjism6bek000jo4das27et2n8" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjisnj5v70015w0dav1fvui2x" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -556,7 +556,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjism6be9000bo4daeowspnz1" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjisnj5ue0008w0da45qqd6vz" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -603,7 +603,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="cjism6be60008o4daljcsnh2u" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="cjisnj5u80004w0dapoqsoaip" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
