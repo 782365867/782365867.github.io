@@ -15,19 +15,22 @@
   
   
   
-  <title>Archives: 2018/4 | 山风之行</title>
+  <title>ERROR 1130 (HY000) Host &#39;114.213.234.22&#39; is not allowed to connect to this MySQL server | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本人目前从事机器学习相关研究和工作，对机器学习和深度学习仍在入门阶段。开此博客，希望记录学习路上的一些体会，还有对生活的一些思考。">
-<meta name="keywords" content="AI ML DL life">
-<meta property="og:type" content="website">
-<meta property="og:title" content="山风之行">
-<meta property="og:url" content="http://xurui.club/archives/2018/04/index.html">
+  <meta name="description" content="给学校一个部门写了个网站，这个网站要用到学校的人事信息表，但是人事信息经常变动，所以跟学校人事部门联系下，每天将新的人事表推送到我们的数据库中。 然后人事部门发来个截图，说连接不上。 大概感觉是权限问题，查了些资料，原来mysql的安全机制，默认只允许本地连接。于是进入数据库中，改了下配置。1234use mysql;update user set host = &amp;apos;%&amp;apos; whe">
+<meta name="keywords" content="异常解决,mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ERROR 1130 (HY000) Host &#39;114.213.234.22&#39; is not allowed to connect to this MySQL server">
+<meta property="og:url" content="http://xurui.club/2018/07/05/mysql/index.html">
 <meta property="og:site_name" content="山风之行">
-<meta property="og:description" content="本人目前从事机器学习相关研究和工作，对机器学习和深度学习仍在入门阶段。开此博客，希望记录学习路上的一些体会，还有对生活的一些思考。">
+<meta property="og:description" content="给学校一个部门写了个网站，这个网站要用到学校的人事信息表，但是人事信息经常变动，所以跟学校人事部门联系下，每天将新的人事表推送到我们的数据库中。 然后人事部门发来个截图，说连接不上。 大概感觉是权限问题，查了些资料，原来mysql的安全机制，默认只允许本地连接。于是进入数据库中，改了下配置。1234use mysql;update user set host = &amp;apos;%&amp;apos; whe">
 <meta property="og:locale" content="zh-Ch">
+<meta property="og:image" content="https://i.imgur.com/VZD4tkX.png">
+<meta property="og:updated_time" content="2018-07-05T10:52:30.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="山风之行">
-<meta name="twitter:description" content="本人目前从事机器学习相关研究和工作，对机器学习和深度学习仍在入门阶段。开此博客，希望记录学习路上的一些体会，还有对生活的一些思考。">
+<meta name="twitter:title" content="ERROR 1130 (HY000) Host &#39;114.213.234.22&#39; is not allowed to connect to this MySQL server">
+<meta name="twitter:description" content="给学校一个部门写了个网站，这个网站要用到学校的人事信息表，但是人事信息经常变动，所以跟学校人事部门联系下，每天将新的人事表推送到我们的数据库中。 然后人事部门发来个截图，说连接不上。 大概感觉是权限问题，查了些资料，原来mysql的安全机制，默认只允许本地连接。于是进入数据库中，改了下配置。1234use mysql;update user set host = &amp;apos;%&amp;apos; whe">
+<meta name="twitter:image" content="https://i.imgur.com/VZD4tkX.png">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -70,155 +73,64 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-mysql" class="post-mysql post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2018/04/27/tensorflow学习笔记3/">tensorflow学习笔记3</a>
+    <h1 class="entry-title article-title">
+      ERROR 1130 (HY000) Host &#39;114.213.234.22&#39; is not allowed to connect to this MySQL server
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2018/04/27/tensorflow学习笔记3/">
-    <time datetime="2018-04-27T13:43:27.000Z" class="entry-date">
-        2018-04-27
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/05/mysql/" data-id="cjj8fmk2j000014daoues4thp" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>给学校一个部门写了个网站，这个网站要用到学校的人事信息表，但是人事信息经常变动，所以跟学校人事部门联系下，每天将新的人事表推送到我们的数据库中。</p>
+<p>然后人事部门发来个截图，说连接不上。<br><img src="https://i.imgur.com/VZD4tkX.png" alt=""></p>
+<p>大概感觉是权限问题，查了些资料，原来mysql的安全机制，默认只允许本地连接。<br>于是进入数据库中，改了下配置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">update user set host = &apos;%&apos; where user = &apos;root&apos;;</span><br><span class="line">flush privileges;</span><br><span class="line">quit</span><br></pre></td></tr></table></figure></p>
+<p>把 host 设为 % 就是解除了本地主机访问的限制。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/07/05/mysql/">
+    <time datetime="2018-07-05T10:39:38.000Z" class="entry-date">
+        2018-07-05
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异常解决/">异常解决</a></li></ul>
 
     </footer>
 </article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2018/04/26/tensorflow学习笔记2/">tensorflow学习笔记2</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2018/04/26/tensorflow学习笔记2/">
-    <time datetime="2018-04-26T13:43:27.000Z" class="entry-date">
-        2018-04-26
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
-
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2018/04/26/tensorflow学习笔记1/">tensorflow学习笔记1</a>
-    </h1>
-  
-
-  </header>
-  <footer class="entry-meta">
-    <a href="/2018/04/26/tensorflow学习笔记1/">
-    <time datetime="2018-04-26T13:43:20.000Z" class="entry-date">
-        2018-04-26
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
-
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2018/04/26/找实习/">找实习</a>
-    </h1>
-  
-
-  </header>
-  <footer class="entry-meta">
-    <a href="/2018/04/26/找实习/">
-    <time datetime="2018-04-26T13:33:45.000Z" class="entry-date">
-        2018-04-26
-    </time>
-</a>
-    
-  <span class="article-delim">&#8226;</span>
-  <div class="article-category">
-  <a class="article-category-link" href="/categories/心情/">心情</a>
-  </div>
 
     
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/心情/">心情</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2018/06/22/capsnet/" rel="next">揭开迷雾，来一顿美味的Capsule盛宴 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
 
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2018/04/26/初来博客/">初来博客</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2018/04/26/初来博客/">
-    <time datetime="2018-04-26T12:46:40.000Z" class="entry-date">
-        2018-04-26
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/心情/">心情</a></li></ul>
 
-    </footer>
-</article>
-  
-  
-    </div></section>
-  
+
+
+
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
