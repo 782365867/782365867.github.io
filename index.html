@@ -72,6 +72,80 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="post-zookeeper" class="post-zookeeper post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/07/12/zookeeper/">安装zookeeper时候，可以查看进程启动，但是状态显示报错 Error contacting service. It is probably not running</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/12/zookeeper/" data-id="cjjio3ouh001suodah2vtq8db" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>最近想学一下大数据，这年头，不会大数据，都不敢说自己是21世纪新青年。</p>
+<p>大数据有很多要学的框架，比如hadoop spark storm zookeeper等等，今天拿zookeeper入个门，安装过程中遇到点坑，分享一下。</p>
+<p>Zookeeper是一个分布式<strong>协调</strong>服务；就是为用户的分布式应用程序提供协调服务<br>A、zookeeper是为别的分布式程序服务的<br>B、Zookeeper本身就是一个分布式程序（只要有半数以上节点存活，zk就能正常服务）<br>C、Zookeeper所提供的服务涵盖：<strong>主从协调</strong>、<strong>服务器节点动态上下线</strong>、统一配置管理、分布式共享锁、统一名称服务……<br>D、虽然说可以提供各种服务，但是zookeeper在底层其实只提供了两个功能：<br> —管理(存储，读取)用户程序提交的<strong>数据</strong>；<br> —并为用户程序提供数据节点<strong>监听</strong>服务；</p>
+<p>1 部署<br>用的是三台虚拟机，centOS 7<br>jdk 8<br>zookeeper3.4.5<br>三台机器网络己配好，host配置如下<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@shizhan1 conf]# cat /etc/hosts</span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">127.0.0.1 shizhan1</span><br><span class="line">192.168.33.3 shizhan1</span><br><span class="line">192.168.33.4 shizhan2</span><br><span class="line">192.168.33.5 shizhan3</span><br></pre></td></tr></table></figure></p>
+<p>2 安装<br><a href="https://pan.baidu.com/s/1O-E6pq3zbzoqRvxHoj66eQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1O-E6pq3zbzoqRvxHoj66eQ</a> 放我网盘了，zookeeper3.4.5</p>
+<p>下载到shizhan1（第一台机子）中，我放在了<code>/root/work/</code>下<br>解压：<br><code>tar -zxvf zookeeper-3.4.5.tar.gz</code><br>重命名：<br><code>mv zookeeper-3.4.5 zookeeper</code>（重命名文件夹zookeeper-3.4.5为zookeeper,太长 写起来好麻烦）</p>
+<p>3 环境变量：<br><code>vi /etc/profile</code><br>添加内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export ZOOKEEPER_HOME=/root/work/zookeeper</span><br><span class="line">export PATH=$PATH:$ZOOKEEPER_HOME/bin</span><br></pre></td></tr></table></figure></p>
+<p>source 一下，也就是把你写的环境变量激活一下<br><code>source /etc/profile</code></p>
+<p>注意，这里三台机子都要改环境变量哟，第二部安装可以只在一个机子上装好，然后拷到其他机子上去，但是环境变量三个都要改。</p>
+<p>4 配置文件<br><code>cd zookeeper/conf</code>进入conf目录<br><code>cp zoo_sample.cfg zoo.cfg</code> 把例子copy一个出来，命名为zoo.cfg,我们要改的就是这个。<br><code>vi zoo.cfg</code><br>添加内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dataDir=/root/zkdata （要创建文件夹）</span><br><span class="line">dataLogDir=/root/zklogdata （要创建文件夹）</span><br><span class="line">server.1=shizhan1:2888:3888 (主机名, 心跳端口、数据端口)</span><br><span class="line">server.2=shizhan2:2888:3888</span><br><span class="line">server.3=shizhan3:2888:3888</span><br></pre></td></tr></table></figure></p>
+<p>5 然后创建上面说的那俩文件夹,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /root/zkdata</span><br><span class="line">mkdir /root/zklogdata</span><br></pre></td></tr></table></figure></p>
+<p>注意，这里三台机子都要创建。<br>6 将配好的zookeeper拷到另外两台机子上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp -r /root/work/zookeeper hadoop@slave2:/home/hadoop/</span><br><span class="line">scp -r /root/work/zookeeper hadoop@slave3:/home/hadoop/</span><br></pre></td></tr></table></figure></p>
+<p>7 在/root/zkdata/中创建myid文件，注意每台机子都要创建，但是值不一样，在步骤4中,如第一台，<code>server.1=shizhan1:2888:3888</code>，shizhan1是主机名，前面的serverl.1中的1,就是shizhan1这台机子上myid文件的值。以这台机子为例，其他两台的值分别为2 和 3。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /root/zkdata/</span><br><span class="line">echo 1 &gt; myid</span><br></pre></td></tr></table></figure></p>
+<p>8 启动服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@shizhan1 bin]# zkServer.sh start</span><br><span class="line">JMX enabled by default</span><br><span class="line">Using config: /root/work/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Starting zookeeper ... STARTED</span><br></pre></td></tr></table></figure></p>
+<p>9 查看服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@shizhan2 conf]# zkServer.sh status</span><br><span class="line">JMX enabled by default</span><br><span class="line">Using config: /root/work/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Mode: follower</span><br></pre></td></tr></table></figure></p>
+<p>只有出现上面类似内容才是成功了。</p>
+<p>排坑–<br>今天启动后，发现jps里有quorumpeermain<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Starting zookeeper ... already running as process 1398.</span><br><span class="line">[root@shizhan2 ~]# jps</span><br><span class="line">1398 QuorumPeerMain</span><br><span class="line">1559 Jps</span><br></pre></td></tr></table></figure></p>
+<p>但是状态显示报错：Error contacting service. It is probably not running</p>
+<p>1）在网上查阅资料一共有几种解决方法：<br>打开zkServer.sh 找到status)</p>
+<p>STAT=<code>echo stat | nc localhost $(grep clientPort &quot;$ZOOCFG&quot; | sed -e &#39;s/.*=//&#39;) 2&gt; /dev/null| grep Mode</code><br>在nc与localhost之间加上 -q 1 （是数字1而不是字母l）<br>如果已存在则去掉<br>注:因为我用的zookeeper是3.4.5版本，所以在我的zkServer.sh脚本文件里根本没有这一行,所以没有生效</p>
+<p>2）调用sh zkServer.sh status 遇到这个问题。百度，google了后发现有人是修改sh脚本里的一个nc的参数来解决，可在3.4.5的sh文件里并没有找到nc的调用。配置文档里指定的log目录没有创建导致出错，手动增加目录后重启，问题解决。<br>注:我想不是日志的问题所以这个方法根本就没有试</p>
+<p>3）创建数据目录,也就是在你zoo.cfg配置文件里dataDir指定的那个目录下创建myid文件,并且指定id,改id为你zoo.cfg文件中<code>server.1=shizhan1:2888:3888</code>中的 1.只要在myid头部写入1即可.</p>
+<p>4）因为防火墙没有关闭。关闭防火墙：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#查看防火墙状态</span><br><span class="line"></span><br><span class="line"> service iptables status </span><br><span class="line"></span><br><span class="line">#关闭防火墙</span><br><span class="line"> service iptables stop</span><br><span class="line">#查看防火墙开机启动状态</span><br><span class="line"> chkconfig iptables --list</span><br><span class="line">#关闭防火墙开机启动</span><br><span class="line"> chkconfig iptables off</span><br></pre></td></tr></table></figure></p>
+<p> 注意：我的确在开始时候没有关闭防火墙，但是当我关闭防火墙之后也没有解决问题。</p>
+<p>如果是centOS 7，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@shizhan2 conf]# systemctl stop firewalld.service</span><br><span class="line">[root@shizhan2 conf]# systemctl disable firewalld.service</span><br></pre></td></tr></table></figure></p>
+<p>我就是关防火墙的时候，用了iptables 那个命令，提示中显示如下，我就大概一看，以为是说防火墙没开，其实人家早就换新命令啦。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@shizhan1 work]# service iptables stop</span><br><span class="line">Redirecting to /bin/systemctl stop iptables.service</span><br><span class="line">Failed to stop iptables.service: Unit iptables.service not loaded.</span><br></pre></td></tr></table></figure></p>
+<p>5） 没有建立主机和ip之间的映射关系。</p>
+<p>  建立主机和ip之间映射关系的命令为 vim /etc/hosts   在文件的末端加入各个主机和ip地址之间的映射关系就可以了。</p>
+<p>  注意：只有在建立了映射关系之后，才可以将在同一个网段下的机器利用主机名进行文件传递。问题解决！</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/07/12/zookeeper/">
+    <time datetime="2018-07-12T08:58:40.000Z" class="entry-date">
+        2018-07-12
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异常解决/">异常解决</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-mysql" class="post-mysql post type-post status-publish format-standard hentry">
     <!---->
 
@@ -87,7 +161,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/05/mysql/" data-id="cjjdl14hm0008cgdakc43n5k5" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/05/mysql/" data-id="cjjio3os5000fuoda7677wnqg" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -136,7 +210,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjjdl14ja0022cgdaxo5denjt" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjjio3ova0022uodafxco57zc" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -238,7 +312,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjjdl14hh0004cgda9fubduhj" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjjio3orq0008uodap4vrcipr" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -293,7 +367,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjjdl14h50000cgdaber5v15k" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjjio3oqq0000uodaib0mwiyz" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -347,7 +421,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjjdl14hs000fcgdaqbf4zp4u" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjjio3oud001quodalrcxtyc2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -399,7 +473,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjjdl14hj0005cgda9yvtdjcn" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjjio3ori0005uoda47mw8h8e" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -456,7 +530,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjjdl14hq000ccgda6wodq0jb" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjjio3oso000kuodal6bzwq7j" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -506,7 +580,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjjdl14ha0001cgda2yn6v23u" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjjio3or10001uodaqgu8e8wv" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -554,7 +628,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjjdl14hz000hcgdamgi7zqw7" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjjio3orv000auoda2862xlry" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -580,53 +654,6 @@
     
   <span class="article-delim">&#8226;</span>
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异常解决/">异常解决</a></li></ul>
-
-    </footer>
-</article>
-
-
-
-
-
-
-  
-    <article id="post-pandas1" class="post-pandas1 post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2018/05/16/pandas1/">pandas之concat</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjjdl14hp000acgdag6t12q1d" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <p>如果我们有两个dataFrame,该怎么合在一起呢？<br>用concat<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">    inp1 = [&#123;<span class="string">'c1'</span>: <span class="number">10</span>, <span class="string">'c2'</span>: <span class="number">100</span>&#125;, &#123;<span class="string">'c1'</span>: <span class="number">11</span>, <span class="string">'c2'</span>: <span class="number">110</span>&#125;, &#123;<span class="string">'c1'</span>: <span class="number">12</span>, <span class="string">'c2'</span>: <span class="number">120</span>&#125;]</span><br><span class="line">    inp2 = [&#123;<span class="string">'c1'</span>: <span class="number">20</span>, <span class="string">'c2'</span>: <span class="number">100</span>&#125;, &#123;<span class="string">'c1'</span>: <span class="number">21</span>, <span class="string">'c2'</span>: <span class="number">110</span>&#125;, &#123;<span class="string">'c1'</span>: <span class="number">22</span>, <span class="string">'c2'</span>: <span class="number">120</span>&#125;]</span><br><span class="line">    df1 = pd.DataFrame(inp1)</span><br><span class="line">    print(df1)</span><br><span class="line">    print(<span class="string">'-'</span> * <span class="number">10</span>)</span><br><span class="line">    df2 = pd.DataFrame(inp2)</span><br><span class="line">    print(df2)</span><br><span class="line">    print(<span class="string">'-'</span> * <span class="number">10</span>)</span><br><span class="line">    df = pd.concat([df1, df2], ignore_index=<span class="keyword">True</span>)</span><br><span class="line">    print(df)</span><br><span class="line"></span><br><span class="line"><span class="comment">#output:</span></span><br><span class="line"> c1   c2</span><br><span class="line"><span class="number">0</span>  <span class="number">10</span>  <span class="number">100</span></span><br><span class="line"><span class="number">1</span>  <span class="number">11</span>  <span class="number">110</span></span><br><span class="line"><span class="number">2</span>  <span class="number">12</span>  <span class="number">120</span></span><br><span class="line">----------</span><br><span class="line">   c1   c2</span><br><span class="line"><span class="number">0</span>  <span class="number">20</span>  <span class="number">100</span></span><br><span class="line"><span class="number">1</span>  <span class="number">21</span>  <span class="number">110</span></span><br><span class="line"><span class="number">2</span>  <span class="number">22</span>  <span class="number">120</span></span><br><span class="line">----------</span><br><span class="line">   c1   c2</span><br><span class="line"><span class="number">0</span>  <span class="number">10</span>  <span class="number">100</span></span><br><span class="line"><span class="number">1</span>  <span class="number">11</span>  <span class="number">110</span></span><br><span class="line"><span class="number">2</span>  <span class="number">12</span>  <span class="number">120</span></span><br><span class="line"><span class="number">3</span>  <span class="number">20</span>  <span class="number">100</span></span><br><span class="line"><span class="number">4</span>  <span class="number">21</span>  <span class="number">110</span></span><br><span class="line"><span class="number">5</span>  <span class="number">22</span>  <span class="number">120</span></span><br></pre></td></tr></table></figure></p>
-<p>每天一点，学习不难。</p>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2018/05/16/pandas1/">
-    <time datetime="2018-05-16T02:20:48.000Z" class="entry-date">
-        2018-05-16
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pandas/">pandas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据分析/">数据分析</a></li></ul>
 
     </footer>
 </article>
@@ -673,6 +700,10 @@
       <ul>
         
           <li>
+            <a href="/2018/07/12/zookeeper/">安装zookeeper时候，可以查看进程启动，但是状态显示报错 Error contacting service. It is probably not running</a>
+          </li>
+        
+          <li>
             <a href="/2018/07/05/mysql/">ERROR 1130 (HY000) Host &#39;114.213.234.22&#39; is not allowed to connect to this MySQL server</a>
           </li>
         
@@ -688,10 +719,6 @@
             <a href="/2018/06/11/interview/">n阶乘后面有多少个0</a>
           </li>
         
-          <li>
-            <a href="/2018/06/05/python-1/">python数据存储利器之pickle</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -701,7 +728,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lda/">lda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/胶囊网络/">胶囊网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lda/">lda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/胶囊网络/">胶囊网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </aside>
 
@@ -710,7 +737,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/Keras/" style="font-size: 12px;">Keras</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/lda/" style="font-size: 10px;">lda</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/tensorflow/" style="font-size: 16px;">tensorflow</a> <a href="/tags/异常解决/" style="font-size: 14px;">异常解决</a> <a href="/tags/心情/" style="font-size: 12px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 18px;">深度学习</a> <a href="/tags/胶囊网络/" style="font-size: 10px;">胶囊网络</a> <a href="/tags/面试/" style="font-size: 12px;">面试</a>
+      <a href="/tags/Keras/" style="font-size: 12.5px;">Keras</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/lda/" style="font-size: 10px;">lda</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/tensorflow/" style="font-size: 15px;">tensorflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/大数据/" style="font-size: 10px;">大数据</a> <a href="/tags/异常解决/" style="font-size: 15px;">异常解决</a> <a href="/tags/心情/" style="font-size: 12.5px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 17.5px;">深度学习</a> <a href="/tags/胶囊网络/" style="font-size: 10px;">胶囊网络</a> <a href="/tags/面试/" style="font-size: 12.5px;">面试</a>
     </div>
   </aside>
 
