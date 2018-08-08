@@ -87,13 +87,13 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/03/echart/" data-id="cjkdq462r0004lwday3mxln80" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/03/echart/" data-id="cjkknp5e700002gdac50lqzgq" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <p>今天朋友写论文用到Echart做图，但是个性化的需要不知怎么做，找我帮忙。我很久没看前端的东西了，不过Echart那玩意好像很有意思，所以就接了下来。</p>
+        <p>今天我家宝贝儿写论文用到Echart做图，但是个性化的需要不知怎么做，找我帮忙。我很久没看前端的东西了，不过Echart那玩意好像很有意思，所以就接了下来。</p>
 <p>先看需求。<img src="https://i.imgur.com/geuR6aA.png" alt=""><br>1 将紫色框部分改成自己的内容<br>2 将红色框内容去掉<br>3 将蓝色框内容改成自己定义的类别，（三种）</p>
 <p>于是看了下代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">app.title = <span class="string">'嵌套环形图'</span>;</span><br><span class="line"></span><br><span class="line">option = &#123;</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: <span class="string">'item'</span>,</span><br><span class="line">        formatter: <span class="string">"&#123;a&#125; &lt;br/&gt;&#123;b&#125;: &#123;c&#125; (&#123;d&#125;%)"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        orient: <span class="string">'vertical'</span>,</span><br><span class="line">        x: <span class="string">'left'</span>,</span><br><span class="line">        data:[<span class="string">'直达'</span>,<span class="string">'营销广告'</span>,<span class="string">'搜索引擎'</span>,<span class="string">'邮件营销'</span>,<span class="string">'联盟广告'</span>,<span class="string">'视频广告'</span>,<span class="string">'百度'</span>,<span class="string">'谷歌'</span>,<span class="string">'必应'</span>,<span class="string">'其他'</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">    series: [</span><br><span class="line">        &#123;</span><br><span class="line">            name:<span class="string">'访问来源'</span>,</span><br><span class="line">            type:<span class="string">'pie'</span>,</span><br><span class="line">            selectedMode: <span class="string">'single'</span>,</span><br><span class="line">            radius: [<span class="number">0</span>, <span class="string">'30%'</span>],</span><br><span class="line"></span><br><span class="line">            label: &#123;</span><br><span class="line">                normal: &#123;</span><br><span class="line">                    position: <span class="string">'inner'</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            labelLine: &#123;</span><br><span class="line">                normal: &#123;</span><br><span class="line">                    show: <span class="literal">false</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            data:[</span><br><span class="line">                &#123;<span class="attr">value</span>:<span class="number">335</span>, <span class="attr">name</span>:<span class="string">'直达'</span>, <span class="attr">selected</span>:<span class="literal">true</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">value</span>:<span class="number">679</span>, <span class="attr">name</span>:<span class="string">'营销广告'</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">value</span>:<span class="number">1548</span>, <span class="attr">name</span>:<span class="string">'搜索引擎'</span>&#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            name:<span class="string">'访问来源'</span>,</span><br><span class="line">            type:<span class="string">'pie'</span>,</span><br><span class="line">            radius: [<span class="string">'40%'</span>, <span class="string">'55%'</span>],</span><br><span class="line">            label: &#123;</span><br><span class="line">                normal: &#123;</span><br><span class="line">                    formatter: <span class="string">'&#123;a|&#123;a&#125;&#125;&#123;abg|&#125;\n&#123;hr|&#125;\n  &#123;b|&#123;b&#125;：&#125;&#123;c&#125;  &#123;per|&#123;d&#125;%&#125;  '</span>,</span><br><span class="line">                    backgroundColor: <span class="string">'#eee'</span>,</span><br><span class="line">                    borderColor: <span class="string">'#aaa'</span>,</span><br><span class="line">                    borderWidth: <span class="number">1</span>,</span><br><span class="line">                    borderRadius: <span class="number">4</span>,</span><br><span class="line">                    <span class="comment">// shadowBlur:3,</span></span><br><span class="line">                    <span class="comment">// shadowOffsetX: 2,</span></span><br><span class="line">                    <span class="comment">// shadowOffsetY: 2,</span></span><br><span class="line">                    <span class="comment">// shadowColor: '#999',</span></span><br><span class="line">                    <span class="comment">// padding: [0, 7],</span></span><br><span class="line">                    rich: &#123;</span><br><span class="line">                        a: &#123;</span><br><span class="line">                            color: <span class="string">'#999'</span>,</span><br><span class="line">                            lineHeight: <span class="number">22</span>,</span><br><span class="line">                            align: <span class="string">'center'</span></span><br><span class="line">                        &#125;,</span><br><span class="line">                        <span class="comment">// abg: &#123;</span></span><br><span class="line">                        <span class="comment">//     backgroundColor: '#333',</span></span><br><span class="line">                        <span class="comment">//     width: '100%',</span></span><br><span class="line">                        <span class="comment">//     align: 'right',</span></span><br><span class="line">                        <span class="comment">//     height: 22,</span></span><br><span class="line">                        <span class="comment">//     borderRadius: [4, 4, 0, 0]</span></span><br><span class="line">                        <span class="comment">// &#125;,</span></span><br><span class="line">                        hr: &#123;</span><br><span class="line">                            borderColor: <span class="string">'#aaa'</span>,</span><br><span class="line">                            width: <span class="string">'100%'</span>,</span><br><span class="line">                            borderWidth: <span class="number">0.5</span>,</span><br><span class="line">                            height: <span class="number">0</span></span><br><span class="line">                        &#125;,</span><br><span class="line">                        b: &#123;</span><br><span class="line">                            fontSize: <span class="number">16</span>,</span><br><span class="line">                            lineHeight: <span class="number">33</span></span><br><span class="line">                        &#125;,</span><br><span class="line">                        per: &#123;</span><br><span class="line">                            color: <span class="string">'#eee'</span>,</span><br><span class="line">                            backgroundColor: <span class="string">'#334455'</span>,</span><br><span class="line">                            padding: [<span class="number">2</span>, <span class="number">4</span>],</span><br><span class="line">                            borderRadius: <span class="number">2</span></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            data:[</span><br><span class="line">                &#123;<span class="attr">value</span>:<span class="number">335</span>, <span class="attr">name</span>:<span class="string">'直达'</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">value</span>:<span class="number">310</span>, <span class="attr">name</span>:<span class="string">'邮件营销'</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">value</span>:<span class="number">234</span>, <span class="attr">name</span>:<span class="string">'联盟广告'</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">value</span>:<span class="number">135</span>, <span class="attr">name</span>:<span class="string">'视频广告'</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">value</span>:<span class="number">1048</span>, <span class="attr">name</span>:<span class="string">'百度'</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">value</span>:<span class="number">251</span>, <span class="attr">name</span>:<span class="string">'谷歌'</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">value</span>:<span class="number">147</span>, <span class="attr">name</span>:<span class="string">'必应'</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">value</span>:<span class="number">102</span>, <span class="attr">name</span>:<span class="string">'其他'</span>&#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>经过注释调试，发现需求1只要改最后一个data集合就好，把name和value换成自己自定义的内容。<br>而需求2 3 主要在<figure class="highlight plain"><figcaption><span>'&#123;a|&#123;a&#125;&#125;&#123;abg|&#125;\n&#123;hr|&#125;\n  &#123;b|&#123;b&#125;：&#125;&#123;c&#125;  &#123;per|&#123;d&#125;%&#125;  '```这里。把、`&#123;c&#125;`去掉即可。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">最难搞的是需求3，用了2小时搞明白的。</span><br><span class="line">这里是官方文档里的介绍</span><br><span class="line">http://echarts.baidu.com/option.html#grid.tooltip.formatter</span><br><span class="line">formatter有两种写法：一种字符串模板，另一种是回调函数。</span><br><span class="line">字符串模型里写的是，我们要改的地方是该series中name的值，这里name只能有一个值，改name是不能了，所以我们可以像改需求1那样，在data中传一个变量。用回调函数，文档中对回调函数也没有写明白。这里用简单的语言再梳理一下。主要有两点：将需要的个性化信息显示出来，然后展现出好看的样式。</span><br><span class="line">第一点：</span><br><span class="line">我们的个性化需求在data里写</span><br></pre></td></tr></table></figure></p>
@@ -139,7 +139,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/12/zookeeper/" data-id="cjkdq464i0019lwdahy2h71xd" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/12/zookeeper/" data-id="cjkknp5ge00172gdawu07v33z" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -213,7 +213,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/05/mysql/" data-id="cjkdq463p000xlwdab12arvz2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/05/mysql/" data-id="cjkknp5fr000n2gdaqqscc3kw" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -262,7 +262,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjkdq465g0026lwda3os6khdc" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjkknp5h9002d2gda6rrufltn" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -364,7 +364,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjkdq463a000mlwdavuv4gx58" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjkknp5fn000k2gdam05jhj0i" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -419,7 +419,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjkdq462i0001lwdab801at7e" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjkknp5fl000i2gdazkrpb1a4" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -473,7 +473,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjkdq463d000plwdavtq016xw" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjkknp5ga00122gdafozj155x" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -525,7 +525,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjkdq4639000llwda2kocoh25" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjkknp5fp000m2gdaymvyfljc" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -582,7 +582,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjkdq463l000tlwdakr6x0osn" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjkknp5gc00142gdamydbuma9" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -632,7 +632,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjkdq462m0002lwdalqgqrtfv" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjkknp5er00032gdaju60hhaw" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
