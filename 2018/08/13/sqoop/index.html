@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="本人目前从事机器学习相关研究和工作，对机器学习和深度学习仍在入门阶段。开此博客，希望记录学习路上的一些体会，还有对生活的一些思考。" />
+  
+
+  
+  <meta name="keywords" content="AI ML DL life" />
+  
+  
+  
+  
+  
+  
+  <title>sqoop异常之java.lang.RuntimeException com.mysql.jdbc.exceptions.jdbc4.CommunicationsException  Communications link failure | 山风之行</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="sqoop是apache旗下一款“Hadoop和关系数据库服务器之间传送数据”的工具。导入数据：MySQL，Oracle导入数据到Hadoop的HDFS、HIVE、HBASE等数据存储系统；导出数据：从Hadoop的文件系统中导出数据到关系数据库 将导入或导出命令翻译成mapreduce程序来实现,在翻译出的mapreduce中主要是对inputformat和outputformat进行定制. 1">
+<meta name="keywords" content="mysql,大数据,异常解,sqoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqoop异常之java.lang.RuntimeException com.mysql.jdbc.exceptions.jdbc4.CommunicationsException  Communications link failure">
+<meta property="og:url" content="http://xurui.club/2018/08/13/sqoop/index.html">
+<meta property="og:site_name" content="山风之行">
+<meta property="og:description" content="sqoop是apache旗下一款“Hadoop和关系数据库服务器之间传送数据”的工具。导入数据：MySQL，Oracle导入数据到Hadoop的HDFS、HIVE、HBASE等数据存储系统；导出数据：从Hadoop的文件系统中导出数据到关系数据库 将导入或导出命令翻译成mapreduce程序来实现,在翻译出的mapreduce中主要是对inputformat和outputformat进行定制. 1">
+<meta property="og:locale" content="zh-Ch">
+<meta property="og:image" content="https://i.imgur.com/BKAWC4y.png">
+<meta property="og:updated_time" content="2018-08-13T03:45:05.592Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sqoop异常之java.lang.RuntimeException com.mysql.jdbc.exceptions.jdbc4.CommunicationsException  Communications link failure">
+<meta name="twitter:description" content="sqoop是apache旗下一款“Hadoop和关系数据库服务器之间传送数据”的工具。导入数据：MySQL，Oracle导入数据到Hadoop的HDFS、HIVE、HBASE等数据存储系统；导出数据：从Hadoop的文件系统中导出数据到关系数据库 将导入或导出命令翻译成mapreduce程序来实现,在翻译出的mapreduce中主要是对inputformat和outputformat进行定制. 1">
+<meta name="twitter:image" content="https://i.imgur.com/BKAWC4y.png">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="山风之行" rel="home">山风之行</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">—— 修养 风范 血性 胆识</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">主页</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">文章</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/about">关于</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-sqoop" class="post-sqoop post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      sqoop异常之java.lang.RuntimeException com.mysql.jdbc.exceptions.jdbc4.CommunicationsException  Communications link failure
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/13/sqoop/" data-id="cjkrqj9510024bodae81h3i0m" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>sqoop是apache旗下一款“Hadoop和关系数据库服务器之间传送数据”的工具。<br><strong>导入数据</strong>：MySQL，Oracle导入数据到Hadoop的HDFS、HIVE、HBASE等数据存储系统；<br><strong>导出数据</strong>：从Hadoop的文件系统中导出数据到关系数据库</p>
+<p>将导入或导出命令翻译成mapreduce程序来实现,在翻译出的mapreduce中主要是对inputformat和outputformat进行定制.</p>
+<p>1 sqoop安装<br>安装sqoop的前提是已经具备java和hadoop的环境</p>
+<p>2 修改配置文件<br>$ cd $SQOOP_HOME/conf<br>$ mv sqoop-env-template.sh sqoop-env.sh<br>打开sqoop-env.sh并编辑下面几行：<br>export HADOOP_COMMON_HOME=/home/hadoop/hadoop-2.7.3/<br>export HADOOP_MAPRED_HOME=/home/hadoop/hadoop-2.7.3/<br>export HIVE_HOME=/home/work/hive/<br>这里没用HBASE，用的时候再配。</p>
+<p>3 将jdbc数据包mysql-connector-java-5.1.44.jar 拷贝到 $SQOOP_HOME/lib下</p>
+<p>4 检查安装时否功<br>$ cd $SQOOP_HOME/bin<br>$ sqoop-version<br>预期的输出：<br>15/12/17 14:52:32 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6<br>Sqoop 1.4.6 git commit id 5b34accaca7de251fc91161733f906af2eddbe83<br>Compiled by abe on Fri Aug 1 11:19:26 PDT 2015<br>到这里，整个Sqoop安装工作完成。</p>
+<p>5 但是，有时候虽然安装成功了，但在使用中会出现各种Bug<br>比如:<br>MySQL数据库服务器中的xing/ emp表导入HDFS。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">[root@shizhan1 bin]# ./sqoop import   \</span><br><span class="line">&gt; --connect jdbc:mysql://localhost:3306/xing   \</span><br><span class="line">&gt; --username root  \</span><br><span class="line">&gt; --password xing   \</span><br><span class="line">&gt; --table emp   \</span><br><span class="line">&gt; --m 1 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Warning: /home/work/sqoop/bin/../../hbase does not exist! HBase imports will fail.</span><br><span class="line">Please set $HBASE_HOME to the root of your HBase installation.</span><br><span class="line">Warning: /home/work/sqoop/bin/../../hcatalog does not exist! HCatalog jobs will fail.</span><br><span class="line">Please set $HCAT_HOME to the root of your HCatalog installation.</span><br><span class="line">Warning: /home/work/sqoop/bin/../../accumulo does not exist! Accumulo imports will fail.</span><br><span class="line">Please set $ACCUMULO_HOME to the root of your Accumulo installation.</span><br><span class="line">18/08/13 10:42:47 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6</span><br><span class="line">18/08/13 10:42:47 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.</span><br><span class="line">18/08/13 10:42:48 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.</span><br><span class="line">18/08/13 10:42:48 INFO tool.CodeGenTool: Beginning code generation</span><br><span class="line">18/08/13 10:42:48 INFO manager.SqlManager: Executing SQL statement: SELECT t.* FROM `emp` AS t LIMIT 1</span><br><span class="line">18/08/13 10:42:48 INFO manager.SqlManager: Executing SQL statement: SELECT t.* FROM `emp` AS t LIMIT 1</span><br><span class="line">18/08/13 10:42:48 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /home/hadoop/hadoop-2.7.3</span><br><span class="line">注: /tmp/sqoop-root/compile/0cbad6aa7f1605ddcd735b7cd9f9e47a/emp.java使用或覆盖了已过时的 API。</span><br><span class="line">注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。</span><br><span class="line">18/08/13 10:42:49 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-root/compile/0cbad6aa7f1605ddcd735b7cd9f9e47a/emp.jar</span><br><span class="line">18/08/13 10:42:49 WARN manager.MySQLManager: It looks like you are importing from mysql.</span><br><span class="line">18/08/13 10:42:49 WARN manager.MySQLManager: This transfer can be faster! Use the --direct</span><br><span class="line">18/08/13 10:42:49 WARN manager.MySQLManager: option to exercise a MySQL-specific fast path.</span><br><span class="line">18/08/13 10:42:49 INFO manager.MySQLManager: Setting zero DATETIME behavior to convertToNull (mysql)</span><br><span class="line">18/08/13 10:42:49 INFO mapreduce.ImportJobBase: Beginning import of emp</span><br><span class="line">18/08/13 10:42:49 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar</span><br><span class="line">18/08/13 10:42:50 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps</span><br><span class="line">18/08/13 10:42:50 INFO client.RMProxy: Connecting to ResourceManager at /192.168.14.151:8032</span><br><span class="line">18/08/13 10:42:53 INFO db.DBInputFormat: Using read commited transaction isolation</span><br><span class="line">18/08/13 10:42:54 INFO mapreduce.JobSubmitter: number of splits:1</span><br><span class="line">18/08/13 10:42:54 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1532423449295_0031</span><br><span class="line">18/08/13 10:42:54 INFO impl.YarnClientImpl: Submitted application application_1532423449295_0031</span><br><span class="line">18/08/13 10:42:54 INFO mapreduce.Job: The url to track the job: http://shizhan1:8088/proxy/application_1532423449295_0031/</span><br><span class="line">18/08/13 10:42:54 INFO mapreduce.Job: Running job: job_1532423449295_0031</span><br><span class="line">18/08/13 10:43:02 INFO mapreduce.Job: Job job_1532423449295_0031 running in uber mode : false</span><br><span class="line">18/08/13 10:43:02 INFO mapreduce.Job:  map 0% reduce 0%</span><br><span class="line">18/08/13 10:43:09 INFO mapreduce.Job: Task Id : attempt_1532423449295_0031_m_000000_0, Status : FAILED</span><br><span class="line">Error: java.lang.RuntimeException: java.lang.RuntimeException: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure</span><br><span class="line"></span><br><span class="line">The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.</span><br><span class="line">        at org.apache.sqoop.mapreduce.db.DBInputFormat.setConf(DBInputFormat.java:167)</span><br><span class="line">        at org.apache.hadoop.util.ReflectionUtils.setConf(ReflectionUtils.java:76)</span><br><span class="line">        at org.apache.hadoop.util.ReflectionUtils.newInstance(ReflectionUtils.java:136)</span><br><span class="line">        at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:749)</span><br><span class="line">        at org.apache.hadoop.mapred.MapTask.run(MapTask.java:341)</span><br><span class="line">        at org.apache.hadoop.mapred.YarnChild$2.run(YarnChild.java:164)</span><br><span class="line">        at java.security.AccessController.doPrivileged(Native Method)</span><br><span class="line">        at javax.security.auth.Subject.doAs(Subject.java:415)</span><br><span class="line">        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1698)</span><br><span class="line">        at org.apache.hadoop.mapred.YarnChild.main(YarnChild.java:158)</span><br><span class="line">Caused by: java.lang.RuntimeException: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure</span><br><span class="line"></span><br><span class="line">The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.</span><br><span class="line">        at org.apache.sqoop.mapreduce.db.DBInputFormat.getConnection(DBInputFormat.java:220)</span><br><span class="line">        at org.apache.sqoop.mapreduce.db.DBInputFormat.setConf(DBInputFormat.java:165)</span><br><span class="line">        ... 9 more</span><br><span class="line">Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure</span><br><span class="line"></span><br><span class="line">The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.</span><br><span class="line">        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)</span><br><span class="line">        at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)</span><br><span class="line">        at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)</span><br><span class="line">        at java.lang.reflect.Constructor.newInstance(Constructor.java:526)</span><br><span class="line">        at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)</span><br><span class="line">        at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:989)</span><br><span class="line">        at com.mysql.jdbc.MysqlIO.&lt;init&gt;(MysqlIO.java:341)</span><br><span class="line">        at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2189)</span><br><span class="line">        at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2222)</span><br><span class="line">        at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2017)</span><br><span class="line">        at com.mysql.jdbc.ConnectionImpl.&lt;init&gt;(ConnectionImpl.java:779)</span><br><span class="line">        at com.mysql.jdbc.JDBC4Connection.&lt;init&gt;(JDBC4Connection.java:47)</span><br><span class="line">        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)</span><br><span class="line">        at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)</span><br><span class="line">        at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)</span><br><span class="line">        at java.lang.reflect.Constructor.newInstance(Constructor.java:526)</span><br><span class="line">        at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)</span><br><span class="line">        at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:389)</span><br><span class="line">        at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:330)</span><br><span class="line">        at java.sql.DriverManager.getConnection(DriverManager.java:571)</span><br><span class="line">        at java.sql.DriverManager.getConnection(DriverManager.java:215)</span><br><span class="line">        at org.apache.sqoop.mapreduce.db.DBConfiguration.getConnection(DBConfiguration.java:302)</span><br><span class="line">        at org.apache.sqoop.mapreduce.db.DBInputFormat.getConnection(DBInputFormat.java:213)</span><br><span class="line">        ... 10 more</span><br><span class="line">Caused by: java.net.ConnectException: 拒绝连接</span><br><span class="line">        at java.net.PlainSocketImpl.socketConnect(Native Method)</span><br><span class="line">        at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:339)</span><br><span class="line">        at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:200)</span><br><span class="line">        at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:182)</span><br><span class="line">        at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)</span><br><span class="line">        at java.net.Socket.connect(Socket.java:579)</span><br><span class="line">        at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:211)</span><br><span class="line">        at com.mysql.jdbc.MysqlIO.&lt;init&gt;(MysqlIO.java:300)</span><br><span class="line">        ... 26 more</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java.lang.RuntimeException: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure</span><br></pre></td></tr></table></figure></p>
+<p>应该是主要和数据库相关，后面还有一个拒绝连接的异常。</p>
+<p>在网上找了些资料，有说把<code>--connect jdbc:mysql://localhost:3306/xing</code>这里的主机名改成IP，改了无果。<br>仔细想了下，这里连不上数据库，可能是数据库配置问题，是不是Mysql不允许外部连接导致的，于是进入Mysql<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">select host,user,password from user;</span><br></pre></td></tr></table></figure></p>
+<p>看到里面乱七八糟，host为shizhan1的user是空，还有一个host为shizhan1的user是root,但是密码为空，于是把第一个记录直接delete,第二个记录的password改成root的密码。<br>GRANT ALL PRIVILEGES ON <em>.</em> TO root@”shizhan1” IDENTIFIED BY “ password “;    //为root添加远程连接的能力，（mysql安装shizhan1上）</p>
+<p>最后flush一下<br>flush privileges;  </p>
+<p>重新跑一下我们的sqoop，但是会报错，提示一个exist。因为虽然之前没有跑通，但是在hdfs对应目录上生成了一个文件夹，就是这个文件夹exist了。<br>删了就好，hadoop fs -rm -r /user/root/emp</p>
+<p>可以重新跑sqoop了<br><img src="https://i.imgur.com/BKAWC4y.png" alt=""><br>可以看到success，搞定！</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/08/13/sqoop/">
+    <time datetime="2018-08-13T03:15:50.000Z" class="entry-date">
+        2018-08-13
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqoop/">sqoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异常解/">异常解</a></li></ul>
+
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2018/08/03/echart/" rel="next">echart的series中label formatter回调函数使用及样式。 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/心情/">心情</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2018/08/13/sqoop/">sqoop异常之java.lang.RuntimeException com.mysql.jdbc.exceptions.jdbc4.CommunicationsException  Communications link failure</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/03/echart/">echart的series中label formatter回调函数使用及样式。</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/12/zookeeper/">安装zookeeper时候，可以查看进程启动，但是状态显示报错 Error contacting service. It is probably not running</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/05/mysql/">ERROR 1130 (HY000) Host &#39;114.213.234.22&#39; is not allowed to connect to this MySQL server</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/22/capsnet/">揭开迷雾，来一顿美味的Capsule盛宴</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echart/">echart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lda/">lda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解/">异常解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/胶囊网络/">胶囊网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/Keras/" style="font-size: 12.5px;">Keras</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/echart/" style="font-size: 10px;">echart</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/lda/" style="font-size: 10px;">lda</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/sqoop/" style="font-size: 10px;">sqoop</a> <a href="/tags/tensorflow/" style="font-size: 15px;">tensorflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/可视化/" style="font-size: 10px;">可视化</a> <a href="/tags/大数据/" style="font-size: 12.5px;">大数据</a> <a href="/tags/异常解/" style="font-size: 10px;">异常解</a> <a href="/tags/异常解决/" style="font-size: 15px;">异常解决</a> <a href="/tags/心情/" style="font-size: 12.5px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 17.5px;">深度学习</a> <a href="/tags/胶囊网络/" style="font-size: 10px;">胶囊网络</a> <a href="/tags/面试/" style="font-size: 12.5px;">面试</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2018 Petrus Zhang
+    All rights reserved.</p>
+    <p>My Way to Better!</p>
+</footer>
+
+
+  <span>Hosted by <a href="https://pages.coding.me" >Coding Pages</a></span>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
