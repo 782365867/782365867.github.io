@@ -72,6 +72,56 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="post-python" class="post-python post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/05/23/python/">python之list.count()和Count()类</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjl3f7fz8000jowda99uvrfl6" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>Count()类的使用<br>同事给了我一堆文本数据，让我帮个小忙。他想统计下每个词的词频，看看文本中提到最多的是什么，然后做后面分析。</p>
+<p>不就是统计词频吗，虽然之前不经常做这个。但是拍脑袋一想，先分词，去停用词，把所有词放到一个列表里，统计，搞定。</p>
+<p>于是五分钟写了个代码，计数那个地方，我用的List里的count方法。不怕丢人，我把代码放这了。。。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">count_word = []</span><br><span class="line">stop_words = []</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data/count.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    lines = f.readlines()</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data/stop_words_new.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    stop_lines = f.readlines()</span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> stop_lines:</span><br><span class="line">    stop_words.append(word.strip())</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">    words = jieba.lcut(line)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> words:</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> stop_words:</span><br><span class="line">            count_word.append(i)</span><br><span class="line">count_word_set = list(set(count_word))</span><br><span class="line">counts = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> count_word_set:</span><br><span class="line">    counts.append(count_word.count(i))</span><br><span class="line">print(len(count_word_set))</span><br><span class="line">print(len(counts))</span><br><span class="line">df = pd.DataFrame(data=&#123;<span class="string">'word'</span>: count_word_set, <span class="string">'count'</span>: counts&#125;)</span><br><span class="line">df.sort_values(by=<span class="string">'count'</span>)</span><br><span class="line">df.to_csv(<span class="string">'data/count.txt'</span>, sep=<span class="string">'\t'</span>, encoding=<span class="string">'utf-8'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>然而，等了一晚上，发现没出来结果。他说数据量不大，几百万条文本。我这里用的set去重，然后遍历set中的每个词，再用list.count(词)来得词频，笨方法行不通。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">所以今天试了Count()类。</span><br><span class="line"><span class="keyword">import</span> jieba</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line">count_word = []</span><br><span class="line">count = Counter()</span><br><span class="line">stop_words = []</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data/count.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    lines = f.readlines()</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data/stop_words_new.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    stop_lines = f.readlines()</span><br><span class="line">print(<span class="string">'data finish'</span>)</span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> stop_lines:</span><br><span class="line">    stop_words.append(word.strip())</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">    words = jieba.lcut(line)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> words:</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> stop_words:</span><br><span class="line">            count_word.append(i)</span><br><span class="line">print(<span class="string">'cut finish'</span>)</span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> count_word:</span><br><span class="line">    count[word] += <span class="number">1</span></span><br><span class="line">cou = count.most_common()</span><br><span class="line">print(cou)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data/common.txt'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    pickle.dump(cou, f)</span><br></pre></td></tr></table></figure></p>
+<p>分完词就结束了。。如果只是想看某个词的词频，用list的count()方法还好，如果统计所有的，还是用Count()类吧。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/05/23/python/">
+    <time datetime="2018-05-23T07:53:42.000Z" class="entry-date">
+        2018-05-23
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-java" class="post-java post type-post status-publish format-standard hentry">
     <!---->
 
@@ -87,7 +137,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjl3e73p60000ikdaqoi8n1un" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjl3f7fyp0005owdas10dviv5" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -135,7 +185,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjl3e73r2000likda3d5yi78s" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjl3f7fzb000lowdac6zx0jto" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -186,7 +236,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjl3e73qz000jikdayoy3m9j2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjl3f7fz5000gowda5gpuigb9" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -233,7 +283,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="cjl3e73pk0001ikdaoz5dwgi2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="cjl3f7fyw000bowdaawhtdm5v" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -280,7 +330,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/12/keras-mask/" data-id="cjl3e73qu000hikdaa38mdek0" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/12/keras-mask/" data-id="cjl3f7fyq0006owday36kt022" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -336,7 +386,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/27/tensorflow学习笔记3/" data-id="cjl3e73rb000rikdab1wy13oo" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/27/tensorflow学习笔记3/" data-id="cjl3f7fzg000towda4v37aok0" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -387,7 +437,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记2/" data-id="cjl3e73re000uikdavgqw7q0o" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记2/" data-id="cjl3f7fze000qowda1n6wl38w" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -437,7 +487,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记1/" data-id="cjl3e73ri000zikdaou4vcb3n" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记1/" data-id="cjl3f7fzd000oowda1g42plan" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -489,7 +539,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/找实习/" data-id="cjl3e73rg000wikdaq0g0jpg6" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/找实习/" data-id="cjl3f7fzm000zowdapkck2i1q" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -531,64 +581,10 @@
 
 
   
-    <article id="post-初来博客" class="post-初来博客 post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2018/04/26/初来博客/">初来博客</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/初来博客/" data-id="cjl3e73rl0012ikdahal79b3a" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <p>我的第一篇博客，也不知道写点啥。</p>
-<p>研究生生涯转眼间过去了大半，曾经的舒适区已经渐渐被现实挤得越来越小。细细想来，过去的这段时间，我究竟在忙些什么？想了很久，才知道答案：瞎忙。</p>
-<p>在本科时候，自己学习了JAVA EE开发，也做过一些小网站，本来要去找工作，可是拿到了保研名额，所以想在舒适区里再窝几年，那个时候的我，虽然怂，不敢面对陌生的人生，可是却有着不可一世的傲气，因为我是专业前三，因为我是安徽省优秀毕业生，因为我是学霸，其实说到底，因为我顶着光环，或者说我意想出来的光环。</p>
-<p>读研，进研究所，接触了机器学习和自然语言处理，发现自己原来会的JAVA开发只是皮毛中的皮毛，我自诩精通技术，却对Machine Learning和NLP一无所知，于是我开始变得谦逊，因为实在没有底气骄傲，尴尬，哈哈。。。</p>
-<p>现在，研二生活也渐渐近尾声，常常有种恐惧感，就像风筝要飞了，手中的线越来越少，你看到了，却无能为力。还好，有篇论文已经写出来了，在投，在等结果；Machine Learning 和 NLP也算入门（不敢吹牛），一些算法也做过推导和代码编写。从开始不懂LR（逻辑回归），到现在懂了一点，也算进步吧。哈哈，开玩笑，懂了不只一点，比一点多一些。</p>
-<p>那压力在哪呢？在找工作。</p>
-<p>前两天投了几个实习，结果不太乐观。面试知识点比较细，虽然基本都能答上来，但总是给人一种不太精通的感觉。所以最近也在恶补数学原理和代码实现，毕竟这是理科和工科的结合嘛。说到这，不禁有点疑问，为什么非要做人工智能相关呢？明明不会，何苦为难。我也说不清，只是感觉这个有挑战有乐趣，工作不就应该这些么？比尔说过一句话：人们往往高估自己一年内能做的事，却又低估自己十年内能做的事。可能我现在还有半只脚在门外，不过认定一个目标往前走，总有踏进去的一天吧。</p>
-<p>回想自己这两年研，AI坚持在学，毕竟想吃这碗饭；也在坚持健身，常常弹琴；有人爱，有事做，有所期待。</p>
-<p>我在瞎忙？<br>好像不是。</p>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2018/04/26/初来博客/">
-    <time datetime="2018-04-26T12:46:40.000Z" class="entry-date">
-        2018-04-26
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/心情/">心情</a></li></ul>
-
-    </footer>
-</article>
-
-
-
-
-
-
-  
   
     <nav id="pagination">
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+        <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
       </nav>
     </nav>
   
@@ -621,6 +617,10 @@
       <ul>
         
           <li>
+            <a href="/2018/08/21/interview-1/">44.最小子数组（python3 实现）</a>
+          </li>
+        
+          <li>
             <a href="/2018/08/13/sqoop/">sqoop异常之java.lang.RuntimeException com.mysql.jdbc.exceptions.jdbc4.CommunicationsException  Communications link failure</a>
           </li>
         
@@ -636,10 +636,6 @@
             <a href="/2018/07/05/mysql/">ERROR 1130 (HY000) Host &#39;114.213.234.22&#39; is not allowed to connect to this MySQL server</a>
           </li>
         
-          <li>
-            <a href="/2018/06/22/capsnet/">揭开迷雾，来一顿美味的Capsule盛宴</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -649,7 +645,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echart/">echart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lda/">lda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/胶囊网络/">胶囊网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echart/">echart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lda/">lda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/胶囊网络/">胶囊网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </aside>
 
@@ -658,7 +654,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/Keras/" style="font-size: 12.5px;">Keras</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/echart/" style="font-size: 10px;">echart</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/lda/" style="font-size: 10px;">lda</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/sqoop/" style="font-size: 10px;">sqoop</a> <a href="/tags/tensorflow/" style="font-size: 15px;">tensorflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/可视化/" style="font-size: 10px;">可视化</a> <a href="/tags/大数据/" style="font-size: 12.5px;">大数据</a> <a href="/tags/异常解决/" style="font-size: 17.5px;">异常解决</a> <a href="/tags/心情/" style="font-size: 12.5px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 17.5px;">深度学习</a> <a href="/tags/胶囊网络/" style="font-size: 10px;">胶囊网络</a> <a href="/tags/面试/" style="font-size: 12.5px;">面试</a>
+      <a href="/tags/Keras/" style="font-size: 12px;">Keras</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/echart/" style="font-size: 10px;">echart</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/lda/" style="font-size: 10px;">lda</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12px;">mysql</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/sqoop/" style="font-size: 10px;">sqoop</a> <a href="/tags/tensorflow/" style="font-size: 16px;">tensorflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/可视化/" style="font-size: 10px;">可视化</a> <a href="/tags/大数据/" style="font-size: 12px;">大数据</a> <a href="/tags/异常解决/" style="font-size: 18px;">异常解决</a> <a href="/tags/心情/" style="font-size: 12px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 18px;">深度学习</a> <a href="/tags/胶囊网络/" style="font-size: 10px;">胶囊网络</a> <a href="/tags/面试/" style="font-size: 14px;">面试</a>
     </div>
   </aside>
 
