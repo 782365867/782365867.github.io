@@ -15,20 +15,20 @@
   
   
   
-  <title>44.最小子数组（python3 实现） | 山风之行</title>
+  <title>1042. 托普利兹矩阵 python | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前两天在忙着搞大数据和论文，论文写差不多了，开始刷刷题，前几天笔试做的一塌糊涂，有的题明明感觉做对了，但是AC不了。趁着最近有空，赶紧找找感觉。一道简单的贪心题 44.最小子数组 给定一个整数数组，找到一个具有最小和的子数组。返回其最小和。 样例 给出数组[1, -1, -2, 1]，返回 -3 注意事项 子数组最少包含一个数字 解： 从第一个数往后遍历i=1-&amp;gt;n将前k个数视为一个整体，如">
-<meta name="keywords" content="面试,python">
+  <meta name="description" content="12345678910111213141516171819202122232425262728描述“托普利兹矩阵”是指如果从左上角到右下角的同一条主斜线上每个元素都相等的矩阵.给定一个M x N矩阵，判断是否为“托普利兹矩阵”.matrix 是一个二维整数数组.matrix 的行列范围都为 [1, 20].matrix[i][j] 的整数取值范围为[0, 99].您在真实的面试中是否遇到过这个题？">
+<meta name="keywords" content="面试,python,java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="44.最小子数组（python3 实现）">
-<meta property="og:url" content="http://xurui.club/2018/08/21/interview-1/index.html">
+<meta property="og:title" content="1042. 托普利兹矩阵 python">
+<meta property="og:url" content="http://xurui.club/2018/09/11/interview-3/index.html">
 <meta property="og:site_name" content="山风之行">
-<meta property="og:description" content="前两天在忙着搞大数据和论文，论文写差不多了，开始刷刷题，前几天笔试做的一塌糊涂，有的题明明感觉做对了，但是AC不了。趁着最近有空，赶紧找找感觉。一道简单的贪心题 44.最小子数组 给定一个整数数组，找到一个具有最小和的子数组。返回其最小和。 样例 给出数组[1, -1, -2, 1]，返回 -3 注意事项 子数组最少包含一个数字 解： 从第一个数往后遍历i=1-&amp;gt;n将前k个数视为一个整体，如">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728描述“托普利兹矩阵”是指如果从左上角到右下角的同一条主斜线上每个元素都相等的矩阵.给定一个M x N矩阵，判断是否为“托普利兹矩阵”.matrix 是一个二维整数数组.matrix 的行列范围都为 [1, 20].matrix[i][j] 的整数取值范围为[0, 99].您在真实的面试中是否遇到过这个题？">
 <meta property="og:locale" content="zh-Ch">
-<meta property="og:updated_time" content="2018-08-21T08:01:16.481Z">
+<meta property="og:updated_time" content="2018-09-11T12:39:18.036Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="44.最小子数组（python3 实现）">
-<meta name="twitter:description" content="前两天在忙着搞大数据和论文，论文写差不多了，开始刷刷题，前几天笔试做的一塌糊涂，有的题明明感觉做对了，但是AC不了。趁着最近有空，赶紧找找感觉。一道简单的贪心题 44.最小子数组 给定一个整数数组，找到一个具有最小和的子数组。返回其最小和。 样例 给出数组[1, -1, -2, 1]，返回 -3 注意事项 子数组最少包含一个数字 解： 从第一个数往后遍历i=1-&amp;gt;n将前k个数视为一个整体，如">
+<meta name="twitter:title" content="1042. 托普利兹矩阵 python">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728描述“托普利兹矩阵”是指如果从左上角到右下角的同一条主斜线上每个元素都相等的矩阵.给定一个M x N矩阵，判断是否为“托普利兹矩阵”.matrix 是一个二维整数数组.matrix 的行列范围都为 [1, 20].matrix[i][j] 的整数取值范围为[0, 99].您在真实的面试中是否遇到过这个题？">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -71,7 +71,7 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-interview-1" class="post-interview-1 post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-interview-3" class="post-interview-3 post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -79,44 +79,36 @@
         
   
     <h1 class="entry-title article-title">
-      44.最小子数组（python3 实现）
+      1042. 托普利兹矩阵 python
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/21/interview-1/" data-id="cjlxpdwcp0001eodaps59x4zo" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-3/" data-id="cjlxpdwct0003eodahfubz83n" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <p>前两天在忙着搞大数据和论文，论文写差不多了，开始刷刷题，前几天笔试做的一塌糊涂，有的题明明感觉做对了，但是AC不了。趁着最近有空，赶紧找找感觉。<br>一道简单的贪心题</p>
-<p><strong>44.最小子数组</strong></p>
-<p>给定一个整数数组，找到一个具有最小和的子数组。返回其最小和。</p>
-<p>样例</p>
-<p>给出数组[1, -1, -2, 1]，返回 -3</p>
-<p>注意事项</p>
-<p>子数组最少包含一个数字</p>
-<p><strong>解：</strong></p>
-<p>从第一个数往后遍历i=1-&gt;n<br>将前k个数视为一个整体，如果这个整体&gt;0,则后面无论是什么，只要加上这个整体，肯定不会变小，所以整体直接舍弃，剩下的为新的数组nums.<br>如果，前面的数为负，如前3个数的和为-7，第4个数为8，则-7+8=1,要不要舍弃呢？后面可能没有小于-7的子数组了呀？所以 我们还要有个变量res，用来保存各阶段的最小值，如这里的-7，如果后面有比-7更小的子数组，就更新这个变量的值，如果没有，res就是一直是-7。<br>python3代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: nums: a list of integers</span></span><br><span class="line"><span class="string">    @return: A integer indicate the sum of minimum subarray</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minSubArray</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line"></span><br><span class="line">        sum = <span class="number">0</span></span><br><span class="line">        res = nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> nums:</span><br><span class="line">            sum+=i</span><br><span class="line">            <span class="keyword">if</span> sum &lt; res:</span><br><span class="line">                res = sum</span><br><span class="line">            <span class="keyword">if</span> sum &gt; <span class="number">0</span>:</span><br><span class="line">                sum = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></p>
-<p>刚开始不通过,看了下数据[1,1],全是正数，而我当时设的res初值为0.本来以为至少会有1个负值。<br>所以把初值改为了第一个数。</p>
-<p>每天一点 进步不难 </p>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">描述</span><br><span class="line">“托普利兹矩阵”是指如果从左上角到右下角的同一条主斜线上每个元素都相等的矩阵.</span><br><span class="line"></span><br><span class="line">给定一个M x N矩阵，判断是否为“托普利兹矩阵”.</span><br><span class="line">matrix 是一个二维整数数组.</span><br><span class="line">matrix 的行列范围都为 [1, 20].</span><br><span class="line">matrix[i][j] 的整数取值范围为[0, 99].</span><br><span class="line">您在真实的面试中是否遇到过这个题？  是</span><br><span class="line">题目纠错</span><br><span class="line">样例</span><br><span class="line">样例 1:</span><br><span class="line"></span><br><span class="line">输入: matrix = [[1,2,3,4],[5,1,2,3],[9,5,1,2]]</span><br><span class="line">输出: True</span><br><span class="line">解释:</span><br><span class="line">1234</span><br><span class="line">5123</span><br><span class="line">9512</span><br><span class="line"></span><br><span class="line">在上述矩阵中，主斜线上元素分别为 &quot;[9]&quot;, &quot;[5, 5]&quot;, &quot;[1, 1, 1]&quot;, &quot;[2, 2, 2]&quot;, &quot;[3, 3]&quot;, &quot;[4]&quot;, 每一条主斜线上元素都相等，所以返回`True`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">样例 2:</span><br><span class="line"></span><br><span class="line">输入: matrix = [[1,2],[2,2]]</span><br><span class="line">输出: False</span><br><span class="line">解释:</span><br><span class="line">主斜线 &quot;[1, 2]&quot; 有不同的元素.</span><br></pre></td></tr></table></figure>
+<p>简单题，直接代码：<br>python<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    @param matrix: the given matrix</span><br><span class="line">    @return: True if and only if the matrix is Toeplitz</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def isToeplitzMatrix(self, matrix):</span><br><span class="line">        # Write your code here</span><br><span class="line">        for i in range(1,len(matrix)):</span><br><span class="line">            for j in range(1,len(matrix[0])):</span><br><span class="line">                if matrix[i][j]!=matrix[i-1][j-1]:</span><br><span class="line">                    return False</span><br><span class="line">        return True</span><br></pre></td></tr></table></figure></p>
+<p>java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> matrix: the given matrix</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: True if and only if the matrix is Toeplitz</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isToeplitzMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Write your code here</span></span><br><span class="line">        <span class="keyword">int</span> m = matrix.length;</span><br><span class="line">        <span class="keyword">int</span> n = matrix[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;m;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;n;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(matrix[i][j]!=matrix[i-<span class="number">1</span>][j-<span class="number">1</span>])&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div><!-- .entry-content -->
 
     <footer class="entry-meta">
-    <a href="/2018/08/21/interview-1/">
-    <time datetime="2018-08-21T07:35:02.000Z" class="entry-date">
-        2018-08-21
+    <a href="/2018/09/11/interview-3/">
+    <time datetime="2018-09-11T12:30:02.000Z" class="entry-date">
+        2018-09-11
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
 
     </footer>
 </article>
@@ -126,10 +118,8 @@
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
     
-        <span class="nav-previous"><a href="/2018/09/11/interview-2/" rel="prev"><span class="meta-nav">←</span> lintcode 814. Shortest Path in Undirected Graph 之python 和 java 实现</a></span>
     
-    
-        <span class="nav-next"><a href="/2018/08/13/sqoop/" rel="next">sqoop异常之java.lang.RuntimeException com.mysql.jdbc.exceptions.jdbc4.CommunicationsException  Communications link failure <span class="meta-nav">→</span></a></span>
+        <span class="nav-next"><a href="/2018/09/11/interview-2/" rel="next">lintcode 814. Shortest Path in Undirected Graph 之python 和 java 实现 <span class="meta-nav">→</span></a></span>
     
 </nav><!-- .nav-single -->
 

@@ -72,6 +72,54 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="post-interview-3" class="post-interview-3 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/09/11/interview-3/">1042. 托普利兹矩阵 python</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-3/" data-id="cjlxpdwct0003eodahfubz83n" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">描述</span><br><span class="line">“托普利兹矩阵”是指如果从左上角到右下角的同一条主斜线上每个元素都相等的矩阵.</span><br><span class="line"></span><br><span class="line">给定一个M x N矩阵，判断是否为“托普利兹矩阵”.</span><br><span class="line">matrix 是一个二维整数数组.</span><br><span class="line">matrix 的行列范围都为 [1, 20].</span><br><span class="line">matrix[i][j] 的整数取值范围为[0, 99].</span><br><span class="line">您在真实的面试中是否遇到过这个题？  是</span><br><span class="line">题目纠错</span><br><span class="line">样例</span><br><span class="line">样例 1:</span><br><span class="line"></span><br><span class="line">输入: matrix = [[1,2,3,4],[5,1,2,3],[9,5,1,2]]</span><br><span class="line">输出: True</span><br><span class="line">解释:</span><br><span class="line">1234</span><br><span class="line">5123</span><br><span class="line">9512</span><br><span class="line"></span><br><span class="line">在上述矩阵中，主斜线上元素分别为 &quot;[9]&quot;, &quot;[5, 5]&quot;, &quot;[1, 1, 1]&quot;, &quot;[2, 2, 2]&quot;, &quot;[3, 3]&quot;, &quot;[4]&quot;, 每一条主斜线上元素都相等，所以返回`True`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">样例 2:</span><br><span class="line"></span><br><span class="line">输入: matrix = [[1,2],[2,2]]</span><br><span class="line">输出: False</span><br><span class="line">解释:</span><br><span class="line">主斜线 &quot;[1, 2]&quot; 有不同的元素.</span><br></pre></td></tr></table></figure>
+<p>简单题，直接代码：<br>python<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    @param matrix: the given matrix</span><br><span class="line">    @return: True if and only if the matrix is Toeplitz</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def isToeplitzMatrix(self, matrix):</span><br><span class="line">        # Write your code here</span><br><span class="line">        for i in range(1,len(matrix)):</span><br><span class="line">            for j in range(1,len(matrix[0])):</span><br><span class="line">                if matrix[i][j]!=matrix[i-1][j-1]:</span><br><span class="line">                    return False</span><br><span class="line">        return True</span><br></pre></td></tr></table></figure></p>
+<p>java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> matrix: the given matrix</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: True if and only if the matrix is Toeplitz</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isToeplitzMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Write your code here</span></span><br><span class="line">        <span class="keyword">int</span> m = matrix.length;</span><br><span class="line">        <span class="keyword">int</span> n = matrix[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;m;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;n;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(matrix[i][j]!=matrix[i-<span class="number">1</span>][j-<span class="number">1</span>])&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/09/11/interview-3/">
+    <time datetime="2018-09-11T12:30:02.000Z" class="entry-date">
+        2018-09-11
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-interview-2" class="post-interview-2 post type-post status-publish format-standard hentry">
     <!---->
 
@@ -87,7 +135,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-2/" data-id="cjlxojxg70000dgdaa9b22rk2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-2/" data-id="cjlxpdwcu0004eoda3gj10y9k" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -142,7 +190,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/21/interview-1/" data-id="cjlxojxgn0003dgda17cmbz57" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/21/interview-1/" data-id="cjlxpdwcp0001eodaps59x4zo" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -198,7 +246,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/13/sqoop/" data-id="cjlxojxjb0029dgdafocyul29" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/13/sqoop/" data-id="cjlxpdwf8002zeodahol80uf7" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -257,7 +305,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/03/echart/" data-id="cjlxojxge0001dgda0l8egwog" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/03/echart/" data-id="cjlxpdwck0000eodad29br9d4" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -309,7 +357,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/12/zookeeper/" data-id="cjlxojxjp002gdgdae82dsor5" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/12/zookeeper/" data-id="cjlxpdwdr000ueodagrq0so91" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -383,7 +431,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/05/mysql/" data-id="cjlxojxgu0008dgdawyb3y8t4" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/05/mysql/" data-id="cjlxpdwdb000geodal9fo08ni" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -432,7 +480,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjlxojxjq002hdgdafpxwrmrp" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjlxpdwfg0035eodau5049m0t" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -534,7 +582,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjlxojxgp0004dgdafdzod21n" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjlxpdwd2000aeodah3ynrunn" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -589,7 +637,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjlxojxhu001fdgda6g0uzgjs" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjlxpdwcw0005eoda7tq54lcp" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -618,58 +666,6 @@
     
   <span class="article-delim">&#8226;</span>
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
-
-    </footer>
-</article>
-
-
-
-
-
-
-  
-    <article id="post-python-1" class="post-python-1 post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2018/06/05/python-1/">python数据存储利器之pickle</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjlxojxhs001edgdapdtzoz1u" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <p>第一天上班那天，有位同事把部分工作交接给我，主要是处理过的一些数据，存的是txt格式。然后大概看了下，还挺整齐，用’,’分隔的。读进去才发现，本来应该是个List,然而由于存成了txt，所有的都变成了str。所以转来转去，费了两天时间。突然想起来好像有pickle这么个小玩意，就拿来试试。从此，再也不想用csv啥的存数据了</p>
-<p>简单介绍下Pickle<br>pickle使用二进制协议完成对python对象的序列化和反序列化。“picking”是将python对象转为字节流，而“unpickling”则是从字节流中转出来。<br>也就是说，无论你要存的内容是字符串、数字、数组、列表、矩阵、DataFrame、np.array()等等，当你进行picking操作时，统统将这些内容转换成字节流保存到文件中，一般是二进制文件。然后当你想使用这些内容时，再从二进制文件中读出来。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br></pre></td></tr></table></figure></p>
-<p>–picking–<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data = ...</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'name.txt'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    pickle.dump(data,f,protocol=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure></p>
-<p>这样就把数据写进name.txt文件里了，注意这里是二进制，你用记事本打开是乱码。有个参数，protocol,是你选用的协议，默认为3，在python2中默认为0，如果你在python3用dump写进文件，去python2里load读取文件,会报异常。当然这种奇怪的需求很少，如果遇到了，把dump里的<code>protocol=0</code>就可以了。<br>当然，你的data可以有多个<br>如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a= <span class="number">1</span></span><br><span class="line">b =<span class="number">3</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'name.txt'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    pickle.dump([a,b],f)</span><br></pre></td></tr></table></figure></p>
-<p>–unpicking–<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'name.txt'</span>,<span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = pickle.load(f)</span><br></pre></td></tr></table></figure></p>
-<p>如果你存的数据是多个<br>那么：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'name.txt'</span>,<span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data= pickle.load(f)</span><br><span class="line">    a,b = data</span><br></pre></td></tr></table></figure></p>
-<p>还有除了dump和load，还有dumps和loads。<br>dumps()和loads()用的不太多，简单说下，和dump类似，dumps把数据写成字节对象，但不用保存到文件。loads则是从字节对象中读出，不用读文件。</p>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2018/06/05/python-1/">
-    <time datetime="2018-06-05T01:52:11.000Z" class="entry-date">
-        2018-06-05
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </footer>
 </article>
@@ -716,6 +712,10 @@
       <ul>
         
           <li>
+            <a href="/2018/09/11/interview-3/">1042. 托普利兹矩阵 python</a>
+          </li>
+        
+          <li>
             <a href="/2018/09/11/interview-2/">lintcode 814. Shortest Path in Undirected Graph 之python 和 java 实现</a>
           </li>
         
@@ -731,10 +731,6 @@
             <a href="/2018/08/03/echart/">echart的series中label formatter回调函数使用及样式。</a>
           </li>
         
-          <li>
-            <a href="/2018/07/12/zookeeper/">安装zookeeper时候，可以查看进程启动，但是状态显示报错 Error contacting service. It is probably not running</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -744,7 +740,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echart/">echart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lda/">lda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/胶囊网络/">胶囊网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">4</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echart/">echart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lda/">lda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/胶囊网络/">胶囊网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">5</span></li></ul>
     </div>
   </aside>
 
@@ -753,7 +749,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/Keras/" style="font-size: 12.5px;">Keras</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/echart/" style="font-size: 10px;">echart</a> <a href="/tags/java/" style="font-size: 12.5px;">java</a> <a href="/tags/lda/" style="font-size: 10px;">lda</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/sqoop/" style="font-size: 10px;">sqoop</a> <a href="/tags/tensorflow/" style="font-size: 15px;">tensorflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/可视化/" style="font-size: 10px;">可视化</a> <a href="/tags/大数据/" style="font-size: 12.5px;">大数据</a> <a href="/tags/异常解决/" style="font-size: 17.5px;">异常解决</a> <a href="/tags/心情/" style="font-size: 12.5px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 17.5px;">深度学习</a> <a href="/tags/胶囊网络/" style="font-size: 10px;">胶囊网络</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
+      <a href="/tags/Keras/" style="font-size: 12px;">Keras</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/echart/" style="font-size: 10px;">echart</a> <a href="/tags/java/" style="font-size: 14px;">java</a> <a href="/tags/lda/" style="font-size: 10px;">lda</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12px;">mysql</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/sqoop/" style="font-size: 10px;">sqoop</a> <a href="/tags/tensorflow/" style="font-size: 16px;">tensorflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/可视化/" style="font-size: 10px;">可视化</a> <a href="/tags/大数据/" style="font-size: 12px;">大数据</a> <a href="/tags/异常解决/" style="font-size: 18px;">异常解决</a> <a href="/tags/心情/" style="font-size: 12px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 18px;">深度学习</a> <a href="/tags/胶囊网络/" style="font-size: 10px;">胶囊网络</a> <a href="/tags/面试/" style="font-size: 18px;">面试</a>
     </div>
   </aside>
 

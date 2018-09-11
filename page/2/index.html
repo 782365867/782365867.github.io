@@ -72,6 +72,58 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="post-python-1" class="post-python-1 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/06/05/python-1/">python数据存储利器之pickle</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjlxpdwdh000keoda85kw9vl3" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>第一天上班那天，有位同事把部分工作交接给我，主要是处理过的一些数据，存的是txt格式。然后大概看了下，还挺整齐，用’,’分隔的。读进去才发现，本来应该是个List,然而由于存成了txt，所有的都变成了str。所以转来转去，费了两天时间。突然想起来好像有pickle这么个小玩意，就拿来试试。从此，再也不想用csv啥的存数据了</p>
+<p>简单介绍下Pickle<br>pickle使用二进制协议完成对python对象的序列化和反序列化。“picking”是将python对象转为字节流，而“unpickling”则是从字节流中转出来。<br>也就是说，无论你要存的内容是字符串、数字、数组、列表、矩阵、DataFrame、np.array()等等，当你进行picking操作时，统统将这些内容转换成字节流保存到文件中，一般是二进制文件。然后当你想使用这些内容时，再从二进制文件中读出来。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br></pre></td></tr></table></figure></p>
+<p>–picking–<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data = ...</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'name.txt'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    pickle.dump(data,f,protocol=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure></p>
+<p>这样就把数据写进name.txt文件里了，注意这里是二进制，你用记事本打开是乱码。有个参数，protocol,是你选用的协议，默认为3，在python2中默认为0，如果你在python3用dump写进文件，去python2里load读取文件,会报异常。当然这种奇怪的需求很少，如果遇到了，把dump里的<code>protocol=0</code>就可以了。<br>当然，你的data可以有多个<br>如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a= <span class="number">1</span></span><br><span class="line">b =<span class="number">3</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'name.txt'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    pickle.dump([a,b],f)</span><br></pre></td></tr></table></figure></p>
+<p>–unpicking–<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'name.txt'</span>,<span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = pickle.load(f)</span><br></pre></td></tr></table></figure></p>
+<p>如果你存的数据是多个<br>那么：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'name.txt'</span>,<span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data= pickle.load(f)</span><br><span class="line">    a,b = data</span><br></pre></td></tr></table></figure></p>
+<p>还有除了dump和load，还有dumps和loads。<br>dumps()和loads()用的不太多，简单说下，和dump类似，dumps把数据写成字节对象，但不用保存到文件。loads则是从字节对象中读出，不用读文件。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/06/05/python-1/">
+    <time datetime="2018-06-05T01:52:11.000Z" class="entry-date">
+        2018-06-05
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-lda" class="post-lda post type-post status-publish format-standard hentry">
     <!---->
 
@@ -87,7 +139,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjlxojxgq0005dgdafk8l6ao0" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjlxpdwd7000feodalk4w8g80" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -144,7 +196,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjlxojxhw001hdgdadm72vjwq" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/23/python/" data-id="cjlxpdwdk000neoda3rynn1ds" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -194,7 +246,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjlxojxgt0007dgda5hw5lz0d" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="cjlxpdwcy0007eoda6mc4w8vo" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -242,7 +294,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjlxojxi2001ndgdagk80rg8e" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/python1/" data-id="cjlxpdwdm000peoda4ls5wblz" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -293,7 +345,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjlxojxgy000bdgda4s69w0w6" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/pandas1/" data-id="cjlxpdwdd000ieodaf5ij0e9c" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -340,7 +392,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="cjlxojxhz001ldgda7gvlcnsx" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="cjlxpdwd5000ceodaitvyt0ak" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -387,7 +439,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/12/keras-mask/" data-id="cjlxojxgx000adgday6f5j6ac" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/12/keras-mask/" data-id="cjlxpdwd00008eodao2v6k1yu" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -443,7 +495,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/27/tensorflow学习笔记3/" data-id="cjlxojxi8001udgdao4qna27v" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/27/tensorflow学习笔记3/" data-id="cjlxpdwdx0012eodarjakl6xh" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -494,7 +546,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记2/" data-id="cjlxojxi4001qdgda1l6v2f9o" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记2/" data-id="cjlxpdwdp000teodazkiiyxqu" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -512,58 +564,6 @@
     <footer class="entry-meta">
     <a href="/2018/04/26/tensorflow学习笔记2/">
     <time datetime="2018-04-26T13:43:27.000Z" class="entry-date">
-        2018-04-26
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
-
-    </footer>
-</article>
-
-
-
-
-
-
-  
-    <article id="post-tensorflow学习笔记1" class="post-tensorflow学习笔记1 post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2018/04/26/tensorflow学习笔记1/">tensorflow学习笔记1</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/04/26/tensorflow学习笔记1/" data-id="cjlxojxhy001jdgda9sic7h16" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <p>明天要去实习了，心里有些激动，有些紧张，还有些舍不得，舍不得学校的样子，和某个人。</p>
-<p>进入正题。</p>
-<p>tensorflow是谷歌开源的一款深度学习框架，我用的是python，这个框架是目前最火的框架之一，很有学习的必要。</p>
-<p>首先tensorflow，tensor +　flow，tensor –&gt; 张量，flow –&gt;流动, 也就是张量在图里流动。这里讲两点，张量就是，0维的叫标量（数字），1维的叫向量，2维的叫矩阵，那3+维只能叫张量了;而在图里流动，这里的图（graph）是tensorflow的重要思想之一，tensorflow把运算结构画成graph，其中有节点op，有边，边代表张量的流动，节点代表运算。</p>
-<p>在tensorflow代码中，分为两大块，第一块用来画图，即把所有的运算画在一张图上，并没有实际运算；第二块用来运算，Session().这样做看似很麻烦，其实有个好处，我们看到了图之后，可以有选择性的运算某些节点，而一些没必要的节点可以不运算，节约了大量的时间。如下面的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">x=2</span><br><span class="line"></span><br><span class="line">y=3</span><br><span class="line"></span><br><span class="line">add_op=tf.add(x,y)</span><br><span class="line"></span><br><span class="line">mul_op=tf.mul(x,y)</span><br><span class="line"></span><br><span class="line">useless=tf.mul(x,add_op)</span><br><span class="line"></span><br><span class="line">pow_op=tf.pow(add_op,mul_op)</span><br><span class="line"></span><br><span class="line">with tf.Session() as sess:</span><br><span class="line"></span><br><span class="line">     z=sess.run(pow_op)</span><br></pre></td></tr></table></figure></p>
-<p><img src="/image/1.jpg" alt=""></p>
-<p>可以看到如果只<code>run(pow_op)</code>,那么<code>useless</code>就不会被运算。原因是，当我们<code>run</code>时，会从图中找该op所依赖的op，而<code>pow_op</code>没有依赖<code>useless</code>,所以就没有执行啦。<br>记得查看graph的时候，可不是像打开jpg一样哟。。要<code>cd</code>到graph存放的目录下，<code>Tensorboard --logdir=&#39;目录 &#39;</code>才行。<br>待续。。。</p>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2018/04/26/tensorflow学习笔记1/">
-    <time datetime="2018-04-26T13:43:20.000Z" class="entry-date">
         2018-04-26
     </time>
 </a>
@@ -617,6 +617,10 @@
       <ul>
         
           <li>
+            <a href="/2018/09/11/interview-3/">1042. 托普利兹矩阵 python</a>
+          </li>
+        
+          <li>
             <a href="/2018/09/11/interview-2/">lintcode 814. Shortest Path in Undirected Graph 之python 和 java 实现</a>
           </li>
         
@@ -632,10 +636,6 @@
             <a href="/2018/08/03/echart/">echart的series中label formatter回调函数使用及样式。</a>
           </li>
         
-          <li>
-            <a href="/2018/07/12/zookeeper/">安装zookeeper时候，可以查看进程启动，但是状态显示报错 Error contacting service. It is probably not running</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -645,7 +645,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echart/">echart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lda/">lda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/胶囊网络/">胶囊网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">4</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echart/">echart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lda/">lda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/胶囊网络/">胶囊网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">5</span></li></ul>
     </div>
   </aside>
 
@@ -654,7 +654,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/Keras/" style="font-size: 12.5px;">Keras</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/echart/" style="font-size: 10px;">echart</a> <a href="/tags/java/" style="font-size: 12.5px;">java</a> <a href="/tags/lda/" style="font-size: 10px;">lda</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/sqoop/" style="font-size: 10px;">sqoop</a> <a href="/tags/tensorflow/" style="font-size: 15px;">tensorflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/可视化/" style="font-size: 10px;">可视化</a> <a href="/tags/大数据/" style="font-size: 12.5px;">大数据</a> <a href="/tags/异常解决/" style="font-size: 17.5px;">异常解决</a> <a href="/tags/心情/" style="font-size: 12.5px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 17.5px;">深度学习</a> <a href="/tags/胶囊网络/" style="font-size: 10px;">胶囊网络</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
+      <a href="/tags/Keras/" style="font-size: 12px;">Keras</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/echart/" style="font-size: 10px;">echart</a> <a href="/tags/java/" style="font-size: 14px;">java</a> <a href="/tags/lda/" style="font-size: 10px;">lda</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12px;">mysql</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/sqoop/" style="font-size: 10px;">sqoop</a> <a href="/tags/tensorflow/" style="font-size: 16px;">tensorflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/可视化/" style="font-size: 10px;">可视化</a> <a href="/tags/大数据/" style="font-size: 12px;">大数据</a> <a href="/tags/异常解决/" style="font-size: 18px;">异常解决</a> <a href="/tags/心情/" style="font-size: 12px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 18px;">深度学习</a> <a href="/tags/胶囊网络/" style="font-size: 10px;">胶囊网络</a> <a href="/tags/面试/" style="font-size: 18px;">面试</a>
     </div>
   </aside>
 
