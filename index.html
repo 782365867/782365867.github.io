@@ -72,6 +72,61 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="post-interview-2" class="post-interview-2 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2018/09/11/interview-2/">lintcode 814. Shortest Path in Undirected Graph 之python 和 java 实现</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-2/" data-id="cjlxojxg70000dgdaa9b22rk2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>最近没有动力学习，今天看到小宝贝那么努力学注会，顿感羞愧。</p>
+<p>虽然收到了offercall，但还没有确定之前，还是好好刷刷题。既然有自己的目标，就应该给出自己的态度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">814. 无向图中的最短路径</span><br><span class="line"></span><br><span class="line">给出一个undirected graph，其中每条边的长度为1，并从图中给出两个节点。我们需要找到给定两个节点之间最短路径的长度。</span><br><span class="line"></span><br><span class="line">样例</span><br><span class="line"></span><br><span class="line">给定图= &#123;1,2,4#2,1,4#3,5#4,1,2#5,3&#125;，nodeA = 3, nodeB = 5。</span><br></pre></td></tr></table></figure></p>
+<p>首先想到的是深度优先搜索。写了好久，关于如何确定遍历完一层，res++的地方没理清楚。于是在网上搜了下资料，有c和java版的，就看了下别人的代码，再用python给实现一下。<br>AC了 哈哈。其实我也不知道刷题用什么好，Python简洁好写，在写代码时候比Java省不少事，之前有个快排的题，同样思路，我用Java和Python分别实现，发现Python比Java短了不只一倍，看着很舒服，有点像伪代码。但是Java代码AC了，用了60ms多，但是Python 超时，6000多ms..</p>
+<p>很尴尬。</p>
+<p>个人还是喜欢Python，希望笔试不要出现这种问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">思路：广度优先搜索，用到队列</span><br><span class="line">1 取A结点入队，标记已访问，res=0，up_last = A</span><br><span class="line">2 当队列不为空时：</span><br><span class="line">	repeat:</span><br><span class="line">		取队头元素——&gt;now_node</span><br><span class="line">		如果 now_node = B</span><br><span class="line">		取now_node的邻接nodes:</span><br><span class="line">			将没有访问的node,全入队并标记访问，然后last指向最后一个</span><br><span class="line">		如果当前指针now_node等于层指针up_last，层指针指向last,并且res++</span><br><span class="line">3 return</span><br></pre></td></tr></table></figure>
+<p>这里Python不叫指针，一般和Java一样，叫引用或者别的啥，我叫指针只是形象一些。</p>
+<p>看代码也比较简单<br>python3.5 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    @param graph: a list of Undirected graph node</span><br><span class="line">    @param A: nodeA</span><br><span class="line">    @param B: nodeB</span><br><span class="line">    @return:  the length of the shortest path</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def shortestPath(self, graph, A, B):</span><br><span class="line">        import queue</span><br><span class="line">        # Write your code here</span><br><span class="line">        conti = queue.Queue()</span><br><span class="line">        visited = []</span><br><span class="line">        conti.put(A)</span><br><span class="line">        visited.append(A)</span><br><span class="line">        last = A</span><br><span class="line">        up_last = A</span><br><span class="line">        res=0</span><br><span class="line">        while not conti.empty():</span><br><span class="line">            now = conti.get()</span><br><span class="line">            if now == B:</span><br><span class="line">                return res</span><br><span class="line">            for i in now.neighbors:</span><br><span class="line">                if i not in visited:</span><br><span class="line">                    conti.put(i)</span><br><span class="line">                    visited.append(i)</span><br><span class="line">                    last = i</span><br><span class="line">            if up_last==now:</span><br><span class="line">                up_last = last</span><br><span class="line">                res +=1</span><br><span class="line">        return res</span><br></pre></td></tr></table></figure>
+<p>java 参考<a href="https://blog.csdn.net/u014115273/article/details/80299072，对比看下吧" target="_blank" rel="noopener">https://blog.csdn.net/u014115273/article/details/80299072，对比看下吧</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for graph node.</span></span><br><span class="line"><span class="comment"> * class GraphNode &#123;</span></span><br><span class="line"><span class="comment"> *     int label;</span></span><br><span class="line"><span class="comment"> *     ArrayList&lt;UndirectedGraphNode&gt; neighbors;</span></span><br><span class="line"><span class="comment"> *     UndirectedGraphNode(int x) &#123; </span></span><br><span class="line"><span class="comment"> *         label = x; neighbors = new ArrayList&lt;UndirectedGraphNode&gt;(); </span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> graph: a list of Undirected graph node</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> A: nodeA</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> B: nodeB</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>:  the length of the shortest path</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">shortestPath</span><span class="params">(List&lt;UndirectedGraphNode&gt; graph, UndirectedGraphNode A, UndirectedGraphNode B)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Write your code here</span></span><br><span class="line">        Queue&lt;UndirectedGraphNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        Set&lt;UndirectedGraphNode&gt; visited = <span class="keyword">new</span> HashSet&lt;&gt;();  </span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        UndirectedGraphNode last = <span class="keyword">null</span>;</span><br><span class="line">        UndirectedGraphNode upperLast = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        queue.offer(A);</span><br><span class="line">        visited.add(A);</span><br><span class="line">        upperLast = A;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(!queue.isEmpty())&#123;</span><br><span class="line">            UndirectedGraphNode now = queue.poll();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(now.label == B.label)&#123;</span><br><span class="line">                <span class="keyword">return</span> res;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span>(UndirectedGraphNode next: now.neighbors)&#123;</span><br><span class="line">                <span class="keyword">if</span>(!visited.contains(next))&#123;</span><br><span class="line">                    queue.offer(next);</span><br><span class="line">                    visited.add(next);</span><br><span class="line">                    last = next;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(now == upperLast)&#123;</span><br><span class="line">                upperLast = last;</span><br><span class="line">                res++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;    </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//not connected</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2018/09/11/interview-2/">
+    <time datetime="2018-09-11T11:50:07.000Z" class="entry-date">
+        2018-09-11
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-interview-1" class="post-interview-1 post type-post status-publish format-standard hentry">
     <!---->
 
@@ -87,7 +142,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/21/interview-1/" data-id="cjl3f7fyi0002owdaytcjg5b8" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/21/interview-1/" data-id="cjlxojxgn0003dgda17cmbz57" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -143,7 +198,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/13/sqoop/" data-id="cjl3f7g0k002mowdaceyinm3f" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/13/sqoop/" data-id="cjlxojxjb0029dgdafocyul29" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -202,7 +257,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/03/echart/" data-id="cjl3f7fyd0000owdau0br5w3g" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/03/echart/" data-id="cjlxojxge0001dgda0l8egwog" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -254,7 +309,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/12/zookeeper/" data-id="cjl3f7fzi000vowdahmlede6s" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/12/zookeeper/" data-id="cjlxojxjp002gdgdae82dsor5" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -328,7 +383,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/05/mysql/" data-id="cjl3f7fyy000dowdamu6fozvh" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/05/mysql/" data-id="cjlxojxgu0008dgdawyb3y8t4" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -377,7 +432,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjl3f7g13002sowdaox18tw54" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjlxojxjq002hdgdafpxwrmrp" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -479,7 +534,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjl3f7fys0008owdad0xz77d7" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjlxojxgp0004dgdafdzod21n" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -534,7 +589,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjl3f7fyn0004owdakcfwrn4w" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/11/interview/" data-id="cjlxojxhu001fdgda6g0uzgjs" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -588,7 +643,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjl3f7fz7000howdavwrej8zr" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/05/python-1/" data-id="cjlxojxhs001edgdapdtzoz1u" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -615,63 +670,6 @@
     
   <span class="article-delim">&#8226;</span>
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
-
-    </footer>
-</article>
-
-
-
-
-
-
-  
-    <article id="post-lda" class="post-lda post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2018/06/01/lda/">lda主题模型python实现篇</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="cjl3f7fyu0009owdaq91itw0p" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <p>最近在做一个动因分析的项目，自然想到了主题模型LDA。这次先把模型流程说下，原理后面再讲。<br>lda实现有很多开源库，这里用的是gensim.</p>
-<h2 id="1-文本预处理"><a href="#1-文本预处理" class="headerlink" title="1 文本预处理"></a>1 文本预处理</h2><p>大概说下文本的样子，LDA是无监督模型，也就是说不需要标签，只要传入文本就好。LDA要学习文档-主题分布和主题-词分布，所以我们把一个人的数据join在一起作为一条文档。对文档进行分词，使用的jieba分词工具包。注意，这里要做去停用词处理，包括标点和一些没用的词，如“呵呵”，“哈哈”。做项目时，第一版没有去无用词，最后提出的主题都是“你”“我”“他”“你好”这样的东西，去掉之后可以较好提高结果质量。</p>
-<h2 id="2-将上步处理的结果进行格式化表示"><a href="#2-将上步处理的结果进行格式化表示" class="headerlink" title="2 将上步处理的结果进行格式化表示"></a>2 将上步处理的结果进行格式化表示</h2><p>即将所有文档数表示成m*n的矩阵D,m表示有m篇文档，n表示这篇文档有n个词，n不定长。</p>
-<h2 id="3-生成词典"><a href="#3-生成词典" class="headerlink" title="3 生成词典"></a>3 生成词典</h2><p>用gensim.corpora.Dictionary包<br>这个包讲下吧<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from gensim.corpora import Dictionary</span><br><span class="line">text = [[&apos;我&apos;, &apos;想吃&apos;, &apos;大龙虾&apos;, &apos;和&apos;, &apos;烤猪蹄&apos;]]</span><br><span class="line">dictionary = Dictionary(text)</span><br><span class="line">print((dictionary))</span><br><span class="line">doc = dictionary.doc2bow([&apos;我&apos;, &apos;想吃&apos;, &apos;大龙虾&apos;, &apos;和&apos;, &apos;我&apos;,&apos;你&apos;,&apos;烤猪蹄&apos;])</span><br><span class="line">print(doc)</span><br><span class="line"></span><br><span class="line">#####output#####</span><br><span class="line">Dictionary(5 unique tokens: [&apos;我&apos;, &apos;大龙虾&apos;, &apos;想吃&apos;, &apos;和&apos;, &apos;烤猪蹄&apos;])</span><br><span class="line">[(0, 1), (1, 1), (2, 2), (3, 1), (4, 1)]</span><br></pre></td></tr></table></figure></p>
-<p>可以看出，我们把我想吃大龙虾和烤猪蹄编成字典，共五个词，这里输出结果里看不出是个字典，其实是有下标的，0对应我，1对应大龙虾，…4对应烤猪蹄。<br>然后我们在下一步将文本变成词袋，这里用的文本是[‘我’, ‘想吃’, ‘大龙虾’, ‘和’, ‘我’,’你’,’烤猪蹄’],注意文本格式也是词为元素的列表。这句话是我自己构造的，只是为了说两点，语法请忽略。第一点：“我”这个词出现了两次，所以下标为2的地方，值为2；第二点，“你”这个词出现了1次，可是在词典中没有，所有直接被忽略。 </p>
-<p>这样就可以用字典，将文本表示成词袋模型，词袋模型不懂的，见我另一篇文章，自然语言处理NLP的词如何表示。当我们做完了LDA模型后，对于新的文本，我们想看下它所在的主题分布，就要使用该字典再进行词袋编码，也就是说这个字典，我们以后也会用到，所以，我们在这里把词典保存起来。<br>保存词典可以用pickle,很好用。不懂的见我另一篇文章，神奇的pickle。</p>
-<h2 id="4-训练LDA模型"><a href="#4-训练LDA模型" class="headerlink" title="4 训练LDA模型"></a>4 训练LDA模型</h2><p>这里用的是gensim.models.ldamodel包<br><code>ldamodel = LdaModel(text, num_topics=10, id2word=dictionary, passes=20)</code><br>使用这句话就可以直接训练LDA模型了，讲一下参数吧。<br>text:文本，已经表示成词袋了。<br>num_topics: 提取的主题数<br>id2word:词典<br>passes:类似于在机器学习中常见的epoch，也就是训练了多少轮。</p>
-<p>然后我们得到了训练好的ldamodel.用这个模型可以做哪些事情呢？</p>
-<h2 id="5-ldamodel使用"><a href="#5-ldamodel使用" class="headerlink" title="5 ldamodel使用"></a>5 ldamodel使用</h2><p>可以输出这个模型的各个主题下的主题词<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">print(ldamodel.print_topics(num_topics=10, num_words=10))</span><br><span class="line">###output###</span><br><span class="line">[(0, &apos;0.015*&quot;说&quot; + 0.011*&quot;吃&quot; + 0.008*&quot;想&quot; + 0.007*&quot;睡&quot; + 0.005*&quot;\u2005&quot; + 0.005*&quot;做&quot; + 0.005*&quot;明天&quot; + 0.005*&quot;买&quot; + 0.005*&quot;干嘛&quot; + 0.005*&quot;玩&quot;&apos;),</span><br><span class="line"> (1, &apos;0.017*&quot; &quot; + 0.010*&quot;说&quot; + 0.004*&quot;吃&quot; + 0.004*&quot;许华升&quot; + 0.004*&quot;\x14&quot; + 0.004*&quot;想&quot; + 0.003*&quot;做&quot; + 0.003*&quot;买&quot; + 0.003*&quot;ÿ&quot; + 0.003*&quot;钱&quot;&apos;),</span><br><span class="line"> (2, &apos;0.008*&quot;com&quot; + 0.007*&quot; &quot; + 0.004*&quot;手机&quot; + 0.003*&quot;女&quot; + 0.003*&quot;说&quot; + 0.003*&quot;www&quot; + 0.003*&quot;cc&quot; + 0.002*&quot;号&quot; + 0.002*&quot;qq&quot; + 0.002*&quot;视频&quot;&apos;), </span><br><span class="line"> (3, &apos;0.007*&quot;com&quot; + 0.006*&quot; &quot; + 0.005*&quot;38&quot; + 0.004*&quot;号&quot; + 0.004*&quot;贷&quot; + 0.003*&quot;3000&quot; + 0.003*&quot;10&quot; + 0.003*&quot;做&quot; + 0.003*&quot;说&quot; + 0.002*&quot;111&quot;&apos;), </span><br><span class="line"> (4, &apos;0.017*&quot; &quot; + 0.007*&quot;说&quot; + 0.006*&quot;做&quot; + 0.005*&quot;你好&quot; + 0.005*&quot;吃&quot; + 0.004*&quot;号&quot; + 0.004*&quot;\u2005&quot; + 0.004*&quot;想&quot; + 0.003*&quot;钱&quot; + 0.003*&quot;明天&quot;&apos;), </span><br><span class="line"> (5, &apos;0.013*&quot; &quot; + 0.012*&quot;说&quot; + 0.007*&quot;吃&quot; + 0.006*&quot;想&quot; + 0.005*&quot;睡&quot; + 0.005*&quot;做&quot; + 0.004*&quot;钱&quot; + 0.004*&quot;买&quot; + 0.004*&quot;回来&quot; + 0.004*&quot;干嘛&quot;&apos;), </span><br><span class="line"> (6, &apos;0.010*&quot; &quot; + 0.005*&quot;买大单&quot; + 0.005*&quot;贷&quot; + 0.004*&quot;说&quot; + 0.004*&quot;贷款&quot; + 0.004*&quot;钱&quot; + 0.003*&quot;com&quot; + 0.003*&quot;号&quot; + 0.003*&quot;奥特曼&quot; + 0.003*&quot;吃&quot;&apos;),</span><br><span class="line"> (7, &apos;0.022*&quot; &quot; + 0.010*&quot;说&quot; + 0.008*&quot;做&quot; + 0.007*&quot;吃&quot; + 0.005*&quot;想&quot; + 0.004*&quot;钱&quot; + 0.003*&quot;\u2005&quot; + 0.003*&quot;买&quot; + 0.003*&quot;谢谢&quot; + 0.003*&quot;明天&quot;&apos;),</span><br><span class="line"> (8, &apos;0.017*&quot; &quot; + 0.015*&quot;com&quot; + 0.006*&quot;www&quot; + 0.005*&quot;说&quot; + 0.004*&quot;号&quot; + 0.004*&quot;\u2005&quot; + 0.003*&quot;手机&quot; + 0.003*&quot;钱&quot; + 0.003*&quot;吃&quot; + 0.003*&quot;https&quot;&apos;), </span><br><span class="line"> (9, &apos;0.011*&quot;\u2005&quot; + 0.011*&quot;说&quot; + 0.010*&quot;做&quot; + 0.009*&quot; &quot; + 0.004*&quot;钱&quot; + 0.004*&quot;买&quot; + 0.004*&quot;发&quot; + 0.003*&quot;谢谢&quot; + 0.003*&quot;吃&quot; + 0.003*&quot;玩&quot;&apos;)]</span><br></pre></td></tr></table></figure></p>
-<p>这里随便找了些数据，效果不是太明显，这里主要讲处理流程，不要被这结果干扰心情，不过工业应用中很多时候，实际结果和你理想的结果有很大差距。用一些正常的数据，是可以看出一些信息的。上次用汽车之家的评论数据做lda，主题信息就比较明显，有关于油耗的，有关于买车的等等。<br>也可以对新文本，找出其所在的主题分布。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def to_lda_vec(model, dictionary, text_list=None):</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    :param model: lda model</span><br><span class="line">    :param dictionary: Dictionary for toBow</span><br><span class="line">    :param text_list: texts</span><br><span class="line">    :return: texts about one topic</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    lda_list = []</span><br><span class="line">    for texts in text_list:</span><br><span class="line">        doc_bow = dictionary.doc2bow(texts)</span><br><span class="line">        doc_lda = model[doc_bow]</span><br><span class="line">	lda_list.append(doc_lda)</span><br><span class="line"></span><br><span class="line">    return lda_list</span><br></pre></td></tr></table></figure></p>
-<p>这个方法中的参数加了注释，这里可以看到有个参数是dictionary，这里就是我们前面训练lda时用的词典，前面保存的词典派上用场了。最后输出的lda_list是一个列表，列表中元素为每句话的doc_lda,doc_lda是这样子的[(5,0.342345),(6,0.1111)…]，也就是个list，无素为元组，元组包括两个值，第一个值表示主题id，第二个值表示属于该主题的概率。</p>
-<p>也可以用于新文本数据的向量化，即将新的文本映射成主题向量，然后可以做分类，做聚类，做推荐。</p>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2018/06/01/lda/">
-    <time datetime="2018-06-01T06:06:35.000Z" class="entry-date">
-        2018-06-01
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lda/">lda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </footer>
 </article>
@@ -718,6 +716,10 @@
       <ul>
         
           <li>
+            <a href="/2018/09/11/interview-2/">lintcode 814. Shortest Path in Undirected Graph 之python 和 java 实现</a>
+          </li>
+        
+          <li>
             <a href="/2018/08/21/interview-1/">44.最小子数组（python3 实现）</a>
           </li>
         
@@ -733,10 +735,6 @@
             <a href="/2018/07/12/zookeeper/">安装zookeeper时候，可以查看进程启动，但是状态显示报错 Error contacting service. It is probably not running</a>
           </li>
         
-          <li>
-            <a href="/2018/07/05/mysql/">ERROR 1130 (HY000) Host &#39;114.213.234.22&#39; is not allowed to connect to this MySQL server</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -746,7 +744,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echart/">echart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lda/">lda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/胶囊网络/">胶囊网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echart/">echart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lda/">lda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/胶囊网络/">胶囊网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">4</span></li></ul>
     </div>
   </aside>
 
@@ -755,7 +753,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/Keras/" style="font-size: 12px;">Keras</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/echart/" style="font-size: 10px;">echart</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/lda/" style="font-size: 10px;">lda</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12px;">mysql</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/sqoop/" style="font-size: 10px;">sqoop</a> <a href="/tags/tensorflow/" style="font-size: 16px;">tensorflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/可视化/" style="font-size: 10px;">可视化</a> <a href="/tags/大数据/" style="font-size: 12px;">大数据</a> <a href="/tags/异常解决/" style="font-size: 18px;">异常解决</a> <a href="/tags/心情/" style="font-size: 12px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 18px;">深度学习</a> <a href="/tags/胶囊网络/" style="font-size: 10px;">胶囊网络</a> <a href="/tags/面试/" style="font-size: 14px;">面试</a>
+      <a href="/tags/Keras/" style="font-size: 12.5px;">Keras</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/echart/" style="font-size: 10px;">echart</a> <a href="/tags/java/" style="font-size: 12.5px;">java</a> <a href="/tags/lda/" style="font-size: 10px;">lda</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/sqoop/" style="font-size: 10px;">sqoop</a> <a href="/tags/tensorflow/" style="font-size: 15px;">tensorflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/可视化/" style="font-size: 10px;">可视化</a> <a href="/tags/大数据/" style="font-size: 12.5px;">大数据</a> <a href="/tags/异常解决/" style="font-size: 17.5px;">异常解决</a> <a href="/tags/心情/" style="font-size: 12.5px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 17.5px;">深度学习</a> <a href="/tags/胶囊网络/" style="font-size: 10px;">胶囊网络</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
     </div>
   </aside>
 

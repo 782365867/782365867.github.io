@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lintcode 814. Shortest Path in Undirected Graph 之python 和 java 实现]]></title>
+    <url>%2F2018%2F09%2F11%2Finterview-2%2F</url>
+    <content type="text"><![CDATA[最近没有动力学习，今天看到小宝贝那么努力学注会，顿感羞愧。 虽然收到了offercall，但还没有确定之前，还是好好刷刷题。既然有自己的目标，就应该给出自己的态度。1234567814. 无向图中的最短路径给出一个undirected graph，其中每条边的长度为1，并从图中给出两个节点。我们需要找到给定两个节点之间最短路径的长度。样例给定图= &#123;1,2,4#2,1,4#3,5#4,1,2#5,3&#125;，nodeA = 3, nodeB = 5。 首先想到的是深度优先搜索。写了好久，关于如何确定遍历完一层，res++的地方没理清楚。于是在网上搜了下资料，有c和java版的，就看了下别人的代码，再用python给实现一下。AC了 哈哈。其实我也不知道刷题用什么好，Python简洁好写，在写代码时候比Java省不少事，之前有个快排的题，同样思路，我用Java和Python分别实现，发现Python比Java短了不只一倍，看着很舒服，有点像伪代码。但是Java代码AC了，用了60ms多，但是Python 超时，6000多ms.. 很尴尬。 个人还是喜欢Python，希望笔试不要出现这种问题。 12345678910思路：广度优先搜索，用到队列1 取A结点入队，标记已访问，res=0，up_last = A2 当队列不为空时： repeat: 取队头元素——&gt;now_node 如果 now_node = B 取now_node的邻接nodes: 将没有访问的node,全入队并标记访问，然后last指向最后一个 如果当前指针now_node等于层指针up_last，层指针指向last,并且res++3 return 这里Python不叫指针，一般和Java一样，叫引用或者别的啥，我叫指针只是形象一些。 看代码也比较简单python3.5 123456789101112131415161718192021222324252627282930class Solution: &quot;&quot;&quot; @param graph: a list of Undirected graph node @param A: nodeA @param B: nodeB @return: the length of the shortest path &quot;&quot;&quot; def shortestPath(self, graph, A, B): import queue # Write your code here conti = queue.Queue() visited = [] conti.put(A) visited.append(A) last = A up_last = A res=0 while not conti.empty(): now = conti.get() if now == B: return res for i in now.neighbors: if i not in visited: conti.put(i) visited.append(i) last = i if up_last==now: up_last = last res +=1 return res java 参考https://blog.csdn.net/u014115273/article/details/80299072，对比看下吧1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556/** * Definition for graph node. * class GraphNode &#123; * int label; * ArrayList&lt;UndirectedGraphNode&gt; neighbors; * UndirectedGraphNode(int x) &#123; * label = x; neighbors = new ArrayList&lt;UndirectedGraphNode&gt;(); * &#125; * &#125;; */public class Solution &#123; /** * @param graph: a list of Undirected graph node * @param A: nodeA * @param B: nodeB * @return: the length of the shortest path */ public int shortestPath(List&lt;UndirectedGraphNode&gt; graph, UndirectedGraphNode A, UndirectedGraphNode B) &#123; // Write your code here Queue&lt;UndirectedGraphNode&gt; queue = new LinkedList&lt;&gt;(); Set&lt;UndirectedGraphNode&gt; visited = new HashSet&lt;&gt;(); int res = 0; UndirectedGraphNode last = null; UndirectedGraphNode upperLast = null; queue.offer(A); visited.add(A); upperLast = A; while(!queue.isEmpty())&#123; UndirectedGraphNode now = queue.poll(); if(now.label == B.label)&#123; return res; &#125; for(UndirectedGraphNode next: now.neighbors)&#123; if(!visited.contains(next))&#123; queue.offer(next); visited.add(next); last = next; &#125; &#125; if(now == upperLast)&#123; upperLast = last; res++; &#125; &#125; return -1;//not connected &#125;&#125;]]></content>
+      <tags>
+        <tag>python</tag>
+        <tag>java</tag>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[44.最小子数组（python3 实现）]]></title>
     <url>%2F2018%2F08%2F21%2Finterview-1%2F</url>
     <content type="text"><![CDATA[前两天在忙着搞大数据和论文，论文写差不多了，开始刷刷题，前几天笔试做的一塌糊涂，有的题明明感觉做对了，但是AC不了。趁着最近有空，赶紧找找感觉。一道简单的贪心题 44.最小子数组 给定一个整数数组，找到一个具有最小和的子数组。返回其最小和。 样例 给出数组[1, -1, -2, 1]，返回 -3 注意事项 子数组最少包含一个数字 解： 从第一个数往后遍历i=1-&gt;n将前k个数视为一个整体，如果这个整体&gt;0,则后面无论是什么，只要加上这个整体，肯定不会变小，所以整体直接舍弃，剩下的为新的数组nums.如果，前面的数为负，如前3个数的和为-7，第4个数为8，则-7+8=1,要不要舍弃呢？后面可能没有小于-7的子数组了呀？所以 我们还要有个变量res，用来保存各阶段的最小值，如这里的-7，如果后面有比-7更小的子数组，就更新这个变量的值，如果没有，res就是一直是-7。python3代码1234567891011121314151617class Solution: """ @param: nums: a list of integers @return: A integer indicate the sum of minimum subarray """ def minSubArray(self, nums): # write your code here sum = 0 res = nums[0] for i in nums: sum+=i if sum &lt; res: res = sum if sum &gt; 0: sum = 0 return res 刚开始不通过,看了下数据[1,1],全是正数，而我当时设的res初值为0.本来以为至少会有1个负值。所以把初值改为了第一个数。 每天一点 进步不难]]></content>
       <tags>
-        <tag>面试</tag>
         <tag>python</tag>
+        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
@@ -16,8 +26,8 @@
       <tags>
         <tag>异常解决</tag>
         <tag>mysql</tag>
-        <tag>大数据</tag>
         <tag>sqoop</tag>
+        <tag>大数据</tag>
       </tags>
   </entry>
   <entry>
@@ -35,8 +45,8 @@
     <content type="text"><![CDATA[最近想学一下大数据，这年头，不会大数据，都不敢说自己是21世纪新青年。 大数据有很多要学的框架，比如hadoop spark storm zookeeper等等，今天拿zookeeper入个门，安装过程中遇到点坑，分享一下。 Zookeeper是一个分布式协调服务；就是为用户的分布式应用程序提供协调服务A、zookeeper是为别的分布式程序服务的B、Zookeeper本身就是一个分布式程序（只要有半数以上节点存活，zk就能正常服务）C、Zookeeper所提供的服务涵盖：主从协调、服务器节点动态上下线、统一配置管理、分布式共享锁、统一名称服务……D、虽然说可以提供各种服务，但是zookeeper在底层其实只提供了两个功能： —管理(存储，读取)用户程序提交的数据； —并为用户程序提供数据节点监听服务； 1 部署用的是三台虚拟机，centOS 7jdk 8zookeeper3.4.5三台机器网络己配好，host配置如下1234567[root@shizhan1 conf]# cat /etc/hosts127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4::1 localhost localhost.localdomain localhost6 localhost6.localdomain6127.0.0.1 shizhan1192.168.33.3 shizhan1192.168.33.4 shizhan2192.168.33.5 shizhan3 2 安装https://pan.baidu.com/s/1O-E6pq3zbzoqRvxHoj66eQ 放我网盘了，zookeeper3.4.5 下载到shizhan1（第一台机子）中，我放在了/root/work/下解压：tar -zxvf zookeeper-3.4.5.tar.gz重命名：mv zookeeper-3.4.5 zookeeper（重命名文件夹zookeeper-3.4.5为zookeeper,太长 写起来好麻烦） 3 环境变量：vi /etc/profile添加内容：12export ZOOKEEPER_HOME=/root/work/zookeeperexport PATH=$PATH:$ZOOKEEPER_HOME/bin source 一下，也就是把你写的环境变量激活一下source /etc/profile 注意，这里三台机子都要改环境变量哟，第二部安装可以只在一个机子上装好，然后拷到其他机子上去，但是环境变量三个都要改。 4 配置文件cd zookeeper/conf进入conf目录cp zoo_sample.cfg zoo.cfg 把例子copy一个出来，命名为zoo.cfg,我们要改的就是这个。vi zoo.cfg添加内容：12345dataDir=/root/zkdata （要创建文件夹）dataLogDir=/root/zklogdata （要创建文件夹）server.1=shizhan1:2888:3888 (主机名, 心跳端口、数据端口)server.2=shizhan2:2888:3888server.3=shizhan3:2888:3888 5 然后创建上面说的那俩文件夹,12mkdir /root/zkdatamkdir /root/zklogdata 注意，这里三台机子都要创建。6 将配好的zookeeper拷到另外两台机子上12scp -r /root/work/zookeeper hadoop@slave2:/home/hadoop/scp -r /root/work/zookeeper hadoop@slave3:/home/hadoop/ 7 在/root/zkdata/中创建myid文件，注意每台机子都要创建，但是值不一样，在步骤4中,如第一台，server.1=shizhan1:2888:3888，shizhan1是主机名，前面的serverl.1中的1,就是shizhan1这台机子上myid文件的值。以这台机子为例，其他两台的值分别为2 和 3。12cd /root/zkdata/echo 1 &gt; myid 8 启动服务1234[root@shizhan1 bin]# zkServer.sh startJMX enabled by defaultUsing config: /root/work/zookeeper/bin/../conf/zoo.cfgStarting zookeeper ... STARTED 9 查看服务1234[root@shizhan2 conf]# zkServer.sh statusJMX enabled by defaultUsing config: /root/work/zookeeper/bin/../conf/zoo.cfgMode: follower 只有出现上面类似内容才是成功了。 排坑–今天启动后，发现jps里有quorumpeermain1234Starting zookeeper ... already running as process 1398.[root@shizhan2 ~]# jps1398 QuorumPeerMain1559 Jps 但是状态显示报错：Error contacting service. It is probably not running 1）在网上查阅资料一共有几种解决方法：打开zkServer.sh 找到status) STAT=echo stat | nc localhost $(grep clientPort &quot;$ZOOCFG&quot; | sed -e &#39;s/.*=//&#39;) 2&gt; /dev/null| grep Mode在nc与localhost之间加上 -q 1 （是数字1而不是字母l）如果已存在则去掉注:因为我用的zookeeper是3.4.5版本，所以在我的zkServer.sh脚本文件里根本没有这一行,所以没有生效 2）调用sh zkServer.sh status 遇到这个问题。百度，google了后发现有人是修改sh脚本里的一个nc的参数来解决，可在3.4.5的sh文件里并没有找到nc的调用。配置文档里指定的log目录没有创建导致出错，手动增加目录后重启，问题解决。注:我想不是日志的问题所以这个方法根本就没有试 3）创建数据目录,也就是在你zoo.cfg配置文件里dataDir指定的那个目录下创建myid文件,并且指定id,改id为你zoo.cfg文件中server.1=shizhan1:2888:3888中的 1.只要在myid头部写入1即可. 4）因为防火墙没有关闭。关闭防火墙：12345678910#查看防火墙状态 service iptables status #关闭防火墙 service iptables stop#查看防火墙开机启动状态 chkconfig iptables --list#关闭防火墙开机启动 chkconfig iptables off 注意：我的确在开始时候没有关闭防火墙，但是当我关闭防火墙之后也没有解决问题。 如果是centOS 7，12[root@shizhan2 conf]# systemctl stop firewalld.service[root@shizhan2 conf]# systemctl disable firewalld.service 我就是关防火墙的时候，用了iptables 那个命令，提示中显示如下，我就大概一看，以为是说防火墙没开，其实人家早就换新命令啦。123[root@shizhan1 work]# service iptables stopRedirecting to /bin/systemctl stop iptables.serviceFailed to stop iptables.service: Unit iptables.service not loaded. 5） 没有建立主机和ip之间的映射关系。 建立主机和ip之间映射关系的命令为 vim /etc/hosts 在文件的末端加入各个主机和ip地址之间的映射关系就可以了。 注意：只有在建立了映射关系之后，才可以将在同一个网段下的机器利用主机名进行文件传递。问题解决！]]></content>
       <tags>
         <tag>异常解决</tag>
-        <tag>zookeeper</tag>
         <tag>大数据</tag>
+        <tag>zookeeper</tag>
       </tags>
   </entry>
   <entry>
@@ -73,8 +83,8 @@
     <url>%2F2018%2F06%2F11%2Finterview%2F</url>
     <content type="text"><![CDATA[开始整理下面试题和心得，这一部分包含Lintcode和平时遇到的一些题目。 题目描述：给定一个正整数n,返回出n的阶乘尾部0的个数。linkcode链接：https://lintcode.com/problem/trailing-zeros/description 分析：看到这一题第一感觉先求阶乘，然后求出结果中尾部有多少0。提交代码，超时。 于是查了下资料，一个数尾部有多少个0，先看这个数的因子，也就是因子分解，如10 分解为2 5，20 分解为2 2 5，100 分解为 2 2 5 5，多找几组数据，发现尾部0的个数为min{2的数，5的个数}。为什么会这样呢？因为尾部的0是由25得出的，当然也可以是45，但是4=2*2呀，最终0还是由2和5造出来的。一对2和5造出来一个0，n对2和5造出n个0，如果有10个2，8个5，则只能凑出8对，所以是min{…}.阶乘也就是因子分解的过程，而且因子从小到大排好了。2的个数肯定比5多，因为5大。所以这个题，看因子中5出现的次数就可以啦。 这里n阶乘用n!表示。5！ –&gt; 1 2 3 4 5 有一个510! –&gt; 1 2 3 4 5 6 7 8 9 10 有2个5（10=25）…25! –&gt; 1 2 3 4 5 …10 ..15 ..20 ..24 25 有6个5（25=55） 125！ = 5 10 15 …25 ..50 ..75 ..100 ..125 有多少呢？我们发现每隔5个数出现一个5，隔25个数多出来1个5..隔125个数再多出一个5也就是从n个抽出55 10 15 20 25 30 … = 5（1 2 3 4 5 ）然后从上面序列中再隔5抽25 50 75 100 125 … = 55（1 2 3 4 5 ）再隔5抽125 250 375 500 625 .. = 55*5（1 2 3 4 5 ） 规律很明显了 好了上代码 python3 1234567891011class Solution: &quot;&quot;&quot; @param: n: An integer @return: An integer, denote the number of trailing zeros in n! &quot;&quot;&quot; def trailingZeros(self, n): zeros = 0 while n &gt; 0: zeros += n // 5 n //= 5 return int(zeros)]]></content>
       <tags>
-        <tag>面试</tag>
         <tag>python</tag>
+        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
