@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[linux之scp]]></title>
     <url>%2F2019%2F07%2F13%2Flinux%2F</url>
-    <content type="text"><![CDATA[local_file remote_username@remote_ip:remote_folder ```1234或者 ```scp local_file remote_username@remote_ip:remote_file 或者 local_file remote_ip:remote_folder```12 或者 scp local_file remote_ip:remote_file` 若需要传文件夹，则加 -r]]></content>
+    <content type="text"><![CDATA[1scp local_file remote_username@remote_ip:remote_folder 或者 1scp local_file remote_username@remote_ip:remote_file 或者 1scp local_file remote_ip:remote_folder 或者 1scp local_file remote_ip:remote_file 若需要传文件夹，则加 -r]]></content>
       <tags>
         <tag>linux</tag>
       </tags>
