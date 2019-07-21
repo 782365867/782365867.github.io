@@ -11,7 +11,7 @@
   <entry>
     <title><![CDATA[hive笔记1]]></title>
     <url>%2F2019%2F07%2F11%2Fhive%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[#hive笔记1 ##查看 这是加删除线的文字 列表内容 列表内容 列表内容 1 2 3 sdfsdfsdf sdf sdfs sdfs sssdf sdf 3 (123456789 function fun()&#123; echo &quot;这是一句非常牛逼的代码&quot;; &#125; fun();(```)----------##select语法结构 SELECT [ALL | DISTINCT] select_expr, select_expr, …FROM table_reference[WHERE where_condition][GROUP BY col_list [HAVING condition]][CLUSTER BY col_list | [DISTRIBUTE BY col_list] [SORT BY| ORDER BY col_list]][LIMIT number]`其中，CLUSTER BY col_list就等同于[DISTRIBUTE BY col_list]+[SORT BY| 外部表和内部表的区别：外部表在drop时，只删表结构和表，不删原数据，即集群数据还在。 sort by 和 order by的区别： sort by 组内有序 order by 全局排序，只有一个reduce]]></content>
+    <content type="text"><![CDATA[#hive笔记1 ##查看 这是加删除线的文字 列表内容 列表内容 列表内容 1 2 3 sdfsdfsdf sdf sdfs sdfs sssdf sdf 3 1234function fun()&#123; echo &quot;这是一句非常牛逼的代码&quot;;&#125;fun(); ##select语法结构12345678SELECT [ALL | DISTINCT] select_expr, select_expr, ... FROM table_reference[WHERE where_condition] [GROUP BY col_list [HAVING condition]] [CLUSTER BY col_list | [DISTRIBUTE BY col_list] [SORT BY| ORDER BY col_list] ] [LIMIT number] 其中，CLUSTER BY col_list就等同于[DISTRIBUTE BY col_list]+[SORT BY| 外部表和内部表的区别：外部表在drop时，只删表结构和表，不删原数据，即集群数据还在。 sort by 和 order by的区别： sort by 组内有序 order by 全局排序，只有一个reduce]]></content>
       <tags>
         <tag>深度学习</tag>
         <tag>hive</tag>
