@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[linux之scp]]></title>
+    <url>%2F2019%2F07%2F13%2Flinux%2F</url>
+    <content type="text"><![CDATA[local_file remote_username@remote_ip:remote_folder ```1234或者 ```scp local_file remote_username@remote_ip:remote_file 或者 local_file remote_ip:remote_folder```12 或者 scp local_file remote_ip:remote_file` 若需要传文件夹，则加 -r]]></content>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hive笔记1]]></title>
     <url>%2F2019%2F07%2F11%2Fhive%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[hive笔记1外部表和内部表的区别：外部表在drop时，只删表结构和表，不删原数据，即集群数据还在。]]></content>
+    <content type="text"><![CDATA[#hive笔记1 ##查看 这是加删除线的文字 列表内容 列表内容 列表内容 1 2 3 sdfsdfsdf sdf sdfs sdfs sssdf sdf 3 (123456789 function fun()&#123; echo &quot;这是一句非常牛逼的代码&quot;; &#125; fun();(```)----------##select语法结构 SELECT [ALL | DISTINCT] select_expr, select_expr, …FROM table_reference[WHERE where_condition][GROUP BY col_list [HAVING condition]][CLUSTER BY col_list | [DISTRIBUTE BY col_list] [SORT BY| ORDER BY col_list]][LIMIT number]`其中，CLUSTER BY col_list就等同于[DISTRIBUTE BY col_list]+[SORT BY| 外部表和内部表的区别：外部表在drop时，只删表结构和表，不删原数据，即集群数据还在。 sort by 和 order by的区别： sort by 组内有序 order by 全局排序，只有一个reduce]]></content>
       <tags>
         <tag>深度学习</tag>
         <tag>hive</tag>
@@ -14,9 +22,9 @@
     <url>%2F2018%2F09%2F11%2Finterview-3%2F</url>
     <content type="text"><![CDATA[12345678910111213141516171819202122232425262728描述“托普利兹矩阵”是指如果从左上角到右下角的同一条主斜线上每个元素都相等的矩阵.给定一个M x N矩阵，判断是否为“托普利兹矩阵”.matrix 是一个二维整数数组.matrix 的行列范围都为 [1, 20].matrix[i][j] 的整数取值范围为[0, 99].您在真实的面试中是否遇到过这个题？ 是题目纠错样例样例 1:输入: matrix = [[1,2,3,4],[5,1,2,3],[9,5,1,2]]输出: True解释:123451239512在上述矩阵中，主斜线上元素分别为 &quot;[9]&quot;, &quot;[5, 5]&quot;, &quot;[1, 1, 1]&quot;, &quot;[2, 2, 2]&quot;, &quot;[3, 3]&quot;, &quot;[4]&quot;, 每一条主斜线上元素都相等，所以返回`True`.样例 2:输入: matrix = [[1,2],[2,2]]输出: False解释:主斜线 &quot;[1, 2]&quot; 有不同的元素. 简单题，直接代码：python123456789101112class Solution: &quot;&quot;&quot; @param matrix: the given matrix @return: True if and only if the matrix is Toeplitz &quot;&quot;&quot; def isToeplitzMatrix(self, matrix): # Write your code here for i in range(1,len(matrix)): for j in range(1,len(matrix[0])): if matrix[i][j]!=matrix[i-1][j-1]: return False return True java12345678910111213141516171819public class Solution &#123; /** * @param matrix: the given matrix * @return: True if and only if the matrix is Toeplitz */ public boolean isToeplitzMatrix(int[][] matrix) &#123; // Write your code here int m = matrix.length; int n = matrix[0].length; for(int i=1;i&lt;m;i++)&#123; for(int j=1;j&lt;n;j++)&#123; if(matrix[i][j]!=matrix[i-1][j-1])&#123; return false; &#125; &#125; &#125; return true; &#125;&#125;]]></content>
       <tags>
+        <tag>面试</tag>
         <tag>python</tag>
         <tag>java</tag>
-        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
@@ -24,9 +32,9 @@
     <url>%2F2018%2F09%2F11%2Finterview-2%2F</url>
     <content type="text"><![CDATA[最近没有动力学习，今天看到小宝贝那么努力学注会，顿感羞愧。 虽然收到了offercall，但还没有确定之前，还是好好刷刷题。既然有自己的目标，就应该给出自己的态度。1234567814. 无向图中的最短路径给出一个undirected graph，其中每条边的长度为1，并从图中给出两个节点。我们需要找到给定两个节点之间最短路径的长度。样例给定图= &#123;1,2,4#2,1,4#3,5#4,1,2#5,3&#125;，nodeA = 3, nodeB = 5。 首先想到的是深度优先搜索。写了好久，关于如何确定遍历完一层，res++的地方没理清楚。于是在网上搜了下资料，有c和java版的，就看了下别人的代码，再用python给实现一下。AC了 哈哈。其实我也不知道刷题用什么好，Python简洁好写，在写代码时候比Java省不少事，之前有个快排的题，同样思路，我用Java和Python分别实现，发现Python比Java短了不只一倍，看着很舒服，有点像伪代码。但是Java代码AC了，用了60ms多，但是Python 超时，6000多ms.. 很尴尬。 个人还是喜欢Python，希望笔试不要出现这种问题。 12345678910思路：广度优先搜索，用到队列1 取A结点入队，标记已访问，res=0，up_last = A2 当队列不为空时： repeat: 取队头元素——&gt;now_node 如果 now_node = B 取now_node的邻接nodes: 将没有访问的node,全入队并标记访问，然后last指向最后一个 如果当前指针now_node等于层指针up_last，层指针指向last,并且res++3 return 这里Python不叫指针，一般和Java一样，叫引用或者别的啥，我叫指针只是形象一些。 看代码也比较简单python3.5 123456789101112131415161718192021222324252627282930class Solution: &quot;&quot;&quot; @param graph: a list of Undirected graph node @param A: nodeA @param B: nodeB @return: the length of the shortest path &quot;&quot;&quot; def shortestPath(self, graph, A, B): import queue # Write your code here conti = queue.Queue() visited = [] conti.put(A) visited.append(A) last = A up_last = A res=0 while not conti.empty(): now = conti.get() if now == B: return res for i in now.neighbors: if i not in visited: conti.put(i) visited.append(i) last = i if up_last==now: up_last = last res +=1 return res java 参考https://blog.csdn.net/u014115273/article/details/80299072，对比看下吧1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556/** * Definition for graph node. * class GraphNode &#123; * int label; * ArrayList&lt;UndirectedGraphNode&gt; neighbors; * UndirectedGraphNode(int x) &#123; * label = x; neighbors = new ArrayList&lt;UndirectedGraphNode&gt;(); * &#125; * &#125;; */public class Solution &#123; /** * @param graph: a list of Undirected graph node * @param A: nodeA * @param B: nodeB * @return: the length of the shortest path */ public int shortestPath(List&lt;UndirectedGraphNode&gt; graph, UndirectedGraphNode A, UndirectedGraphNode B) &#123; // Write your code here Queue&lt;UndirectedGraphNode&gt; queue = new LinkedList&lt;&gt;(); Set&lt;UndirectedGraphNode&gt; visited = new HashSet&lt;&gt;(); int res = 0; UndirectedGraphNode last = null; UndirectedGraphNode upperLast = null; queue.offer(A); visited.add(A); upperLast = A; while(!queue.isEmpty())&#123; UndirectedGraphNode now = queue.poll(); if(now.label == B.label)&#123; return res; &#125; for(UndirectedGraphNode next: now.neighbors)&#123; if(!visited.contains(next))&#123; queue.offer(next); visited.add(next); last = next; &#125; &#125; if(now == upperLast)&#123; upperLast = last; res++; &#125; &#125; return -1;//not connected &#125;&#125;]]></content>
       <tags>
+        <tag>面试</tag>
         <tag>python</tag>
         <tag>java</tag>
-        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
@@ -34,8 +42,8 @@
     <url>%2F2018%2F08%2F21%2Finterview-1%2F</url>
     <content type="text"><![CDATA[前两天在忙着搞大数据和论文，论文写差不多了，开始刷刷题，前几天笔试做的一塌糊涂，有的题明明感觉做对了，但是AC不了。趁着最近有空，赶紧找找感觉。一道简单的贪心题 44.最小子数组 给定一个整数数组，找到一个具有最小和的子数组。返回其最小和。 样例 给出数组[1, -1, -2, 1]，返回 -3 注意事项 子数组最少包含一个数字 解： 从第一个数往后遍历i=1-&gt;n将前k个数视为一个整体，如果这个整体&gt;0,则后面无论是什么，只要加上这个整体，肯定不会变小，所以整体直接舍弃，剩下的为新的数组nums.如果，前面的数为负，如前3个数的和为-7，第4个数为8，则-7+8=1,要不要舍弃呢？后面可能没有小于-7的子数组了呀？所以 我们还要有个变量res，用来保存各阶段的最小值，如这里的-7，如果后面有比-7更小的子数组，就更新这个变量的值，如果没有，res就是一直是-7。python3代码1234567891011121314151617class Solution: """ @param: nums: a list of integers @return: A integer indicate the sum of minimum subarray """ def minSubArray(self, nums): # write your code here sum = 0 res = nums[0] for i in nums: sum+=i if sum &lt; res: res = sum if sum &gt; 0: sum = 0 return res 刚开始不通过,看了下数据[1,1],全是正数，而我当时设的res初值为0.本来以为至少会有1个负值。所以把初值改为了第一个数。 每天一点 进步不难]]></content>
       <tags>
-        <tag>python</tag>
         <tag>面试</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -91,8 +99,8 @@
     <url>%2F2018%2F06%2F19%2Fkmaxpooling%2F</url>
     <content type="text"><![CDATA[pooling（池化）是卷积神经网络中常用操作，主要目的是减小张量大小，便于计算，可以认为是一步降维操作。前两天项目上需要用到k-max-pooling操作，项目代码是用keras写的，keras没有k-max-pooling层，所以要自己写。 卷积神经网络的最经典的模型是卷积+池化+全连接。其中卷积操作通过一个滑动的卷积窗口来强化提取特征，可以认为卷积窗是一个权重矩阵，而卷积操作中的每一步，都是一个矩阵的加权求和，随着卷积窗口滑动，每一步的和被记录下来，形成一个新的矩阵。我们有多少种卷积窗，经过一层卷积就留下几个矩阵。然而，如果经过多层卷积，那最后矩阵就越来越大，那我们对资源耗费太大，有没有什么好的操作呢？–pooling 简单理解，pooling就是把一个大矩阵，变成小矩阵。如max-pooling，如size=2,就是在原来的矩阵中，每2*2个块中，取其中最大的一个记录下来，然后下一个块，再下一个十几个，最后记录下来的值就成了一个新矩阵，而这个新矩阵的大小，比以前缩小了4倍。有人会问，那不是损失了信息了么？当然损失了信息，但是我们认为损失的信息并没那么重要，就像一幅超清图，和一张高清图，虽然没那么清晰了，但这张图所描述的信息我们还是一眼能看出来。max-pooling操作，可以这么理解，给你一张图片，你分成了好多块，每块里面，别的地方颜色很浅，就一个地方颜色很深，那你是不是第一眼先看到那个黑点呢？ 再说一下mean-pooling.和max-pooling类似，只不过把每块中取最大值的操作，换成了对每块取均值。这样就会把每个点的值都考虑到，没有max-pooling操作那样粗暴。 还有一种常用的操作是k-max-pooling.这种是在max-pooling上改进来的，因为max-pooling操作太简单粗暴了，k-max-pooling认为每一块不只一个点重要，前几个亮点都比较重要，所以在每一个pooling块中取了前k大的值。 keras中pooling操作好像只有maxpooling和meanpooing.于是自己写了个代码，实现k-max-pooling。因为项目中用的是LSTM处理文本，我这里就对LSTM层的结果进行处理了，LSTM层输出三维张量(shape=[in_dim1,in_dim2,in_dim3]),其中in_dim1表示样本数量，in_dim2表示一个样本（也就是一段话）的长度（如：这里认为一句话有100个词，那么短于100的句子后面补0，长于100的句子后面截断），in_dim3为lstm结点数量，也就是每个step输出的向量长度。k-max-pooling操作，就是在dim2中，取出k个最大值，可以想象是取出k个最重要的词。输入为LSTM层输出的三维张量，输出为一个二维张量，shape=[out_dim1,out_dim2],out_dim1为样本数，out_dim2为in_dim3*k。 代码如下：123456789101112131415161718192021222324252627def test59(): from keras.layers import Lambda, Input from keras.models import Model import tensorflow as tf l = [[1, 2, 3, 4, 5, 6, 7, 8, 9], [11, 22, 33, 44, 55, 66, 77, 88, 99]] data = np.reshape(l, [2, 3, 3]) print(data)###output####[[[ 1 2 3]# [ 4 5 6]# [ 7 8 9]]# [[11 22 33]# [44 55 66]# [77 88 99]]]#数据为2个样本，每个样本是3个step（可以认为是句子有3个词），每个step是一个长为3的向量（可以认为词向量长度为3） input = Input(shape=[3, 3], dtype='int32') la = Lambda(lambda x: tf.reshape(tf.nn.top_k(tf.transpose(x,[0,2,1]),k=2)[0],shape=[-1,6]))(input) model = Model(inputs=input, outputs=la) pre = model.predict(data) print(pre)#[[ 7 4 8 5 9 6]#[77 44 88 55 99 66]]if __name__=='__main__': test59() 这里的k-max-pooling用Lambda写的，tf.reshape(tf.nn.top_k(tf.transpose(x,[0,2,1]),k=2)[0],shape=[-1,6])，分解成三步：tf.transpose(x,[0,2,1]–&gt;因为tf有个top_k方法，可以对取张量最后一维的前k大的数，所以我们把step所在维度调整到最后。transpose是一个转置操作。tf.nn.top_k（，k=2）–&gt;取出最后一个维度前k大的数。tf.reshape(),top_k操作对每个样本取出的结果是一个二维矩阵in_dim3 × k，所以把它转成向量，向量长度为in_dim3*k 当然，也可以写一个自定义层，处理步骤类似 12345678910111213141516171819202122class KMaxPooling(Layer): """ k-max-pooling """ def __init__(self, k=1, **kwargs): super().__init__(**kwargs) self.input_spec = InputSpec(ndim=3) self.k = k def compute_output_shape(self, input_shape): return (input_shape[0], (input_shape[2] * self.k)) def call(self, inputs): # swap last two dimensions since top_k will be applied along the last dimension shifted_input = tf.transpose(inputs, [0, 2, 1]) # extract top_k, returns two tensors [values, indices] top_k = tf.nn.top_k(shifted_input, k=self.k, sorted=True, name=None)[0] # return flattened output return Flatten()(top_k)]]></content>
       <tags>
-        <tag>python</tag>
         <tag>深度学习</tag>
+        <tag>python</tag>
         <tag>Keras</tag>
         <tag>tensorflow</tag>
       </tags>
@@ -102,8 +110,8 @@
     <url>%2F2018%2F06%2F11%2Finterview%2F</url>
     <content type="text"><![CDATA[开始整理下面试题和心得，这一部分包含Lintcode和平时遇到的一些题目。 题目描述：给定一个正整数n,返回出n的阶乘尾部0的个数。linkcode链接：https://lintcode.com/problem/trailing-zeros/description 分析：看到这一题第一感觉先求阶乘，然后求出结果中尾部有多少0。提交代码，超时。 于是查了下资料，一个数尾部有多少个0，先看这个数的因子，也就是因子分解，如10 分解为2 5，20 分解为2 2 5，100 分解为 2 2 5 5，多找几组数据，发现尾部0的个数为min{2的数，5的个数}。为什么会这样呢？因为尾部的0是由25得出的，当然也可以是45，但是4=2*2呀，最终0还是由2和5造出来的。一对2和5造出来一个0，n对2和5造出n个0，如果有10个2，8个5，则只能凑出8对，所以是min{…}.阶乘也就是因子分解的过程，而且因子从小到大排好了。2的个数肯定比5多，因为5大。所以这个题，看因子中5出现的次数就可以啦。 这里n阶乘用n!表示。5！ –&gt; 1 2 3 4 5 有一个510! –&gt; 1 2 3 4 5 6 7 8 9 10 有2个5（10=25）…25! –&gt; 1 2 3 4 5 …10 ..15 ..20 ..24 25 有6个5（25=55） 125！ = 5 10 15 …25 ..50 ..75 ..100 ..125 有多少呢？我们发现每隔5个数出现一个5，隔25个数多出来1个5..隔125个数再多出一个5也就是从n个抽出55 10 15 20 25 30 … = 5（1 2 3 4 5 ）然后从上面序列中再隔5抽25 50 75 100 125 … = 55（1 2 3 4 5 ）再隔5抽125 250 375 500 625 .. = 55*5（1 2 3 4 5 ） 规律很明显了 好了上代码 python3 1234567891011class Solution: &quot;&quot;&quot; @param: n: An integer @return: An integer, denote the number of trailing zeros in n! &quot;&quot;&quot; def trailingZeros(self, n): zeros = 0 while n &gt; 0: zeros += n // 5 n //= 5 return int(zeros)]]></content>
       <tags>
-        <tag>python</tag>
         <tag>面试</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>

@@ -72,6 +72,56 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="post-linux" class="post-linux post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2019/07/13/linux/">linux之scp</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/13/linux/" data-id="cjycm5vib0000hsda3v4smwcg" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <figure class="highlight plain"><figcaption><span>local_file remote_username@remote_ip:remote_folder ```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">或者 </span><br><span class="line"></span><br><span class="line">```scp local_file remote_username@remote_ip:remote_file</span><br></pre></td></tr></table></figure>
+<p>或者 </p>
+<figure class="highlight plain"><figcaption><span>local_file remote_ip:remote_folder```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">或者</span><br></pre></td></tr></table></figure>
+<p>scp local_file remote_ip:remote_file<br><code>`</code></p>
+<p>若需要传文件夹，则加 -r</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/07/13/linux/">
+    <time datetime="2019-07-13T06:57:46.000Z" class="entry-date">
+        2019-07-13
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-hive笔记" class="post-hive笔记 post type-post status-publish format-standard hentry">
     <!---->
 
@@ -87,13 +137,47 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/11/hive笔记/" data-id="cjxyt3kf4000b40dah0ejxf28" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/11/hive笔记/" data-id="cjycm3wh20002lodabakn2mxv" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <h2 id="hive笔记1"><a href="#hive笔记1" class="headerlink" title="hive笔记1"></a>hive笔记1</h2><p>外部表和内部表的区别：<br>外部表在drop时，只删表结构和表，不删原数据，即集群数据还在。</p>
+        <p>#hive笔记1</p>
+<p>##查看</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p><del>这是加删除线的文字</del></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<ul>
+<li>列表内容<ul>
+<li>列表内容<ul>
+<li>列表内容</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>1</li>
+<li>2</li>
+<li>3</li>
+<li></li>
+</ul>
+<pre><code>sdfsdfsdf
+sdf
+    sdfs
+sdfs    
+</code></pre><p>sssdf</p>
+<pre><code>sdf
+</code></pre><ul>
+<li>3</li>
+</ul>
+<p>(<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    function fun()&#123;</span><br><span class="line">         echo &quot;这是一句非常牛逼的代码&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    fun();</span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line">----------</span><br><span class="line">##select</span><br><span class="line">语法结构</span><br></pre></td></tr></table></figure></p>
+<p>SELECT [ALL | DISTINCT] select_expr, select_expr, …<br>FROM table_reference<br>[WHERE where_condition]<br>[GROUP BY col_list [HAVING condition]]<br>[CLUSTER BY col_list<br>  | [DISTRIBUTE BY col_list] [SORT BY| ORDER BY col_list]<br>]<br>[LIMIT number]<br><code>`</code><br>其中，<code>CLUSTER BY col_list</code>就等同于<code>[DISTRIBUTE BY col_list]</code>+<code>[SORT BY|</code></p>
+<p>外部表和内部表的区别：<br>外部表在drop时，只删表结构和表，不删原数据，即集群数据还在。</p>
+<p><code>sort by</code> 和 <code>order by</code>的区别：<br>    <code>sort by</code> 组内有序<br>    <code>order by</code> 全局排序，只有一个reduce</p>
 
       
     </div><!-- .entry-content -->
@@ -133,7 +217,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-3/" data-id="cjxyt3kg1001540dakm7vqsz1" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-3/" data-id="cjycm3wh90006lodawo2izngn" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -181,7 +265,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-2/" data-id="cjxyt3ked000040da1v4yuwwp" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-2/" data-id="cjycm3wh80005lodaj3plnmvj" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -236,7 +320,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/21/interview-1/" data-id="cjxyt3kf2000940daiusqqhay" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/21/interview-1/" data-id="cjycm3wh60004loda1ak9oq22" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -292,7 +376,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/13/sqoop/" data-id="cjxyt3kh4002s40davix2rsyz" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/13/sqoop/" data-id="cjycm3wja0032lodavh8p44yi" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -351,7 +435,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/03/echart/" data-id="cjxyt3key000740daszlh3mhd" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/03/echart/" data-id="cjycm3wgr0000loda62bho1da" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -403,7 +487,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/12/zookeeper/" data-id="cjxyt3kga001f40dace6eudsf" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/12/zookeeper/" data-id="cjycm3wi3000zlodaxbjen3x5" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -477,7 +561,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/05/mysql/" data-id="cjxyt3kfn000s40daghy96yqy" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/05/mysql/" data-id="cjycm3who000hlodaghvb3rrr" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -526,7 +610,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjxyt3kh5002t40daggb5vkmf" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/22/capsnet/" data-id="cjycm3wjn0038lodaclf654tl" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -613,61 +697,6 @@
 
 
   
-    <article id="post-kmaxpooling" class="post-kmaxpooling post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2018/06/19/kmaxpooling/">k-max-pooling的keras实现</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="cjxyt3kfa000h40dathj70zad" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <p>pooling（池化）是卷积神经网络中常用操作，主要目的是减小张量大小，便于计算，可以认为是一步降维操作。前两天项目上需要用到k-max-pooling操作，项目代码是用keras写的，keras没有k-max-pooling层，所以要自己写。</p>
-<p>卷积神经网络的最经典的模型是卷积+池化+全连接。<br>其中卷积操作通过一个滑动的卷积窗口来强化提取特征，可以认为卷积窗是一个权重矩阵，而卷积操作中的每一步，都是一个矩阵的加权求和，随着卷积窗口滑动，每一步的和被记录下来，形成一个新的矩阵。我们有多少种卷积窗，经过一层卷积就留下几个矩阵。然而，如果经过多层卷积，那最后矩阵就越来越大，那我们对资源耗费太大，有没有什么好的操作呢？–pooling</p>
-<p>简单理解，pooling就是把一个大矩阵，变成小矩阵。如max-pooling，如size=2,就是在原来的矩阵中，每2*2个块中，取其中最大的一个记录下来，然后下一个块，再下一个十几个，最后记录下来的值就成了一个新矩阵，而这个新矩阵的大小，比以前缩小了4倍。有人会问，那不是损失了信息了么？当然损失了信息，但是我们认为损失的信息并没那么重要，就像一幅超清图，和一张高清图，虽然没那么清晰了，但这张图所描述的信息我们还是一眼能看出来。max-pooling操作，可以这么理解，给你一张图片，你分成了好多块，每块里面，别的地方颜色很浅，就一个地方颜色很深，那你是不是第一眼先看到那个黑点呢？</p>
-<p>再说一下mean-pooling.<br>和max-pooling类似，只不过把每块中取最大值的操作，换成了对每块取均值。这样就会把每个点的值都考虑到，没有max-pooling操作那样粗暴。</p>
-<p>还有一种常用的操作是k-max-pooling.这种是在max-pooling上改进来的，因为max-pooling操作太简单粗暴了，k-max-pooling认为每一块不只一个点重要，前几个亮点都比较重要，所以在每一个pooling块中取了前k大的值。</p>
-<p>keras中pooling操作好像只有maxpooling和meanpooing.于是自己写了个代码，实现k-max-pooling。<br>因为项目中用的是LSTM处理文本，我这里就对LSTM层的结果进行处理了，LSTM层输出三维张量(shape=[in_dim1,in_dim2,in_dim3]),其中in_dim1表示样本数量，in_dim2表示一个样本（也就是一段话）的长度（如：这里认为一句话有100个词，那么短于100的句子后面补0，长于100的句子后面截断），in_dim3为lstm结点数量，也就是每个step输出的向量长度。<br>k-max-pooling操作，就是在dim2中，取出k个最大值，可以想象是取出k个最重要的词。<br>输入为LSTM层输出的三维张量，输出为一个二维张量，shape=[out_dim1,out_dim2],out_dim1为样本数，out_dim2为in_dim3*k。</p>
-<p>代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test59</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">from</span> keras.layers <span class="keyword">import</span> Lambda, Input</span><br><span class="line">    <span class="keyword">from</span> keras.models <span class="keyword">import</span> Model</span><br><span class="line">    <span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">    l = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>], [<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>, <span class="number">55</span>, <span class="number">66</span>, <span class="number">77</span>, <span class="number">88</span>, <span class="number">99</span>]]</span><br><span class="line">    data = np.reshape(l, [<span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>])</span><br><span class="line">    print(data)</span><br><span class="line"><span class="comment">###output###</span></span><br><span class="line"><span class="comment">#[[[ 1  2  3]</span></span><br><span class="line"><span class="comment">#  [ 4  5  6]</span></span><br><span class="line"><span class="comment">#  [ 7  8  9]]</span></span><br><span class="line"><span class="comment"># [[11 22 33]</span></span><br><span class="line"><span class="comment">#  [44 55 66]</span></span><br><span class="line"><span class="comment">#  [77 88 99]]]</span></span><br><span class="line"><span class="comment">#数据为2个样本，每个样本是3个step（可以认为是句子有3个词），每个step是一个长为3的向量（可以认为词向量长度为3）</span></span><br><span class="line">    input = Input(shape=[<span class="number">3</span>, <span class="number">3</span>], dtype=<span class="string">'int32'</span>)</span><br><span class="line">    la = Lambda(<span class="keyword">lambda</span> x: tf.reshape(tf.nn.top_k(tf.transpose(x,[<span class="number">0</span>,<span class="number">2</span>,<span class="number">1</span>]),k=<span class="number">2</span>)[<span class="number">0</span>],shape=[<span class="number">-1</span>,<span class="number">6</span>]))(input)</span><br><span class="line">    model = Model(inputs=input, outputs=la)</span><br><span class="line">    pre = model.predict(data)</span><br><span class="line">    print(pre)</span><br><span class="line"><span class="comment">#[[ 7  4  8  5  9  6]</span></span><br><span class="line"><span class="comment">#[77 44 88 55 99 66]]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    test59()</span><br></pre></td></tr></table></figure></p>
-<p>这里的k-max-pooling用Lambda写的，<code>tf.reshape(tf.nn.top_k(tf.transpose(x,[0,2,1]),k=2)[0],shape=[-1,6])</code>，分解成三步：<br><code>tf.transpose(x,[0,2,1]</code>–&gt;因为tf有个top_k方法，可以对取张量最后一维的前k大的数，所以我们把step所在维度调整到最后。transpose是一个转置操作。<br><code>tf.nn.top_k（，k=2）</code>–&gt;取出最后一个维度前k大的数。<br><code>tf.reshape(),top_k</code>操作对每个样本取出的结果是一个二维矩阵in_dim3 × k，所以把它转成向量，向量长度为in_dim3*k</p>
-<p>当然，也可以写一个自定义层，处理步骤类似</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KMaxPooling</span><span class="params">(Layer)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    k-max-pooling</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, k=<span class="number">1</span>, **kwargs)</span>:</span></span><br><span class="line">        super().__init__(**kwargs)</span><br><span class="line">        self.input_spec = InputSpec(ndim=<span class="number">3</span>)</span><br><span class="line">        self.k = k</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compute_output_shape</span><span class="params">(self, input_shape)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> (input_shape[<span class="number">0</span>], (input_shape[<span class="number">2</span>] * self.k))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, inputs)</span>:</span></span><br><span class="line">        <span class="comment"># swap last two dimensions since top_k will be applied along the last dimension</span></span><br><span class="line">        shifted_input = tf.transpose(inputs, [<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># extract top_k, returns two tensors [values, indices]</span></span><br><span class="line">        top_k = tf.nn.top_k(shifted_input, k=self.k, sorted=<span class="keyword">True</span>, name=<span class="keyword">None</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># return flattened output</span></span><br><span class="line">        <span class="keyword">return</span> Flatten()(top_k)</span><br></pre></td></tr></table></figure>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2018/06/19/kmaxpooling/">
-    <time datetime="2018-06-19T12:58:32.000Z" class="entry-date">
-        2018-06-19
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keras/">Keras</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
-
-    </footer>
-</article>
-
-
-
-
-
-
-  
   
     <nav id="pagination">
       <nav id="page-nav">
@@ -705,6 +734,10 @@
       <ul>
         
           <li>
+            <a href="/2019/07/13/linux/">linux之scp</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/11/hive笔记/">hive笔记1</a>
           </li>
         
@@ -720,10 +753,6 @@
             <a href="/2018/08/21/interview-1/">44.最小子数组（python3 实现）</a>
           </li>
         
-          <li>
-            <a href="/2018/08/13/sqoop/">sqoop异常之java.lang.RuntimeException com.mysql.jdbc.exceptions.jdbc4.CommunicationsException  Communications link failure</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -733,7 +762,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echart/">echart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hive/">hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lda/">lda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/胶囊网络/">胶囊网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">5</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echart/">echart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hive/">hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lda/">lda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常解决/">异常解决</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心情/">心情</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/胶囊网络/">胶囊网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">5</span></li></ul>
     </div>
   </aside>
 
@@ -742,7 +771,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/echart/" style="font-size: 10px;">echart</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 13.33px;">java</a> <a href="/tags/lda/" style="font-size: 10px;">lda</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/sqoop/" style="font-size: 10px;">sqoop</a> <a href="/tags/tensorflow/" style="font-size: 15px;">tensorflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/可视化/" style="font-size: 10px;">可视化</a> <a href="/tags/大数据/" style="font-size: 11.67px;">大数据</a> <a href="/tags/异常解决/" style="font-size: 16.67px;">异常解决</a> <a href="/tags/心情/" style="font-size: 11.67px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 18.33px;">深度学习</a> <a href="/tags/胶囊网络/" style="font-size: 10px;">胶囊网络</a> <a href="/tags/面试/" style="font-size: 16.67px;">面试</a>
+      <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/echart/" style="font-size: 10px;">echart</a> <a href="/tags/hive/" style="font-size: 10px;">hive</a> <a href="/tags/java/" style="font-size: 13.33px;">java</a> <a href="/tags/lda/" style="font-size: 10px;">lda</a> <a href="/tags/linux/" style="font-size: 11.67px;">linux</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/pandas/" style="font-size: 10px;">pandas</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/sqoop/" style="font-size: 10px;">sqoop</a> <a href="/tags/tensorflow/" style="font-size: 15px;">tensorflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/可视化/" style="font-size: 10px;">可视化</a> <a href="/tags/大数据/" style="font-size: 11.67px;">大数据</a> <a href="/tags/异常解决/" style="font-size: 16.67px;">异常解决</a> <a href="/tags/心情/" style="font-size: 11.67px;">心情</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/数据分析/" style="font-size: 10px;">数据分析</a> <a href="/tags/深度学习/" style="font-size: 18.33px;">深度学习</a> <a href="/tags/胶囊网络/" style="font-size: 10px;">胶囊网络</a> <a href="/tags/面试/" style="font-size: 16.67px;">面试</a>
     </div>
   </aside>
 
