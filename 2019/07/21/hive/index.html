@@ -17,18 +17,18 @@
   
   <title>hive 之join的用法 | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Join 在 hive 中可将两个表连接在一起。包括join,inner join,left join, right join, full outer join,left semi join等，下面进行一一讲解。 ##join(等同于inner join)id|name|age—|:–:|—:1|小明|112|小红|223|小白|33">
+  <meta name="description" content="Join 在 hive 中可将两个表连接在一起。包括join,inner join,left join, right join, full outer join,left semi join等，下面进行一一讲解。 ##join(等同于inner join)    id name age     1 小明 11   2 小红 22   3 小白 33">
 <meta name="keywords" content="hive">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hive 之join的用法">
 <meta property="og:url" content="http://xurui.club/2019/07/21/hive/index.html">
 <meta property="og:site_name" content="山风之行">
-<meta property="og:description" content="Join 在 hive 中可将两个表连接在一起。包括join,inner join,left join, right join, full outer join,left semi join等，下面进行一一讲解。 ##join(等同于inner join)id|name|age—|:–:|—:1|小明|112|小红|223|小白|33">
+<meta property="og:description" content="Join 在 hive 中可将两个表连接在一起。包括join,inner join,left join, right join, full outer join,left semi join等，下面进行一一讲解。 ##join(等同于inner join)    id name age     1 小明 11   2 小红 22   3 小白 33">
 <meta property="og:locale" content="zh-Ch">
-<meta property="og:updated_time" content="2019-07-21T07:23:24.514Z">
+<meta property="og:updated_time" content="2019-07-21T07:26:11.109Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hive 之join的用法">
-<meta name="twitter:description" content="Join 在 hive 中可将两个表连接在一起。包括join,inner join,left join, right join, full outer join,left semi join等，下面进行一一讲解。 ##join(等同于inner join)id|name|age—|:–:|—:1|小明|112|小红|223|小白|33">
+<meta name="twitter:description" content="Join 在 hive 中可将两个表连接在一起。包括join,inner join,left join, right join, full outer join,left semi join等，下面进行一一讲解。 ##join(等同于inner join)    id name age     1 小明 11   2 小红 22   3 小白 33">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -86,14 +86,40 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/21/hive/" data-id="cjycmy1vo0002usdac1gf1l0w" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/21/hive/" data-id="cjycn0zco0002ygdahkbziy47" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
         <p>Join 在 hive 中可将两个表连接在一起。包括<code>join</code>,<code>inner join</code>,<code>left join</code>, <code>right join</code>, <code>full outer join</code>,<code>left semi join</code>等，下面进行一一讲解。</p>
-<p>##join(等同于inner join)<br>id|name|age<br>—|:–:|—:<br>1|小明|11<br>2|小红|22<br>3|小白|33</p>
+<p>##join(等同于inner join)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">id</th>
+<th style="text-align:center">name</th>
+<th style="text-align:center">age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">小明</td>
+<td style="text-align:center">11</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">小红</td>
+<td style="text-align:center">22</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">小白</td>
+<td style="text-align:center">33</td>
+</tr>
+</tbody>
+</table>
 
       
     </div><!-- .entry-content -->
