@@ -17,18 +17,18 @@
   
   <title>hive笔记1 | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#hive笔记1 ##查看    这是加删除线的文字     列表内容 列表内容 列表内容     1 2 3   sdfsdfsdf sdf     sdfs sdfs     sssdf sdf  3  1234function fun()&amp;#123;     echo &amp;quot;这是一句非常牛逼的代码&amp;quot;;&amp;#125;fun();  ##select语法结构12345678SELE">
+  <meta name="description" content="#hive笔记1  ##select语法结构12345678SELECT [ALL | DISTINCT] select_expr, select_expr, ... FROM table_reference[WHERE where_condition] [GROUP BY col_list [HAVING condition]] [CLUSTER BY col_list   | [DISTRIB">
 <meta name="keywords" content="hive,深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hive笔记1">
 <meta property="og:url" content="http://xurui.club/2019/07/11/hive笔记/index.html">
 <meta property="og:site_name" content="山风之行">
-<meta property="og:description" content="#hive笔记1 ##查看    这是加删除线的文字     列表内容 列表内容 列表内容     1 2 3   sdfsdfsdf sdf     sdfs sdfs     sssdf sdf  3  1234function fun()&amp;#123;     echo &amp;quot;这是一句非常牛逼的代码&amp;quot;;&amp;#125;fun();  ##select语法结构12345678SELE">
+<meta property="og:description" content="#hive笔记1  ##select语法结构12345678SELECT [ALL | DISTINCT] select_expr, select_expr, ... FROM table_reference[WHERE where_condition] [GROUP BY col_list [HAVING condition]] [CLUSTER BY col_list   | [DISTRIB">
 <meta property="og:locale" content="zh-Ch">
-<meta property="og:updated_time" content="2019-07-21T07:08:35.665Z">
+<meta property="og:updated_time" content="2019-07-21T08:05:52.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hive笔记1">
-<meta name="twitter:description" content="#hive笔记1 ##查看    这是加删除线的文字     列表内容 列表内容 列表内容     1 2 3   sdfsdfsdf sdf     sdfs sdfs     sssdf sdf  3  1234function fun()&amp;#123;     echo &amp;quot;这是一句非常牛逼的代码&amp;quot;;&amp;#125;fun();  ##select语法结构12345678SELE">
+<meta name="twitter:description" content="#hive笔记1  ##select语法结构12345678SELECT [ALL | DISTINCT] select_expr, select_expr, ... FROM table_reference[WHERE where_condition] [GROUP BY col_list [HAVING condition]] [CLUSTER BY col_list   | [DISTRIB">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -86,47 +86,16 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/11/hive笔记/" data-id="cjyco81zg0004q4dab5jz47az" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/11/hive笔记/" data-id="cjycoky5c0004koda2hcrybt2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
         <p>#hive笔记1</p>
-<p>##查看</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p><del>这是加删除线的文字</del></p>
-</blockquote>
-</blockquote>
-</blockquote>
-<ul>
-<li>列表内容<ul>
-<li>列表内容<ul>
-<li>列表内容</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>1</li>
-<li>2</li>
-<li>3</li>
-<li></li>
-</ul>
-<pre><code>sdfsdfsdf
-sdf
-    sdfs
-sdfs    
-</code></pre><p>sssdf</p>
-<pre><code>sdf
-</code></pre><ul>
-<li>3</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function fun()&#123;</span><br><span class="line">     echo &quot;这是一句非常牛逼的代码&quot;;</span><br><span class="line">&#125;</span><br><span class="line">fun();</span><br></pre></td></tr></table></figure>
 <hr>
 <p>##select<br>语法结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT [ALL | DISTINCT] select_expr, select_expr, ... </span><br><span class="line">FROM table_reference</span><br><span class="line">[WHERE where_condition] </span><br><span class="line">[GROUP BY col_list [HAVING condition]] </span><br><span class="line">[CLUSTER BY col_list </span><br><span class="line">  | [DISTRIBUTE BY col_list] [SORT BY| ORDER BY col_list] </span><br><span class="line">] </span><br><span class="line">[LIMIT number]</span><br></pre></td></tr></table></figure></p>
-<p>其中，<code>CLUSTER BY col_list</code>就等同于<code>[DISTRIBUTE BY col_list]</code>+<code>[SORT BY|</code></p>
+<p>其中，<code>CLUSTER BY col_list</code>就等同于<code>DISTRIBUTE BY col_list</code>+<code>SORT BY</code></p>
 <p>外部表和内部表的区别：<br>外部表在drop时，只删表结构和表，不删原数据，即集群数据还在。</p>
 <p><code>sort by</code> 和 <code>order by</code>的区别：<br>    <code>sort by</code> 组内有序<br>    <code>order by</code> 全局排序，只有一个reduce</p>
 
