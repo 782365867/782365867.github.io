@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hive 之join的用法]]></title>
+    <url>%2F2019%2F07%2F21%2Fhive%2F</url>
+    <content type="text"><![CDATA[Join 在 hive 中可将两个表连接在一起。包括join,inner join,left join, right join, full outer join,left semi join等，下面进行一一讲解。 ##join(等同于inner join)id|name|age—|:–:|—:1|小明|112|小红|223|小白|33]]></content>
+      <tags>
+        <tag>hive</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[linux之scp]]></title>
     <url>%2F2019%2F07%2F13%2Flinux%2F</url>
     <content type="text"><![CDATA[1scp local_file remote_username@remote_ip:remote_folder 或者 1scp local_file remote_username@remote_ip:remote_file 或者 1scp local_file remote_ip:remote_folder 或者 1scp local_file remote_ip:remote_file 若需要传文件夹，则加 -r]]></content>
@@ -13,8 +21,8 @@
     <url>%2F2019%2F07%2F11%2Fhive%E7%AC%94%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[#hive笔记1 ##查看 这是加删除线的文字 列表内容 列表内容 列表内容 1 2 3 sdfsdfsdf sdf sdfs sdfs sssdf sdf 3 1234function fun()&#123; echo &quot;这是一句非常牛逼的代码&quot;;&#125;fun(); ##select语法结构12345678SELECT [ALL | DISTINCT] select_expr, select_expr, ... FROM table_reference[WHERE where_condition] [GROUP BY col_list [HAVING condition]] [CLUSTER BY col_list | [DISTRIBUTE BY col_list] [SORT BY| ORDER BY col_list] ] [LIMIT number] 其中，CLUSTER BY col_list就等同于[DISTRIBUTE BY col_list]+[SORT BY| 外部表和内部表的区别：外部表在drop时，只删表结构和表，不删原数据，即集群数据还在。 sort by 和 order by的区别： sort by 组内有序 order by 全局排序，只有一个reduce]]></content>
       <tags>
-        <tag>深度学习</tag>
         <tag>hive</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -22,9 +30,9 @@
     <url>%2F2018%2F09%2F11%2Finterview-3%2F</url>
     <content type="text"><![CDATA[12345678910111213141516171819202122232425262728描述“托普利兹矩阵”是指如果从左上角到右下角的同一条主斜线上每个元素都相等的矩阵.给定一个M x N矩阵，判断是否为“托普利兹矩阵”.matrix 是一个二维整数数组.matrix 的行列范围都为 [1, 20].matrix[i][j] 的整数取值范围为[0, 99].您在真实的面试中是否遇到过这个题？ 是题目纠错样例样例 1:输入: matrix = [[1,2,3,4],[5,1,2,3],[9,5,1,2]]输出: True解释:123451239512在上述矩阵中，主斜线上元素分别为 &quot;[9]&quot;, &quot;[5, 5]&quot;, &quot;[1, 1, 1]&quot;, &quot;[2, 2, 2]&quot;, &quot;[3, 3]&quot;, &quot;[4]&quot;, 每一条主斜线上元素都相等，所以返回`True`.样例 2:输入: matrix = [[1,2],[2,2]]输出: False解释:主斜线 &quot;[1, 2]&quot; 有不同的元素. 简单题，直接代码：python123456789101112class Solution: &quot;&quot;&quot; @param matrix: the given matrix @return: True if and only if the matrix is Toeplitz &quot;&quot;&quot; def isToeplitzMatrix(self, matrix): # Write your code here for i in range(1,len(matrix)): for j in range(1,len(matrix[0])): if matrix[i][j]!=matrix[i-1][j-1]: return False return True java12345678910111213141516171819public class Solution &#123; /** * @param matrix: the given matrix * @return: True if and only if the matrix is Toeplitz */ public boolean isToeplitzMatrix(int[][] matrix) &#123; // Write your code here int m = matrix.length; int n = matrix[0].length; for(int i=1;i&lt;m;i++)&#123; for(int j=1;j&lt;n;j++)&#123; if(matrix[i][j]!=matrix[i-1][j-1])&#123; return false; &#125; &#125; &#125; return true; &#125;&#125;]]></content>
       <tags>
-        <tag>面试</tag>
         <tag>python</tag>
         <tag>java</tag>
+        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
@@ -32,9 +40,9 @@
     <url>%2F2018%2F09%2F11%2Finterview-2%2F</url>
     <content type="text"><![CDATA[最近没有动力学习，今天看到小宝贝那么努力学注会，顿感羞愧。 虽然收到了offercall，但还没有确定之前，还是好好刷刷题。既然有自己的目标，就应该给出自己的态度。1234567814. 无向图中的最短路径给出一个undirected graph，其中每条边的长度为1，并从图中给出两个节点。我们需要找到给定两个节点之间最短路径的长度。样例给定图= &#123;1,2,4#2,1,4#3,5#4,1,2#5,3&#125;，nodeA = 3, nodeB = 5。 首先想到的是深度优先搜索。写了好久，关于如何确定遍历完一层，res++的地方没理清楚。于是在网上搜了下资料，有c和java版的，就看了下别人的代码，再用python给实现一下。AC了 哈哈。其实我也不知道刷题用什么好，Python简洁好写，在写代码时候比Java省不少事，之前有个快排的题，同样思路，我用Java和Python分别实现，发现Python比Java短了不只一倍，看着很舒服，有点像伪代码。但是Java代码AC了，用了60ms多，但是Python 超时，6000多ms.. 很尴尬。 个人还是喜欢Python，希望笔试不要出现这种问题。 12345678910思路：广度优先搜索，用到队列1 取A结点入队，标记已访问，res=0，up_last = A2 当队列不为空时： repeat: 取队头元素——&gt;now_node 如果 now_node = B 取now_node的邻接nodes: 将没有访问的node,全入队并标记访问，然后last指向最后一个 如果当前指针now_node等于层指针up_last，层指针指向last,并且res++3 return 这里Python不叫指针，一般和Java一样，叫引用或者别的啥，我叫指针只是形象一些。 看代码也比较简单python3.5 123456789101112131415161718192021222324252627282930class Solution: &quot;&quot;&quot; @param graph: a list of Undirected graph node @param A: nodeA @param B: nodeB @return: the length of the shortest path &quot;&quot;&quot; def shortestPath(self, graph, A, B): import queue # Write your code here conti = queue.Queue() visited = [] conti.put(A) visited.append(A) last = A up_last = A res=0 while not conti.empty(): now = conti.get() if now == B: return res for i in now.neighbors: if i not in visited: conti.put(i) visited.append(i) last = i if up_last==now: up_last = last res +=1 return res java 参考https://blog.csdn.net/u014115273/article/details/80299072，对比看下吧1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556/** * Definition for graph node. * class GraphNode &#123; * int label; * ArrayList&lt;UndirectedGraphNode&gt; neighbors; * UndirectedGraphNode(int x) &#123; * label = x; neighbors = new ArrayList&lt;UndirectedGraphNode&gt;(); * &#125; * &#125;; */public class Solution &#123; /** * @param graph: a list of Undirected graph node * @param A: nodeA * @param B: nodeB * @return: the length of the shortest path */ public int shortestPath(List&lt;UndirectedGraphNode&gt; graph, UndirectedGraphNode A, UndirectedGraphNode B) &#123; // Write your code here Queue&lt;UndirectedGraphNode&gt; queue = new LinkedList&lt;&gt;(); Set&lt;UndirectedGraphNode&gt; visited = new HashSet&lt;&gt;(); int res = 0; UndirectedGraphNode last = null; UndirectedGraphNode upperLast = null; queue.offer(A); visited.add(A); upperLast = A; while(!queue.isEmpty())&#123; UndirectedGraphNode now = queue.poll(); if(now.label == B.label)&#123; return res; &#125; for(UndirectedGraphNode next: now.neighbors)&#123; if(!visited.contains(next))&#123; queue.offer(next); visited.add(next); last = next; &#125; &#125; if(now == upperLast)&#123; upperLast = last; res++; &#125; &#125; return -1;//not connected &#125;&#125;]]></content>
       <tags>
-        <tag>面试</tag>
         <tag>python</tag>
         <tag>java</tag>
+        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
@@ -42,8 +50,8 @@
     <url>%2F2018%2F08%2F21%2Finterview-1%2F</url>
     <content type="text"><![CDATA[前两天在忙着搞大数据和论文，论文写差不多了，开始刷刷题，前几天笔试做的一塌糊涂，有的题明明感觉做对了，但是AC不了。趁着最近有空，赶紧找找感觉。一道简单的贪心题 44.最小子数组 给定一个整数数组，找到一个具有最小和的子数组。返回其最小和。 样例 给出数组[1, -1, -2, 1]，返回 -3 注意事项 子数组最少包含一个数字 解： 从第一个数往后遍历i=1-&gt;n将前k个数视为一个整体，如果这个整体&gt;0,则后面无论是什么，只要加上这个整体，肯定不会变小，所以整体直接舍弃，剩下的为新的数组nums.如果，前面的数为负，如前3个数的和为-7，第4个数为8，则-7+8=1,要不要舍弃呢？后面可能没有小于-7的子数组了呀？所以 我们还要有个变量res，用来保存各阶段的最小值，如这里的-7，如果后面有比-7更小的子数组，就更新这个变量的值，如果没有，res就是一直是-7。python3代码1234567891011121314151617class Solution: """ @param: nums: a list of integers @return: A integer indicate the sum of minimum subarray """ def minSubArray(self, nums): # write your code here sum = 0 res = nums[0] for i in nums: sum+=i if sum &lt; res: res = sum if sum &gt; 0: sum = 0 return res 刚开始不通过,看了下数据[1,1],全是正数，而我当时设的res初值为0.本来以为至少会有1个负值。所以把初值改为了第一个数。 每天一点 进步不难]]></content>
       <tags>
-        <tag>面试</tag>
         <tag>python</tag>
+        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
@@ -110,8 +118,8 @@
     <url>%2F2018%2F06%2F11%2Finterview%2F</url>
     <content type="text"><![CDATA[开始整理下面试题和心得，这一部分包含Lintcode和平时遇到的一些题目。 题目描述：给定一个正整数n,返回出n的阶乘尾部0的个数。linkcode链接：https://lintcode.com/problem/trailing-zeros/description 分析：看到这一题第一感觉先求阶乘，然后求出结果中尾部有多少0。提交代码，超时。 于是查了下资料，一个数尾部有多少个0，先看这个数的因子，也就是因子分解，如10 分解为2 5，20 分解为2 2 5，100 分解为 2 2 5 5，多找几组数据，发现尾部0的个数为min{2的数，5的个数}。为什么会这样呢？因为尾部的0是由25得出的，当然也可以是45，但是4=2*2呀，最终0还是由2和5造出来的。一对2和5造出来一个0，n对2和5造出n个0，如果有10个2，8个5，则只能凑出8对，所以是min{…}.阶乘也就是因子分解的过程，而且因子从小到大排好了。2的个数肯定比5多，因为5大。所以这个题，看因子中5出现的次数就可以啦。 这里n阶乘用n!表示。5！ –&gt; 1 2 3 4 5 有一个510! –&gt; 1 2 3 4 5 6 7 8 9 10 有2个5（10=25）…25! –&gt; 1 2 3 4 5 …10 ..15 ..20 ..24 25 有6个5（25=55） 125！ = 5 10 15 …25 ..50 ..75 ..100 ..125 有多少呢？我们发现每隔5个数出现一个5，隔25个数多出来1个5..隔125个数再多出一个5也就是从n个抽出55 10 15 20 25 30 … = 5（1 2 3 4 5 ）然后从上面序列中再隔5抽25 50 75 100 125 … = 55（1 2 3 4 5 ）再隔5抽125 250 375 500 625 .. = 55*5（1 2 3 4 5 ） 规律很明显了 好了上代码 python3 1234567891011class Solution: &quot;&quot;&quot; @param: n: An integer @return: An integer, denote the number of trailing zeros in n! &quot;&quot;&quot; def trailingZeros(self, n): zeros = 0 while n &gt; 0: zeros += n // 5 n //= 5 return int(zeros)]]></content>
       <tags>
-        <tag>面试</tag>
         <tag>python</tag>
+        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
