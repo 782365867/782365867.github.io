@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[xing]]></title>
+    <url>%2F2019%2F08%2F04%2Fxing%2F</url>
+    <content type="text"><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[hive 之join的用法]]></title>
     <url>%2F2019%2F07%2F21%2Fhive%2F</url>
     <content type="text"><![CDATA[Join 在 hive 中可将两个表连接在一起。包括join,inner join,left join, right join, full outer join,left semi join等，下面进行一一讲解。 表student 表sc ##join(等同于inner join)左右两表中id字段相同的做迪卡尔积，若只有一张表中出现了某id，则该值不会出现在结果中。 1select * from student s join sc on s.sno = sc.sno; left join(right join 类似)左右两表中id字段相同的做迪卡尔积，若只有左表中出现了某id，则结果中会出现该条记录，但右部分用null补齐；若只有右表中出现了某id，则该值不会出现在结果中。 1select * from student s left join sc on s.sno = sc.sno; full outer join左右两表中id字段相同的做迪卡尔积，若只有一张表中出现了某id，则结果中会出现该记录，左右缺失部分用null补齐。1select * from student s full outer join sc on s.sno = sc.sno; ##left semi join相当于inner join中取左边的一半1select * from student s left semi join sc on s.sno = sc.sno;]]></content>
@@ -19,10 +24,10 @@
   <entry>
     <title><![CDATA[hive笔记1]]></title>
     <url>%2F2019%2F07%2F11%2Fhive%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[#hive笔记1 ##select语法结构12345678SELECT [ALL | DISTINCT] select_expr, select_expr, ... FROM table_reference[WHERE where_condition] [GROUP BY col_list [HAVING condition]] [CLUSTER BY col_list | [DISTRIBUTE BY col_list] [SORT BY| ORDER BY col_list] ] [LIMIT number] 其中，CLUSTER BY col_list就等同于DISTRIBUTE BY col_list+SORT BY 外部表和内部表的区别：外部表在drop时，只删表结构和表，不删原数据，即集群数据还在。 sort by 和 order by的区别： sort by 组内有序 order by 全局排序，只有一个reduce]]></content>
+    <content type="text"><![CDATA[#hive笔记1 ##select语法结构12345678SELECT [ALL | DISTINCT] select_expr, select_expr, ... FROM table_reference[WHERE where_condition] [GROUP BY col_list [HAVING condition]] [CLUSTER BY col_list | [DISTRIBUTE BY col_list] [SORT BY| ORDER BY col_list] ] [LIMIT number] 其中，CLUSTER BY col_list就等同于DISTRIBUTE BY col_list+SORT BY若使用distribute by,分发数量由reduce的数量决定。外部表和内部表的区别：外部表在drop时，只删表结构和表，不删原数据，即集群数据还在。 sort by 和 order by的区别： sort by 组内有序 order by 全局排序，只有一个reduce]]></content>
       <tags>
-        <tag>hive</tag>
         <tag>深度学习</tag>
+        <tag>hive</tag>
       </tags>
   </entry>
   <entry>
@@ -61,8 +66,8 @@
       <tags>
         <tag>异常解决</tag>
         <tag>mysql</tag>
-        <tag>大数据</tag>
         <tag>sqoop</tag>
+        <tag>大数据</tag>
       </tags>
   </entry>
   <entry>
@@ -80,8 +85,8 @@
     <content type="text"><![CDATA[最近想学一下大数据，这年头，不会大数据，都不敢说自己是21世纪新青年。 大数据有很多要学的框架，比如hadoop spark storm zookeeper等等，今天拿zookeeper入个门，安装过程中遇到点坑，分享一下。 Zookeeper是一个分布式协调服务；就是为用户的分布式应用程序提供协调服务A、zookeeper是为别的分布式程序服务的B、Zookeeper本身就是一个分布式程序（只要有半数以上节点存活，zk就能正常服务）C、Zookeeper所提供的服务涵盖：主从协调、服务器节点动态上下线、统一配置管理、分布式共享锁、统一名称服务……D、虽然说可以提供各种服务，但是zookeeper在底层其实只提供了两个功能： —管理(存储，读取)用户程序提交的数据； —并为用户程序提供数据节点监听服务； 1 部署用的是三台虚拟机，centOS 7jdk 8zookeeper3.4.5三台机器网络己配好，host配置如下1234567[root@shizhan1 conf]# cat /etc/hosts127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4::1 localhost localhost.localdomain localhost6 localhost6.localdomain6127.0.0.1 shizhan1192.168.33.3 shizhan1192.168.33.4 shizhan2192.168.33.5 shizhan3 2 安装https://pan.baidu.com/s/1O-E6pq3zbzoqRvxHoj66eQ 放我网盘了，zookeeper3.4.5 下载到shizhan1（第一台机子）中，我放在了/root/work/下解压：tar -zxvf zookeeper-3.4.5.tar.gz重命名：mv zookeeper-3.4.5 zookeeper（重命名文件夹zookeeper-3.4.5为zookeeper,太长 写起来好麻烦） 3 环境变量：vi /etc/profile添加内容：12export ZOOKEEPER_HOME=/root/work/zookeeperexport PATH=$PATH:$ZOOKEEPER_HOME/bin source 一下，也就是把你写的环境变量激活一下source /etc/profile 注意，这里三台机子都要改环境变量哟，第二部安装可以只在一个机子上装好，然后拷到其他机子上去，但是环境变量三个都要改。 4 配置文件cd zookeeper/conf进入conf目录cp zoo_sample.cfg zoo.cfg 把例子copy一个出来，命名为zoo.cfg,我们要改的就是这个。vi zoo.cfg添加内容：12345dataDir=/root/zkdata （要创建文件夹）dataLogDir=/root/zklogdata （要创建文件夹）server.1=shizhan1:2888:3888 (主机名, 心跳端口、数据端口)server.2=shizhan2:2888:3888server.3=shizhan3:2888:3888 5 然后创建上面说的那俩文件夹,12mkdir /root/zkdatamkdir /root/zklogdata 注意，这里三台机子都要创建。6 将配好的zookeeper拷到另外两台机子上12scp -r /root/work/zookeeper hadoop@slave2:/home/hadoop/scp -r /root/work/zookeeper hadoop@slave3:/home/hadoop/ 7 在/root/zkdata/中创建myid文件，注意每台机子都要创建，但是值不一样，在步骤4中,如第一台，server.1=shizhan1:2888:3888，shizhan1是主机名，前面的serverl.1中的1,就是shizhan1这台机子上myid文件的值。以这台机子为例，其他两台的值分别为2 和 3。12cd /root/zkdata/echo 1 &gt; myid 8 启动服务1234[root@shizhan1 bin]# zkServer.sh startJMX enabled by defaultUsing config: /root/work/zookeeper/bin/../conf/zoo.cfgStarting zookeeper ... STARTED 9 查看服务1234[root@shizhan2 conf]# zkServer.sh statusJMX enabled by defaultUsing config: /root/work/zookeeper/bin/../conf/zoo.cfgMode: follower 只有出现上面类似内容才是成功了。 排坑–今天启动后，发现jps里有quorumpeermain1234Starting zookeeper ... already running as process 1398.[root@shizhan2 ~]# jps1398 QuorumPeerMain1559 Jps 但是状态显示报错：Error contacting service. It is probably not running 1）在网上查阅资料一共有几种解决方法：打开zkServer.sh 找到status) STAT=echo stat | nc localhost $(grep clientPort &quot;$ZOOCFG&quot; | sed -e &#39;s/.*=//&#39;) 2&gt; /dev/null| grep Mode在nc与localhost之间加上 -q 1 （是数字1而不是字母l）如果已存在则去掉注:因为我用的zookeeper是3.4.5版本，所以在我的zkServer.sh脚本文件里根本没有这一行,所以没有生效 2）调用sh zkServer.sh status 遇到这个问题。百度，google了后发现有人是修改sh脚本里的一个nc的参数来解决，可在3.4.5的sh文件里并没有找到nc的调用。配置文档里指定的log目录没有创建导致出错，手动增加目录后重启，问题解决。注:我想不是日志的问题所以这个方法根本就没有试 3）创建数据目录,也就是在你zoo.cfg配置文件里dataDir指定的那个目录下创建myid文件,并且指定id,改id为你zoo.cfg文件中server.1=shizhan1:2888:3888中的 1.只要在myid头部写入1即可. 4）因为防火墙没有关闭。关闭防火墙：12345678910#查看防火墙状态 service iptables status #关闭防火墙 service iptables stop#查看防火墙开机启动状态 chkconfig iptables --list#关闭防火墙开机启动 chkconfig iptables off 注意：我的确在开始时候没有关闭防火墙，但是当我关闭防火墙之后也没有解决问题。 如果是centOS 7，12[root@shizhan2 conf]# systemctl stop firewalld.service[root@shizhan2 conf]# systemctl disable firewalld.service 我就是关防火墙的时候，用了iptables 那个命令，提示中显示如下，我就大概一看，以为是说防火墙没开，其实人家早就换新命令啦。123[root@shizhan1 work]# service iptables stopRedirecting to /bin/systemctl stop iptables.serviceFailed to stop iptables.service: Unit iptables.service not loaded. 5） 没有建立主机和ip之间的映射关系。 建立主机和ip之间映射关系的命令为 vim /etc/hosts 在文件的末端加入各个主机和ip地址之间的映射关系就可以了。 注意：只有在建立了映射关系之后，才可以将在同一个网段下的机器利用主机名进行文件传递。问题解决！]]></content>
       <tags>
         <tag>异常解决</tag>
-        <tag>zookeeper</tag>
         <tag>大数据</tag>
+        <tag>zookeeper</tag>
       </tags>
   </entry>
   <entry>
@@ -107,8 +112,8 @@
     <url>%2F2018%2F06%2F19%2Fkmaxpooling%2F</url>
     <content type="text"><![CDATA[pooling（池化）是卷积神经网络中常用操作，主要目的是减小张量大小，便于计算，可以认为是一步降维操作。前两天项目上需要用到k-max-pooling操作，项目代码是用keras写的，keras没有k-max-pooling层，所以要自己写。 卷积神经网络的最经典的模型是卷积+池化+全连接。其中卷积操作通过一个滑动的卷积窗口来强化提取特征，可以认为卷积窗是一个权重矩阵，而卷积操作中的每一步，都是一个矩阵的加权求和，随着卷积窗口滑动，每一步的和被记录下来，形成一个新的矩阵。我们有多少种卷积窗，经过一层卷积就留下几个矩阵。然而，如果经过多层卷积，那最后矩阵就越来越大，那我们对资源耗费太大，有没有什么好的操作呢？–pooling 简单理解，pooling就是把一个大矩阵，变成小矩阵。如max-pooling，如size=2,就是在原来的矩阵中，每2*2个块中，取其中最大的一个记录下来，然后下一个块，再下一个十几个，最后记录下来的值就成了一个新矩阵，而这个新矩阵的大小，比以前缩小了4倍。有人会问，那不是损失了信息了么？当然损失了信息，但是我们认为损失的信息并没那么重要，就像一幅超清图，和一张高清图，虽然没那么清晰了，但这张图所描述的信息我们还是一眼能看出来。max-pooling操作，可以这么理解，给你一张图片，你分成了好多块，每块里面，别的地方颜色很浅，就一个地方颜色很深，那你是不是第一眼先看到那个黑点呢？ 再说一下mean-pooling.和max-pooling类似，只不过把每块中取最大值的操作，换成了对每块取均值。这样就会把每个点的值都考虑到，没有max-pooling操作那样粗暴。 还有一种常用的操作是k-max-pooling.这种是在max-pooling上改进来的，因为max-pooling操作太简单粗暴了，k-max-pooling认为每一块不只一个点重要，前几个亮点都比较重要，所以在每一个pooling块中取了前k大的值。 keras中pooling操作好像只有maxpooling和meanpooing.于是自己写了个代码，实现k-max-pooling。因为项目中用的是LSTM处理文本，我这里就对LSTM层的结果进行处理了，LSTM层输出三维张量(shape=[in_dim1,in_dim2,in_dim3]),其中in_dim1表示样本数量，in_dim2表示一个样本（也就是一段话）的长度（如：这里认为一句话有100个词，那么短于100的句子后面补0，长于100的句子后面截断），in_dim3为lstm结点数量，也就是每个step输出的向量长度。k-max-pooling操作，就是在dim2中，取出k个最大值，可以想象是取出k个最重要的词。输入为LSTM层输出的三维张量，输出为一个二维张量，shape=[out_dim1,out_dim2],out_dim1为样本数，out_dim2为in_dim3*k。 代码如下：123456789101112131415161718192021222324252627def test59(): from keras.layers import Lambda, Input from keras.models import Model import tensorflow as tf l = [[1, 2, 3, 4, 5, 6, 7, 8, 9], [11, 22, 33, 44, 55, 66, 77, 88, 99]] data = np.reshape(l, [2, 3, 3]) print(data)###output####[[[ 1 2 3]# [ 4 5 6]# [ 7 8 9]]# [[11 22 33]# [44 55 66]# [77 88 99]]]#数据为2个样本，每个样本是3个step（可以认为是句子有3个词），每个step是一个长为3的向量（可以认为词向量长度为3） input = Input(shape=[3, 3], dtype='int32') la = Lambda(lambda x: tf.reshape(tf.nn.top_k(tf.transpose(x,[0,2,1]),k=2)[0],shape=[-1,6]))(input) model = Model(inputs=input, outputs=la) pre = model.predict(data) print(pre)#[[ 7 4 8 5 9 6]#[77 44 88 55 99 66]]if __name__=='__main__': test59() 这里的k-max-pooling用Lambda写的，tf.reshape(tf.nn.top_k(tf.transpose(x,[0,2,1]),k=2)[0],shape=[-1,6])，分解成三步：tf.transpose(x,[0,2,1]–&gt;因为tf有个top_k方法，可以对取张量最后一维的前k大的数，所以我们把step所在维度调整到最后。transpose是一个转置操作。tf.nn.top_k（，k=2）–&gt;取出最后一个维度前k大的数。tf.reshape(),top_k操作对每个样本取出的结果是一个二维矩阵in_dim3 × k，所以把它转成向量，向量长度为in_dim3*k 当然，也可以写一个自定义层，处理步骤类似 12345678910111213141516171819202122class KMaxPooling(Layer): """ k-max-pooling """ def __init__(self, k=1, **kwargs): super().__init__(**kwargs) self.input_spec = InputSpec(ndim=3) self.k = k def compute_output_shape(self, input_shape): return (input_shape[0], (input_shape[2] * self.k)) def call(self, inputs): # swap last two dimensions since top_k will be applied along the last dimension shifted_input = tf.transpose(inputs, [0, 2, 1]) # extract top_k, returns two tensors [values, indices] top_k = tf.nn.top_k(shifted_input, k=self.k, sorted=True, name=None)[0] # return flattened output return Flatten()(top_k)]]></content>
       <tags>
-        <tag>深度学习</tag>
         <tag>python</tag>
+        <tag>深度学习</tag>
         <tag>Keras</tag>
         <tag>tensorflow</tag>
       </tags>
