@@ -87,19 +87,31 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2019/08/31/hbase/" data-id="cjzzox8q00002zwdaa78dv4yy" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2019/08/31/hbase/" data-id="ck00gu9r10002fkda5qpz761t" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <h1 id="1-hbase简介"><a href="#1-hbase简介" class="headerlink" title="1 hbase简介"></a>1 hbase简介</h1><h2 id="1-1-hbase是什么"><a href="#1-1-hbase是什么" class="headerlink" title="1.1 hbase是什么"></a>1.1 hbase是什么</h2><p>HBASE是一个高可靠性、高性能、<strong>面向列</strong>、可伸缩的分布式存储系统，利用HBASE技术可在廉价PC Server上搭建起大规模结构化存储集群。<br>HBASE的目标是存储并处理大型的数据，更具体来说是仅需使用普通的硬件配置，就能够处理由成千上万的行和列所组成的大型数据。<br>HBASE是Google Bigtable的开源实现，但是也有很多不同之处。比如：Google Bigtable利用GFS作为其文件存储系统，HBASE利用Hadoop HDFS作为其文件存储系统；Google运行MAPREDUCE来处理Bigtable中的海量数据，HBASE同样利用Hadoop MapReduce来处理HBASE中的海量数据；Google Bigtable利用Chubby作为协同服务，HBASE利用Zookeeper作为对应。<br>HBase集群有两种角色：<strong>Hmaster</strong> 和 <strong>HregionServer</strong></p>
+        <h1 id="1-hbase简介"><a href="#1-hbase简介" class="headerlink" title="1 hbase简介"></a>1 hbase简介</h1><h2 id="1-1-hbase是什么"><a href="#1-1-hbase是什么" class="headerlink" title="1.1 hbase是什么"></a>1.1 hbase是什么</h2><p>HBASE是一个高可靠性、高性能、<strong>面向列</strong>、可伸缩的分布式存储系统，利用HBASE技术可在廉价PC Server上搭建起大规模结构化存储集群。<br>HBASE的目标是存储并处理大型的数据，更具体来说是仅需使用普通的硬件配置，就能够处理由成千上万的行和列所组成的大型数据。<br>HBASE是Google Bigtable的开源实现，但是也有很多不同之处。比如：Google Bigtable利用GFS作为其文件存储系统，HBASE利用Hadoop HDFS作为其文件存储系统；Google运行MAPREDUCE来处理Bigtable中的海量数据，HBASE同样利用Hadoop MapReduce来处理HBASE中的海量数据；Google Bigtable利用Chubby作为协同服务，HBASE利用Zookeeper作为对应。<br>HBase集群有两种角色：<strong>Hmaster</strong> 和 <strong>HregionServer</strong><br>Hdfs适合存整块数据，如果大量数据一条一条存，namenode难以承受，所以有了Hbase。一条数据来时，先缓存到HregionServer内存，128M满了后写到hdfs上。</p>
+<p>hmaster的作用：</p>
+<ul>
+<li>管理HregionServer，如果hregionserver挂了，hmaster管理数据迁移。</li>
+<li>连接zk的API，做增删改查 表的节点，创建zk节点，管理映射信息</li>
+<li>管理HregionServer中的表分配，也就管理元数据，保存表的位置，表的具体数据，在hregionServer上。表创建后，就跟hmaster没关系了，可以直接通过zk增删改查，hmaster只是在zk注册了节点。</li>
+</ul>
+<p>hregionserver作用</p>
+<ul>
+<li>表的增删改查数据。</li>
+<li>和hdfs交互，存取数据。</li>
+</ul>
 <h2 id="1-2-hbase优势"><a href="#1-2-hbase优势" class="headerlink" title="1.2 hbase优势"></a>1.2 hbase优势</h2><p>hbase是一种分布式数据库，相比于传统数据库的优势在于：</p>
 <ul>
 <li>线性扩展，随着数据量增多可以通过节点扩展进行支撑</li>
 <li>数据存储在hdfs上，备份机制健全</li>
 <li>通过zookeeper协调查找数据，访问速度块。</li>
 </ul>
+<p>但是hbase主要用来存海量数据，列式数据库无法做多表关联。</p>
 <h1 id="2-hbase安装"><a href="#2-hbase安装" class="headerlink" title="2 hbase安装"></a>2 hbase安装</h1><p>主要包括以下步骤</p>
 <ul>
 <li>下载hbase安装包</li>
@@ -110,7 +122,7 @@
 <li>启动，先启动hadoop和zookeeper集群,然后start-hbase.sh</li>
 <li>进行命令行hbase shell<br>启动后Jps查看：<br><img src="hbase-jps.png" alt=""></li>
 </ul>
-<h1 id="3-hbase数据模型"><a href="#3-hbase数据模型" class="headerlink" title="3 hbase数据模型"></a>3 hbase数据模型</h1><h2 id="3-1-hbase数据模型"><a href="#3-1-hbase数据模型" class="headerlink" title="3.1 hbase数据模型"></a>3.1 hbase数据模型</h2><p><img src="hbase/hbase数据模型.png" alt=""><br><img src="hbase数据模型.png" alt=""></p>
+<h1 id="3-hbase数据模型"><a href="#3-hbase数据模型" class="headerlink" title="3 hbase数据模型"></a>3 hbase数据模型</h1><h2 id="3-1-hbase数据模型"><a href="#3-1-hbase数据模型" class="headerlink" title="3.1 hbase数据模型"></a>3.1 hbase数据模型</h2><p><img src="hbase数据模型.png" alt=""></p>
 <h2 id="3-2-rowkey"><a href="#3-2-rowkey" class="headerlink" title="3.2 rowkey"></a>3.2 rowkey</h2><p>row key是用来检索记录的主键。访问HBASE table中的行，只有三种方式：</p>
 <ul>
 <li>通过单个row key访问</li>
@@ -119,8 +131,9 @@
 </ul>
 <p>在HBASE内部，row key保存为字节数组。存储时，数据按照Row key的<strong>字典序</strong>(byte order)排序存储。设计key时，要充分排序存储这个特性，将经常一起读取的行存储放到一起。(位置相关性)</p>
 <h2 id="3-3-Columns-Family"><a href="#3-3-Columns-Family" class="headerlink" title="3.3 Columns Family"></a>3.3 Columns Family</h2><p>列簇 ：HBASE表中的每个列，都归属于某个<strong>列族</strong>。列族是表的schema的一部分(而列不是,列不是表结构，而是作为数据)，必须在使用表之前定义。列名都以列族作为前缀。例如 courses:history，courses:math都属于courses 这个列族。</p>
-<h2 id="3-4-cell"><a href="#3-4-cell" class="headerlink" title="3.4 cell"></a>3.4 cell</h2><p>由{row key, columnFamily, version} 唯一确定的单元。cell中 的数据是<strong>没有类型</strong>的，全部是<strong>字节码</strong>形式存贮。</p>
+<h2 id="3-4-cell"><a href="#3-4-cell" class="headerlink" title="3.4 cell"></a>3.4 cell</h2><p>由{row key, columnFamily, version} 唯一确定的单元格（row key确定是哪个id的数据，再由列簇确定列，再由时间版本确定唯一单元格）。cell中 的数据是<strong>没有类型</strong>的，全部是<strong>字节码</strong>形式存贮。</p>
 <h2 id="3-5-Time-Stamp"><a href="#3-5-Time-Stamp" class="headerlink" title="3.5 Time Stamp"></a>3.5 Time Stamp</h2><p>HBASE 中通过rowkey和columns确定的为一个存贮单元称为cell。每个 cell都保存 着同一份数据的多个版本。版本通过时间戳来索引。时间戳的类型是 64位整型。时间戳可以由HBASE(在数据写入时自动 )赋值，此时时间戳是精确到毫秒 的当前系统时间。时间戳也可以由客户显式赋值。如果应用程序要避免数据版 本冲突，就必须自己生成具有唯一性的时间戳。每个 cell中，不同版本的数据按照时间倒序排序，即最新的数据排在最前面。<br>为了避免数据存在过多版本造成的的管理 (包括存贮和索引)负担，HBASE提供 了两种数据版本回收方式。一是保存数据的最后n个版本，二是保存最近一段 时间内的版本（比如最近七天）。用户可以针对每个列族进行设置。</p>
+<h2 id="3-5-更新"><a href="#3-5-更新" class="headerlink" title="3.5 更新"></a>3.5 更新</h2><p>hbase没有update的概念，若想修改数据，就用下一条数据，覆盖上一条，rowkey相同。</p>
 <h1 id="4-hbase命令"><a href="#4-hbase命令" class="headerlink" title="4 hbase命令"></a>4 hbase命令</h1><table>
 <thead>
 <tr>
@@ -159,7 +172,7 @@
 </tr>
 <tr>
 <td style="text-align:center">添加记录</td>
-<td style="text-align:center">put  ‘表名’, ‘rowKey’, ‘列族 : 列‘  ,  ‘值’</td>
+<td style="text-align:center">put  ‘表名’, ‘rowKey’, ‘列族 : 列’  ,  ‘值’</td>
 </tr>
 <tr>
 <td style="text-align:center">查看记录rowkey下的所有数据</td>
@@ -179,7 +192,7 @@
 </tr>
 <tr>
 <td style="text-align:center">删除记录</td>
-<td style="text-align:center">delete  ‘表名’ ,‘行名’ , ‘列族：列’</td>
+<td style="text-align:center">delete  ‘表名’ ,’行名’ , ‘列族：列’</td>
 </tr>
 <tr>
 <td style="text-align:center">删除整行</td>
@@ -195,11 +208,11 @@
 </tr>
 <tr>
 <td style="text-align:center">查看所有记录</td>
-<td style="text-align:center">scan “表名”  </td>
+<td style="text-align:center">scan ‘表名’  </td>
 </tr>
 <tr>
 <td style="text-align:center">查看某个表某个列中所有数据</td>
-<td style="text-align:center">scan “表名” , {COLUMNS=&gt;’列族名:列名’}</td>
+<td style="text-align:center">scan ‘表名’ , {COLUMNS=&gt;’列族名:列名’}</td>
 </tr>
 <tr>
 <td style="text-align:center">更新记录</td>
@@ -207,7 +220,63 @@
 </tr>
 </tbody>
 </table>
-<p>ss</p>
+<p><img src="hbase-shell.png" alt=""></p>
+<h1 id="5-hbase依赖zookeeper"><a href="#5-hbase依赖zookeeper" class="headerlink" title="5 hbase依赖zookeeper"></a>5 hbase依赖zookeeper</h1><p><img src="zk.png" alt=""><br>通过zk知道rowkey那条记录该放哪个regionserver上，找数据通过zk，不通过hmaster。</p>
+<ul>
+<li>hbase regionserver向zookeeper注册，提供hbase regionserver状态信息（是否在线）。</li>
+<li>hmaster启动时候会将hbase系统表-ROOT-加载到zookeeper cluster，通过zookeeper cluster可以获取当前系统表.META.的存储所对应的regionserver信息</li>
+<li>保存Hmaster的地址和backup-master地址</li>
+<li>保存表-ROOT-的地址，（hbase默认的根表，检索表）</li>
+<li>HRegionServer列表</li>
+</ul>
+<h1 id="6-java-API"><a href="#6-java-API" class="headerlink" title="6 java API"></a>6 java API</h1><table>
+<thead>
+<tr>
+<th style="text-align:center">功能</th>
+<th style="text-align:center">API</th>
+<th style="text-align:center">作用</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">配置</td>
+<td style="text-align:center">HBaseConfiguration</td>
+<td style="text-align:center">通过此类可以对HBase进行配置</td>
+<td style="text-align:center">Configuration config = HBaseConfiguration.create();</td>
+</tr>
+<tr>
+<td style="text-align:center">表管理类</td>
+<td style="text-align:center">HBaseAdmin</td>
+<td style="text-align:center">提供接口关系HBase 数据库中的表信息</td>
+<td style="text-align:center">HBaseAdmin admin = new HBaseAdmin(config);</td>
+</tr>
+<tr>
+<td style="text-align:center">表描述类</td>
+<td style="text-align:center">HTableDescriptor</td>
+<td style="text-align:center">类包含了表的名字以及表的列族信息</td>
+<td style="text-align:center">HTableDescriptor htd =new HTableDescriptor(tablename);</td>
+</tr>
+</tbody>
+</table>
+<p>htd.addFamily(new HColumnDescriptor(“myFamily”));<br>列簇描述类 | HColumnDescriptor | 维护列族的信息 ｜ htd.addFamily(new HColumnDescriptor(“myFamily”));  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">功能</th>
+<th style="text-align:center">API</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">创建表 ｜ CreateTable</td>
+<td style="text-align:center">HBaseAdmin admin = new HBaseAdmin(config);</td>
+</tr>
+</tbody>
+</table>
+<p>HTableDescriptor desc = new HTableDescriptor(tableName);<br>HColumnDescriptor family1 = new HColumnDescriptor(“f1”);<br>HColumnDescriptor family2 = new HColumnDescriptor(“f2”);<br>desc.addFamily(family1);<br>desc.addFamily(family2);<br>admin.createTable(desc);</p>
+<p>ssccmd</p>
 
       
     </div><!-- .entry-content -->
@@ -244,7 +313,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/21/hive/" data-id="cjzzox8q50004zwdawrxnkq2g" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/21/hive/" data-id="ck00gu9r80005fkdad7w072xv" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -302,7 +371,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/13/linux/" data-id="cjzzox8qv000lzwdakjllr02q" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/13/linux/" data-id="ck00gu9rw000ofkdadgswm8rf" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -355,7 +424,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/11/hive笔记/" data-id="cjzzox8q70005zwda1p0tbyz8" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/11/hive笔记/" data-id="ck00gu9r60004fkdamlzy0qdr" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -405,7 +474,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-3/" data-id="cjzzox8qe0009zwdabpobb61f" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-3/" data-id="ck00gu9rd0009fkdaclxry14o" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -453,7 +522,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-2/" data-id="cjzzox8qb0008zwdapfrn0i14" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-2/" data-id="ck00gu9rc0008fkda5dh23az3" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -508,7 +577,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/21/interview-1/" data-id="cjzzox8q90006zwdau0mc6dw8" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/21/interview-1/" data-id="ck00gu9r90006fkdaet35qzu2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -564,7 +633,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/13/sqoop/" data-id="cjzzox8sp0038zwdavw6mkvch" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/13/sqoop/" data-id="ck00gu9to0038fkdapsd3zvdn" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -623,7 +692,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/03/echart/" data-id="cjzzox8pv0000zwdajv51mk0m" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/03/echart/" data-id="ck00gu9qv0000fkdaf87ob7xy" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -675,7 +744,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/12/zookeeper/" data-id="cjzzox8rc0016zwdaduqav6dm" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/12/zookeeper/" data-id="ck00gu9sb0016fkdawgpkcokk" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
