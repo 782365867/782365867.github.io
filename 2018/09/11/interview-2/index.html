@@ -17,18 +17,18 @@
   
   <title>lintcode 814. Shortest Path in Undirected Graph 之python 和 java 实现 | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近没有动力学习，今天看到小宝贝那么努力学注会，顿感羞愧。 虽然收到了offercall，但还没有确定之前，还是好好刷刷题。既然有自己的目标，就应该给出自己的态度。1234567814. 无向图中的最短路径给出一个undirected graph，其中每条边的长度为1，并从图中给出两个节点。我们需要找到给定两个节点之间最短路径的长度。 &amp;lt;!-- more --&amp;gt;样例给定图= &amp;#123">
+  <meta name="description" content="最近没有动力学习，今天看到小宝贝那么努力学注会，顿感羞愧。 虽然收到了offercall，但还没有确定之前，还是好好刷刷题。既然有自己的目标，就应该给出自己的态度。">
 <meta name="keywords" content="面试,python,java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lintcode 814. Shortest Path in Undirected Graph 之python 和 java 实现">
 <meta property="og:url" content="http://xurui.club/2018/09/11/interview-2/index.html">
 <meta property="og:site_name" content="山风之行">
-<meta property="og:description" content="最近没有动力学习，今天看到小宝贝那么努力学注会，顿感羞愧。 虽然收到了offercall，但还没有确定之前，还是好好刷刷题。既然有自己的目标，就应该给出自己的态度。1234567814. 无向图中的最短路径给出一个undirected graph，其中每条边的长度为1，并从图中给出两个节点。我们需要找到给定两个节点之间最短路径的长度。 &amp;lt;!-- more --&amp;gt;样例给定图= &amp;#123">
+<meta property="og:description" content="最近没有动力学习，今天看到小宝贝那么努力学注会，顿感羞愧。 虽然收到了offercall，但还没有确定之前，还是好好刷刷题。既然有自己的目标，就应该给出自己的态度。">
 <meta property="og:locale" content="zh-Ch">
-<meta property="og:updated_time" content="2019-09-01T05:19:23.855Z">
+<meta property="og:updated_time" content="2019-09-01T05:26:44.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lintcode 814. Shortest Path in Undirected Graph 之python 和 java 实现">
-<meta name="twitter:description" content="最近没有动力学习，今天看到小宝贝那么努力学注会，顿感羞愧。 虽然收到了offercall，但还没有确定之前，还是好好刷刷题。既然有自己的目标，就应该给出自己的态度。1234567814. 无向图中的最短路径给出一个undirected graph，其中每条边的长度为1，并从图中给出两个节点。我们需要找到给定两个节点之间最短路径的长度。 &amp;lt;!-- more --&amp;gt;样例给定图= &amp;#123">
+<meta name="twitter:description" content="最近没有动力学习，今天看到小宝贝那么努力学注会，顿感羞愧。 虽然收到了offercall，但还没有确定之前，还是好好刷刷题。既然有自己的目标，就应该给出自己的态度。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -86,14 +86,14 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-2/" data-id="ck00j4e7800055wda5l83k2pv" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/09/11/interview-2/" data-id="ck00j9pad0006mgdayah567n9" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
         <p>最近没有动力学习，今天看到小宝贝那么努力学注会，顿感羞愧。</p>
-<p>虽然收到了offercall，但还没有确定之前，还是好好刷刷题。既然有自己的目标，就应该给出自己的态度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">814. 无向图中的最短路径</span><br><span class="line"></span><br><span class="line">给出一个undirected graph，其中每条边的长度为1，并从图中给出两个节点。我们需要找到给定两个节点之间最短路径的长度。</span><br><span class="line"> &lt;!-- more --&gt;</span><br><span class="line">样例</span><br><span class="line"></span><br><span class="line">给定图= &#123;1,2,4#2,1,4#3,5#4,1,2#5,3&#125;，nodeA = 3, nodeB = 5。</span><br></pre></td></tr></table></figure></p>
+<p>虽然收到了offercall，但还没有确定之前，还是好好刷刷题。既然有自己的目标，就应该给出自己的态度。<br> <a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">814. 无向图中的最短路径</span><br><span class="line"></span><br><span class="line">给出一个undirected graph，其中每条边的长度为1，并从图中给出两个节点。我们需要找到给定两个节点之间最短路径的长度。</span><br><span class="line"></span><br><span class="line">样例</span><br><span class="line"></span><br><span class="line">给定图= &#123;1,2,4#2,1,4#3,5#4,1,2#5,3&#125;，nodeA = 3, nodeB = 5。</span><br></pre></td></tr></table></figure></p>
 <p>首先想到的是深度优先搜索。写了好久，关于如何确定遍历完一层，res++的地方没理清楚。于是在网上搜了下资料，有c和java版的，就看了下别人的代码，再用python给实现一下。<br>AC了 哈哈。其实我也不知道刷题用什么好，Python简洁好写，在写代码时候比Java省不少事，之前有个快排的题，同样思路，我用Java和Python分别实现，发现Python比Java短了不只一倍，看着很舒服，有点像伪代码。但是Java代码AC了，用了60ms多，但是Python 超时，6000多ms..</p>
 <p>很尴尬。</p>
 <p>个人还是喜欢Python，希望笔试不要出现这种问题。</p>
