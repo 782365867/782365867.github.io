@@ -17,18 +17,18 @@
   
   <title>lda主题模型python实现篇 | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近在做一个动因分析的项目，自然想到了主题模型LDA。这次先把模型流程说下，原理后面再讲。lda实现有很多开源库，这里用的是gensim. 1 文本预处理大概说下文本的样子，LDA是无监督模型，也就是说不需要标签，只要传入文本就好。LDA要学习文档-主题分布和主题-词分布，所以我们把一个人的数据join在一起作为一条文档。对文档进行分词，使用的jieba分词工具包。注意，这里要做去停用词处理，包括">
+  <meta name="description" content="最近在做一个动因分析的项目，自然想到了主题模型LDA。这次先把模型流程说下，原理后面再讲。lda实现有很多开源库，这里用的是gensim.">
 <meta name="keywords" content="python,lda,NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lda主题模型python实现篇">
 <meta property="og:url" content="http://xurui.club/2018/06/01/lda/index.html">
 <meta property="og:site_name" content="山风之行">
-<meta property="og:description" content="最近在做一个动因分析的项目，自然想到了主题模型LDA。这次先把模型流程说下，原理后面再讲。lda实现有很多开源库，这里用的是gensim. 1 文本预处理大概说下文本的样子，LDA是无监督模型，也就是说不需要标签，只要传入文本就好。LDA要学习文档-主题分布和主题-词分布，所以我们把一个人的数据join在一起作为一条文档。对文档进行分词，使用的jieba分词工具包。注意，这里要做去停用词处理，包括">
+<meta property="og:description" content="最近在做一个动因分析的项目，自然想到了主题模型LDA。这次先把模型流程说下，原理后面再讲。lda实现有很多开源库，这里用的是gensim.">
 <meta property="og:locale" content="zh-Ch">
-<meta property="og:updated_time" content="2018-06-01T06:30:26.141Z">
+<meta property="og:updated_time" content="2019-09-01T05:18:45.969Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lda主题模型python实现篇">
-<meta name="twitter:description" content="最近在做一个动因分析的项目，自然想到了主题模型LDA。这次先把模型流程说下，原理后面再讲。lda实现有很多开源库，这里用的是gensim. 1 文本预处理大概说下文本的样子，LDA是无监督模型，也就是说不需要标签，只要传入文本就好。LDA要学习文档-主题分布和主题-词分布，所以我们把一个人的数据join在一起作为一条文档。对文档进行分词，使用的jieba分词工具包。注意，这里要做去停用词处理，包括">
+<meta name="twitter:description" content="最近在做一个动因分析的项目，自然想到了主题模型LDA。这次先把模型流程说下，原理后面再讲。lda实现有很多开源库，这里用的是gensim.">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -86,13 +86,13 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="ck00iv1ys000k1cdadje0ehq8" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/01/lda/" data-id="ck00j4e7n000h5wda100ku9hu" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <p>最近在做一个动因分析的项目，自然想到了主题模型LDA。这次先把模型流程说下，原理后面再讲。<br>lda实现有很多开源库，这里用的是gensim.</p>
+        <p>最近在做一个动因分析的项目，自然想到了主题模型LDA。这次先把模型流程说下，原理后面再讲。<br>lda实现有很多开源库，这里用的是gensim.<br> <a id="more"></a></p>
 <h2 id="1-文本预处理"><a href="#1-文本预处理" class="headerlink" title="1 文本预处理"></a>1 文本预处理</h2><p>大概说下文本的样子，LDA是无监督模型，也就是说不需要标签，只要传入文本就好。LDA要学习文档-主题分布和主题-词分布，所以我们把一个人的数据join在一起作为一条文档。对文档进行分词，使用的jieba分词工具包。注意，这里要做去停用词处理，包括标点和一些没用的词，如“呵呵”，“哈哈”。做项目时，第一版没有去无用词，最后提出的主题都是“你”“我”“他”“你好”这样的东西，去掉之后可以较好提高结果质量。</p>
 <h2 id="2-将上步处理的结果进行格式化表示"><a href="#2-将上步处理的结果进行格式化表示" class="headerlink" title="2 将上步处理的结果进行格式化表示"></a>2 将上步处理的结果进行格式化表示</h2><p>即将所有文档数表示成m*n的矩阵D,m表示有m篇文档，n表示这篇文档有n个词，n不定长。</p>
 <h2 id="3-生成词典"><a href="#3-生成词典" class="headerlink" title="3 生成词典"></a>3 生成词典</h2><p>用gensim.corpora.Dictionary包<br>这个包讲下吧<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from gensim.corpora import Dictionary</span><br><span class="line">text = [[&apos;我&apos;, &apos;想吃&apos;, &apos;大龙虾&apos;, &apos;和&apos;, &apos;烤猪蹄&apos;]]</span><br><span class="line">dictionary = Dictionary(text)</span><br><span class="line">print((dictionary))</span><br><span class="line">doc = dictionary.doc2bow([&apos;我&apos;, &apos;想吃&apos;, &apos;大龙虾&apos;, &apos;和&apos;, &apos;我&apos;,&apos;你&apos;,&apos;烤猪蹄&apos;])</span><br><span class="line">print(doc)</span><br><span class="line"></span><br><span class="line">#####output#####</span><br><span class="line">Dictionary(5 unique tokens: [&apos;我&apos;, &apos;大龙虾&apos;, &apos;想吃&apos;, &apos;和&apos;, &apos;烤猪蹄&apos;])</span><br><span class="line">[(0, 1), (1, 1), (2, 2), (3, 1), (4, 1)]</span><br></pre></td></tr></table></figure></p>

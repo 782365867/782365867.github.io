@@ -25,7 +25,7 @@
 <meta property="og:site_name" content="山风之行">
 <meta property="og:description" content="keras 的Mask层先看下官方文档的解释  Masking层keras.layers.core.Masking(mask_value=0.0)使用给定的值对输入的序列信号进行“屏蔽”，用以定位需要跳过的时间步 对于输入张量的时间步，即输入张量的第1维度（维度从0开始算，见例子），如果输入张量在该时间步上都等于mask_value，则该时间步将在模型接下来的所有层（只要支持masking）被跳过">
 <meta property="og:locale" content="zh-Ch">
-<meta property="og:updated_time" content="2018-06-20T02:27:26.966Z">
+<meta property="og:updated_time" content="2019-09-01T05:18:57.120Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Keras 笔记之Mask层">
 <meta name="twitter:description" content="keras 的Mask层先看下官方文档的解释  Masking层keras.layers.core.Masking(mask_value=0.0)使用给定的值对输入的序列信号进行“屏蔽”，用以定位需要跳过的时间步 对于输入张量的时间步，即输入张量的第1维度（维度从0开始算，见例子），如果输入张量在该时间步上都等于mask_value，则该时间步将在模型接下来的所有层（只要支持masking）被跳过">
@@ -86,7 +86,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/12/keras-mask/" data-id="ck00iv1yn000d1cdahapxfazz" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/12/keras-mask/" data-id="ck00j4e7j000c5wdaw7xzfc87" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -95,8 +95,7 @@
         <p>keras 的Mask层<br>先看下官方文档的解释</p>
 <hr>
 <p>Masking层<br>keras.layers.core.Masking(mask_value=0.0)<br>使用给定的值对输入的序列信号进行“屏蔽”，用以定位需要跳过的时间步</p>
-<p>对于输入张量的时间步，即输入张量的第1维度（维度从0开始算，见例子），如果输入张量在该时间步上都等于mask_value，则该时间步将在模型接下来的所有层（只要支持masking）被跳过（屏蔽）。</p>
-<p>如果模型接下来的一些层不支持masking，却接受到masking过的数据，则抛出异常。</p>
+<p>对于输入张量的时间步，即输入张量的第1维度（维度从0开始算，见例子），如果输入张量在该时间步上都等于mask_value，则该时间步将在模型接下来的所有层（只要支持masking）被跳过（屏蔽）。<br> <a id="more"></a><br>如果模型接下来的一些层不支持masking，却接受到masking过的数据，则抛出异常。</p>
 <p>例子<br>考虑输入数据x是一个形如(samples,timesteps,features)的张量，现将其送入LSTM层。因为你缺少时间步为3和5的信号，所以你希望将其掩盖。这时候应该：</p>
 <p>赋值x[:,3,:] = 0.，x[:,5,:] = 0.</p>
 <p>在LSTM层之前插入mask_value=0.的Masking层</p>

@@ -17,18 +17,18 @@
   
   <title>linux命令之grep | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天在跑分类模型，发现了一些比较奇怪的结果，严重影响了分类器性能，所有就想看看这些数据是啥，因为数据是加密的，只能看到id,所以这里就把id取出来，693d0f86a8a90d5a138f75ac7160490c，这里经过md5加密的，然后经过查表解密，得到其明文id,这里假设id为im_12345,然后我们就可以去明文中查找带这个id的数据了。数据放在linux下，我们在终端中用grep &amp;#3">
+  <meta name="description" content="今天在跑分类模型，发现了一些比较奇怪的结果，严重影响了分类器性能，所有就想看看这些数据是啥，因为数据是加密的，只能看到id,所以这里就把id取出来，693d0f86a8a90d5a138f75ac7160490c，这里经过md5加密的，然后经过查表解密，得到其明文id,这里假设id为im_12345,然后我们就可以去明文中查找带这个id的数据了。数据放在linux下，我们在终端中用">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux命令之grep">
 <meta property="og:url" content="http://xurui.club/2018/05/16/linux1/index.html">
 <meta property="og:site_name" content="山风之行">
-<meta property="og:description" content="今天在跑分类模型，发现了一些比较奇怪的结果，严重影响了分类器性能，所有就想看看这些数据是啥，因为数据是加密的，只能看到id,所以这里就把id取出来，693d0f86a8a90d5a138f75ac7160490c，这里经过md5加密的，然后经过查表解密，得到其明文id,这里假设id为im_12345,然后我们就可以去明文中查找带这个id的数据了。数据放在linux下，我们在终端中用grep &amp;#3">
+<meta property="og:description" content="今天在跑分类模型，发现了一些比较奇怪的结果，严重影响了分类器性能，所有就想看看这些数据是啥，因为数据是加密的，只能看到id,所以这里就把id取出来，693d0f86a8a90d5a138f75ac7160490c，这里经过md5加密的，然后经过查表解密，得到其明文id,这里假设id为im_12345,然后我们就可以去明文中查找带这个id的数据了。数据放在linux下，我们在终端中用">
 <meta property="og:locale" content="zh-Ch">
-<meta property="og:updated_time" content="2018-05-16T05:47:28.589Z">
+<meta property="og:updated_time" content="2019-09-01T05:22:39.662Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux命令之grep">
-<meta name="twitter:description" content="今天在跑分类模型，发现了一些比较奇怪的结果，严重影响了分类器性能，所有就想看看这些数据是啥，因为数据是加密的，只能看到id,所以这里就把id取出来，693d0f86a8a90d5a138f75ac7160490c，这里经过md5加密的，然后经过查表解密，得到其明文id,这里假设id为im_12345,然后我们就可以去明文中查找带这个id的数据了。数据放在linux下，我们在终端中用grep &amp;#3">
+<meta name="twitter:description" content="今天在跑分类模型，发现了一些比较奇怪的结果，严重影响了分类器性能，所有就想看看这些数据是啥，因为数据是加密的，只能看到id,所以这里就把id取出来，693d0f86a8a90d5a138f75ac7160490c，这里经过md5加密的，然后经过查表解密，得到其明文id,这里假设id为im_12345,然后我们就可以去明文中查找带这个id的数据了。数据放在linux下，我们在终端中用">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -86,13 +86,13 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="ck00iv1yt000l1cda8n2f99xq" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/16/linux1/" data-id="ck00j4e7p000j5wdabsz8rdfx" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <p>今天在跑分类模型，发现了一些比较奇怪的结果，严重影响了分类器性能，所有就想看看这些数据是啥，因为数据是加密的，只能看到id,所以这里就把id取出来，693d0f86a8a90d5a138f75ac7160490c，这里经过md5加密的，然后经过查表解密，得到其明文id,这里假设id为im_12345,然后我们就可以去明文中查找带这个id的数据了。数据放在linux下，我们在终端中用<br><code>grep &#39;im_12345&#39; xx.txt</code><br><code>//xx.txt为要查找的文件名</code><br>就可以返回我们想看的那条数据了。<br>然后发现，返回了一大堆数据，实在不知道哪条才是<br>于是我们再做一次grep<br>即<br><code>grep &#39;im_12345&#39; xx.txt|prep &#39;2017-12-12&#39;</code></p>
+        <p>今天在跑分类模型，发现了一些比较奇怪的结果，严重影响了分类器性能，所有就想看看这些数据是啥，因为数据是加密的，只能看到id,所以这里就把id取出来，693d0f86a8a90d5a138f75ac7160490c，这里经过md5加密的，然后经过查表解密，得到其明文id,这里假设id为im_12345,然后我们就可以去明文中查找带这个id的数据了。数据放在linux下，我们在终端中用<br> <a id="more"></a><br><code>grep &#39;im_12345&#39; xx.txt</code><br><code>//xx.txt为要查找的文件名</code><br>就可以返回我们想看的那条数据了。<br>然后发现，返回了一大堆数据，实在不知道哪条才是<br>于是我们再做一次grep<br>即<br><code>grep &#39;im_12345&#39; xx.txt|prep &#39;2017-12-12&#39;</code></p>
 <p>总结，<code>grep pattern1 file|grep pattern2</code><br>也就是在pattern1匹配的基础上再进行一次grep<br>哈哈，每天一点，进步不难。</p>
 
       

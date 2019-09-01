@@ -17,18 +17,18 @@
   
   <title>hive笔记1 | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#hive笔记1  ##select语法结构12345678SELECT [ALL | DISTINCT] select_expr, select_expr, ... FROM table_reference[WHERE where_condition] [GROUP BY col_list [HAVING condition]] [CLUSTER BY col_list   | [DISTRIB">
-<meta name="keywords" content="深度学习,hive">
+  <meta name="description" content="#hive笔记1  ##select语法结构123456789SELECT [ALL | DISTINCT] select_expr, select_expr, ... FROM table_reference[WHERE where_condition] [GROUP BY col_list [HAVING condition]] [CLUSTER BY col_list   | [DISTRI">
+<meta name="keywords" content="hive,深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hive笔记1">
 <meta property="og:url" content="http://xurui.club/2019/07/11/hive笔记/index.html">
 <meta property="og:site_name" content="山风之行">
-<meta property="og:description" content="#hive笔记1  ##select语法结构12345678SELECT [ALL | DISTINCT] select_expr, select_expr, ... FROM table_reference[WHERE where_condition] [GROUP BY col_list [HAVING condition]] [CLUSTER BY col_list   | [DISTRIB">
+<meta property="og:description" content="#hive笔记1  ##select语法结构123456789SELECT [ALL | DISTINCT] select_expr, select_expr, ... FROM table_reference[WHERE where_condition] [GROUP BY col_list [HAVING condition]] [CLUSTER BY col_list   | [DISTRI">
 <meta property="og:locale" content="zh-Ch">
-<meta property="og:updated_time" content="2019-07-22T13:03:42.387Z">
+<meta property="og:updated_time" content="2019-09-01T05:22:59.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hive笔记1">
-<meta name="twitter:description" content="#hive笔记1  ##select语法结构12345678SELECT [ALL | DISTINCT] select_expr, select_expr, ... FROM table_reference[WHERE where_condition] [GROUP BY col_list [HAVING condition]] [CLUSTER BY col_list   | [DISTRIB">
+<meta name="twitter:description" content="#hive笔记1  ##select语法结构123456789SELECT [ALL | DISTINCT] select_expr, select_expr, ... FROM table_reference[WHERE where_condition] [GROUP BY col_list [HAVING condition]] [CLUSTER BY col_list   | [DISTRI">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -86,7 +86,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/11/hive笔记/" data-id="ck00iv1xs00001cda2tpqj86w" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2019/07/11/hive笔记/" data-id="ck00j4e7300035wda1uo8kzdi" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -94,7 +94,7 @@
       
         <p>#hive笔记1</p>
 <hr>
-<p>##select<br>语法结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT [ALL | DISTINCT] select_expr, select_expr, ... </span><br><span class="line">FROM table_reference</span><br><span class="line">[WHERE where_condition] </span><br><span class="line">[GROUP BY col_list [HAVING condition]] </span><br><span class="line">[CLUSTER BY col_list </span><br><span class="line">  | [DISTRIBUTE BY col_list] [SORT BY| ORDER BY col_list] </span><br><span class="line">] </span><br><span class="line">[LIMIT number]</span><br></pre></td></tr></table></figure></p>
+<p>##select<br>语法结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT [ALL | DISTINCT] select_expr, select_expr, ... </span><br><span class="line">FROM table_reference</span><br><span class="line">[WHERE where_condition] </span><br><span class="line">[GROUP BY col_list [HAVING condition]] </span><br><span class="line">[CLUSTER BY col_list </span><br><span class="line">  | [DISTRIBUTE BY col_list] [SORT BY| ORDER BY col_list] </span><br><span class="line">] </span><br><span class="line">[LIMIT number]</span><br><span class="line"> &lt;!-- more --&gt;</span><br></pre></td></tr></table></figure></p>
 <p>其中，<code>CLUSTER BY col_list</code>就等同于<code>DISTRIBUTE BY col_list</code>+<code>SORT BY</code><br>若使用distribute by,分发数量由reduce的数量决定。<br>外部表和内部表的区别：<br>外部表在drop时，只删表结构和表，不删原数据，即集群数据还在。</p>
 <p><code>sort by</code> 和 <code>order by</code>的区别：<br>    <code>sort by</code> 组内有序<br>    <code>order by</code> 全局排序，只有一个reduce</p>
 

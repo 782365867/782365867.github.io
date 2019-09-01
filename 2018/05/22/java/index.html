@@ -25,7 +25,7 @@
 <meta property="og:site_name" content="山风之行">
 <meta property="og:description" content="之前的服务器重装了，所以项目代码重新布置了。明明之前能跑的程序，在我PC机上也是能跑的，放到服务器下就报了这个异常。java.sql.SQLException: Illegal mix of collations (utf8_general_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation ‘=’跟据异常信息，大致可以理解为是字符">
 <meta property="og:locale" content="zh-Ch">
-<meta property="og:updated_time" content="2018-05-22T12:18:14.742Z">
+<meta property="og:updated_time" content="2019-09-01T05:19:05.792Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java异常之java.sql.SQLException Illegal mix of collations (utf8_general_ci">
 <meta name="twitter:description" content="之前的服务器重装了，所以项目代码重新布置了。明明之前能跑的程序，在我PC机上也是能跑的，放到服务器下就报了这个异常。java.sql.SQLException: Illegal mix of collations (utf8_general_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation ‘=’跟据异常信息，大致可以理解为是字符">
@@ -86,14 +86,13 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="ck00iv1yl000b1cda7dqjuxvm" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/05/22/java/" data-id="ck00j4e7h000a5wdabwsc02gj" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <p>之前的服务器重装了，所以项目代码重新布置了。明明之前能跑的程序，在我PC机上也是能跑的，放到服务器下就报了这个异常。<br>java.sql.SQLException: Illegal mix of collations (utf8_general_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation ‘=’<br>跟据异常信息，大致可以理解为是字符集问题。</p>
-<p>后来查了下原因，我的数据库使用的mysql建的，字符集为utf-8，数据库排序规则为utf8_unicode_ci.数据库的表是通过hibernate自动生成的，但是少了一个人事部的基本信息表，所以后来把人事表导进来，但是人事表的排序规则用的是unicode_general_ci，正好是异常提示中的内容。</p>
+        <p>之前的服务器重装了，所以项目代码重新布置了。明明之前能跑的程序，在我PC机上也是能跑的，放到服务器下就报了这个异常。<br>java.sql.SQLException: Illegal mix of collations (utf8_general_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation ‘=’<br>跟据异常信息，大致可以理解为是字符集问题。<br> <a id="more"></a><br>后来查了下原因，我的数据库使用的mysql建的，字符集为utf-8，数据库排序规则为utf8_unicode_ci.数据库的表是通过hibernate自动生成的，但是少了一个人事部的基本信息表，所以后来把人事表导进来，但是人事表的排序规则用的是unicode_general_ci，正好是异常提示中的内容。</p>
 <p>查明了原因，我把数据库删了，因为服务器刚布好，还没投入使用，库内无数据，如果使用过程中出现这种问题，就改那个捣乱的表。当然，系统在使用过程中，也不可能出现这个问题。</p>
 
       

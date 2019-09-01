@@ -17,18 +17,18 @@
   
   <title>k-max-pooling的keras实现 | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="pooling（池化）是卷积神经网络中常用操作，主要目的是减小张量大小，便于计算，可以认为是一步降维操作。前两天项目上需要用到k-max-pooling操作，项目代码是用keras写的，keras没有k-max-pooling层，所以要自己写。 卷积神经网络的最经典的模型是卷积+池化+全连接。其中卷积操作通过一个滑动的卷积窗口来强化提取特征，可以认为卷积窗是一个权重矩阵，而卷积操作中的每一步，都是">
+  <meta name="description" content="pooling（池化）是卷积神经网络中常用操作，主要目的是减小张量大小，便于计算，可以认为是一步降维操作。前两天项目上需要用到k-max-pooling操作，项目代码是用keras写的，keras没有k-max-pooling层，所以要自己写。">
 <meta name="keywords" content="深度学习,python,Keras,tensorflow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="k-max-pooling的keras实现">
 <meta property="og:url" content="http://xurui.club/2018/06/19/kmaxpooling/index.html">
 <meta property="og:site_name" content="山风之行">
-<meta property="og:description" content="pooling（池化）是卷积神经网络中常用操作，主要目的是减小张量大小，便于计算，可以认为是一步降维操作。前两天项目上需要用到k-max-pooling操作，项目代码是用keras写的，keras没有k-max-pooling层，所以要自己写。 卷积神经网络的最经典的模型是卷积+池化+全连接。其中卷积操作通过一个滑动的卷积窗口来强化提取特征，可以认为卷积窗是一个权重矩阵，而卷积操作中的每一步，都是">
+<meta property="og:description" content="pooling（池化）是卷积神经网络中常用操作，主要目的是减小张量大小，便于计算，可以认为是一步降维操作。前两天项目上需要用到k-max-pooling操作，项目代码是用keras写的，keras没有k-max-pooling层，所以要自己写。">
 <meta property="og:locale" content="zh-Ch">
-<meta property="og:updated_time" content="2018-06-20T02:27:38.123Z">
+<meta property="og:updated_time" content="2019-09-01T05:18:52.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="k-max-pooling的keras实现">
-<meta name="twitter:description" content="pooling（池化）是卷积神经网络中常用操作，主要目的是减小张量大小，便于计算，可以认为是一步降维操作。前两天项目上需要用到k-max-pooling操作，项目代码是用keras写的，keras没有k-max-pooling层，所以要自己写。 卷积神经网络的最经典的模型是卷积+池化+全连接。其中卷积操作通过一个滑动的卷积窗口来强化提取特征，可以认为卷积窗是一个权重矩阵，而卷积操作中的每一步，都是">
+<meta name="twitter:description" content="pooling（池化）是卷积神经网络中常用操作，主要目的是减小张量大小，便于计算，可以认为是一步降维操作。前两天项目上需要用到k-max-pooling操作，项目代码是用keras写的，keras没有k-max-pooling层，所以要自己写。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -86,13 +86,13 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="ck00iv1yp000g1cdafa4sgchp" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/06/19/kmaxpooling/" data-id="ck00j4e7l000f5wdaodn7csdx" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <p>pooling（池化）是卷积神经网络中常用操作，主要目的是减小张量大小，便于计算，可以认为是一步降维操作。前两天项目上需要用到k-max-pooling操作，项目代码是用keras写的，keras没有k-max-pooling层，所以要自己写。</p>
+        <p>pooling（池化）是卷积神经网络中常用操作，主要目的是减小张量大小，便于计算，可以认为是一步降维操作。前两天项目上需要用到k-max-pooling操作，项目代码是用keras写的，keras没有k-max-pooling层，所以要自己写。<br> <a id="more"></a></p>
 <p>卷积神经网络的最经典的模型是卷积+池化+全连接。<br>其中卷积操作通过一个滑动的卷积窗口来强化提取特征，可以认为卷积窗是一个权重矩阵，而卷积操作中的每一步，都是一个矩阵的加权求和，随着卷积窗口滑动，每一步的和被记录下来，形成一个新的矩阵。我们有多少种卷积窗，经过一层卷积就留下几个矩阵。然而，如果经过多层卷积，那最后矩阵就越来越大，那我们对资源耗费太大，有没有什么好的操作呢？–pooling</p>
 <p>简单理解，pooling就是把一个大矩阵，变成小矩阵。如max-pooling，如size=2,就是在原来的矩阵中，每2*2个块中，取其中最大的一个记录下来，然后下一个块，再下一个十几个，最后记录下来的值就成了一个新矩阵，而这个新矩阵的大小，比以前缩小了4倍。有人会问，那不是损失了信息了么？当然损失了信息，但是我们认为损失的信息并没那么重要，就像一幅超清图，和一张高清图，虽然没那么清晰了，但这张图所描述的信息我们还是一眼能看出来。max-pooling操作，可以这么理解，给你一张图片，你分成了好多块，每块里面，别的地方颜色很浅，就一个地方颜色很深，那你是不是第一眼先看到那个黑点呢？</p>
 <p>再说一下mean-pooling.<br>和max-pooling类似，只不过把每块中取最大值的操作，换成了对每块取均值。这样就会把每个点的值都考虑到，没有max-pooling操作那样粗暴。</p>

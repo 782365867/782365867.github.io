@@ -17,18 +17,18 @@
   
   <title>安装zookeeper时候，可以查看进程启动，但是状态显示报错 Error contacting service. It is probably not running | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近想学一下大数据，这年头，不会大数据，都不敢说自己是21世纪新青年。 大数据有很多要学的框架，比如hadoop spark storm zookeeper等等，今天拿zookeeper入个门，安装过程中遇到点坑，分享一下。 Zookeeper是一个分布式协调服务；就是为用户的分布式应用程序提供协调服务A、zookeeper是为别的分布式程序服务的B、Zookeeper本身就是一个分布式程序（只要">
+  <meta name="description" content="最近想学一下大数据，这年头，不会大数据，都不敢说自己是21世纪新青年。 大数据有很多要学的框架，比如hadoop spark storm zookeeper等等，今天拿zookeeper入个门，安装过程中遇到点坑，分享一下。">
 <meta name="keywords" content="异常解决,zookeeper,大数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安装zookeeper时候，可以查看进程启动，但是状态显示报错 Error contacting service. It is probably not running">
 <meta property="og:url" content="http://xurui.club/2018/07/12/zookeeper/index.html">
 <meta property="og:site_name" content="山风之行">
-<meta property="og:description" content="最近想学一下大数据，这年头，不会大数据，都不敢说自己是21世纪新青年。 大数据有很多要学的框架，比如hadoop spark storm zookeeper等等，今天拿zookeeper入个门，安装过程中遇到点坑，分享一下。 Zookeeper是一个分布式协调服务；就是为用户的分布式应用程序提供协调服务A、zookeeper是为别的分布式程序服务的B、Zookeeper本身就是一个分布式程序（只要">
+<meta property="og:description" content="最近想学一下大数据，这年头，不会大数据，都不敢说自己是21世纪新青年。 大数据有很多要学的框架，比如hadoop spark storm zookeeper等等，今天拿zookeeper入个门，安装过程中遇到点坑，分享一下。">
 <meta property="og:locale" content="zh-Ch">
-<meta property="og:updated_time" content="2018-07-12T14:46:54.270Z">
+<meta property="og:updated_time" content="2019-09-01T05:21:36.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装zookeeper时候，可以查看进程启动，但是状态显示报错 Error contacting service. It is probably not running">
-<meta name="twitter:description" content="最近想学一下大数据，这年头，不会大数据，都不敢说自己是21世纪新青年。 大数据有很多要学的框架，比如hadoop spark storm zookeeper等等，今天拿zookeeper入个门，安装过程中遇到点坑，分享一下。 Zookeeper是一个分布式协调服务；就是为用户的分布式应用程序提供协调服务A、zookeeper是为别的分布式程序服务的B、Zookeeper本身就是一个分布式程序（只要">
+<meta name="twitter:description" content="最近想学一下大数据，这年头，不会大数据，都不敢说自己是21世纪新青年。 大数据有很多要学的框架，比如hadoop spark storm zookeeper等等，今天拿zookeeper入个门，安装过程中遇到点坑，分享一下。">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -86,15 +86,14 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/12/zookeeper/" data-id="ck00iv1z5000y1cdaduldowjo" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/07/12/zookeeper/" data-id="ck00j4e8500125wda5cskf3qk" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
         <p>最近想学一下大数据，这年头，不会大数据，都不敢说自己是21世纪新青年。</p>
-<p>大数据有很多要学的框架，比如hadoop spark storm zookeeper等等，今天拿zookeeper入个门，安装过程中遇到点坑，分享一下。</p>
-<p>Zookeeper是一个分布式<strong>协调</strong>服务；就是为用户的分布式应用程序提供协调服务<br>A、zookeeper是为别的分布式程序服务的<br>B、Zookeeper本身就是一个分布式程序（只要有半数以上节点存活，zk就能正常服务）<br>C、Zookeeper所提供的服务涵盖：<strong>主从协调</strong>、<strong>服务器节点动态上下线</strong>、统一配置管理、分布式共享锁、统一名称服务……<br>D、虽然说可以提供各种服务，但是zookeeper在底层其实只提供了两个功能：<br> —管理(存储，读取)用户程序提交的<strong>数据</strong>；<br> —并为用户程序提供数据节点<strong>监听</strong>服务；</p>
+<p>大数据有很多要学的框架，比如hadoop spark storm zookeeper等等，今天拿zookeeper入个门，安装过程中遇到点坑，分享一下。<br> <a id="more"></a><br>Zookeeper是一个分布式<strong>协调</strong>服务；就是为用户的分布式应用程序提供协调服务<br>A、zookeeper是为别的分布式程序服务的<br>B、Zookeeper本身就是一个分布式程序（只要有半数以上节点存活，zk就能正常服务）<br>C、Zookeeper所提供的服务涵盖：<strong>主从协调</strong>、<strong>服务器节点动态上下线</strong>、统一配置管理、分布式共享锁、统一名称服务……<br>D、虽然说可以提供各种服务，但是zookeeper在底层其实只提供了两个功能：<br> —管理(存储，读取)用户程序提交的<strong>数据</strong>；<br> —并为用户程序提供数据节点<strong>监听</strong>服务；</p>
 <p>1 部署<br>用的是三台虚拟机，centOS 7<br>jdk 8<br>zookeeper3.4.5<br>三台机器网络己配好，host配置如下<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@shizhan1 conf]# cat /etc/hosts</span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">127.0.0.1 shizhan1</span><br><span class="line">192.168.33.3 shizhan1</span><br><span class="line">192.168.33.4 shizhan2</span><br><span class="line">192.168.33.5 shizhan3</span><br></pre></td></tr></table></figure></p>
 <p>2 安装<br><a href="https://pan.baidu.com/s/1O-E6pq3zbzoqRvxHoj66eQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1O-E6pq3zbzoqRvxHoj66eQ</a> 放我网盘了，zookeeper3.4.5</p>
 <p>下载到shizhan1（第一台机子）中，我放在了<code>/root/work/</code>下<br>解压：<br><code>tar -zxvf zookeeper-3.4.5.tar.gz</code><br>重命名：<br><code>mv zookeeper-3.4.5 zookeeper</code>（重命名文件夹zookeeper-3.4.5为zookeeper,太长 写起来好麻烦）</p>

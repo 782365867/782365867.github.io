@@ -17,19 +17,19 @@
   
   <title>sqoop异常之java.lang.RuntimeException com.mysql.jdbc.exceptions.jdbc4.CommunicationsException  Communications link failure | 山风之行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="sqoop是apache旗下一款“Hadoop和关系数据库服务器之间传送数据”的工具。导入数据：MySQL，Oracle导入数据到Hadoop的HDFS、HIVE、HBASE等数据存储系统；导出数据：从Hadoop的文件系统中导出数据到关系数据库 将导入或导出命令翻译成mapreduce程序来实现,在翻译出的mapreduce中主要是对inputformat和outputformat进行定制. 1">
+  <meta name="description" content="sqoop是apache旗下一款“Hadoop和关系数据库服务器之间传送数据”的工具。导入数据：MySQL，Oracle导入数据到Hadoop的HDFS、HIVE、HBASE等数据存储系统；导出数据：从Hadoop的文件系统中导出数据到关系数据库 将导入或导出命令翻译成mapreduce程序来实现,在翻译出的mapreduce中主要是对inputformat和outputformat进行定制.">
 <meta name="keywords" content="异常解决,mysql,大数据,sqoop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sqoop异常之java.lang.RuntimeException com.mysql.jdbc.exceptions.jdbc4.CommunicationsException  Communications link failure">
 <meta property="og:url" content="http://xurui.club/2018/08/13/sqoop/index.html">
 <meta property="og:site_name" content="山风之行">
-<meta property="og:description" content="sqoop是apache旗下一款“Hadoop和关系数据库服务器之间传送数据”的工具。导入数据：MySQL，Oracle导入数据到Hadoop的HDFS、HIVE、HBASE等数据存储系统；导出数据：从Hadoop的文件系统中导出数据到关系数据库 将导入或导出命令翻译成mapreduce程序来实现,在翻译出的mapreduce中主要是对inputformat和outputformat进行定制. 1">
+<meta property="og:description" content="sqoop是apache旗下一款“Hadoop和关系数据库服务器之间传送数据”的工具。导入数据：MySQL，Oracle导入数据到Hadoop的HDFS、HIVE、HBASE等数据存储系统；导出数据：从Hadoop的文件系统中导出数据到关系数据库 将导入或导出命令翻译成mapreduce程序来实现,在翻译出的mapreduce中主要是对inputformat和outputformat进行定制.">
 <meta property="og:locale" content="zh-Ch">
 <meta property="og:image" content="https://i.imgur.com/BKAWC4y.png">
-<meta property="og:updated_time" content="2018-08-21T07:32:28.473Z">
+<meta property="og:updated_time" content="2019-09-01T05:21:57.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqoop异常之java.lang.RuntimeException com.mysql.jdbc.exceptions.jdbc4.CommunicationsException  Communications link failure">
-<meta name="twitter:description" content="sqoop是apache旗下一款“Hadoop和关系数据库服务器之间传送数据”的工具。导入数据：MySQL，Oracle导入数据到Hadoop的HDFS、HIVE、HBASE等数据存储系统；导出数据：从Hadoop的文件系统中导出数据到关系数据库 将导入或导出命令翻译成mapreduce程序来实现,在翻译出的mapreduce中主要是对inputformat和outputformat进行定制. 1">
+<meta name="twitter:description" content="sqoop是apache旗下一款“Hadoop和关系数据库服务器之间传送数据”的工具。导入数据：MySQL，Oracle导入数据到Hadoop的HDFS、HIVE、HBASE等数据存储系统；导出数据：从Hadoop的文件系统中导出数据到关系数据库 将导入或导出命令翻译成mapreduce程序来实现,在翻译出的mapreduce中主要是对inputformat和outputformat进行定制.">
 <meta name="twitter:image" content="https://i.imgur.com/BKAWC4y.png">
   
   
@@ -88,14 +88,14 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/13/sqoop/" data-id="ck00iv20l00381cdaca265qvo" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://xurui.club/2018/08/13/sqoop/" data-id="ck00j4e9l00385wda7eeec0lw" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
         <p>sqoop是apache旗下一款“Hadoop和关系数据库服务器之间传送数据”的工具。<br><strong>导入数据</strong>：MySQL，Oracle导入数据到Hadoop的HDFS、HIVE、HBASE等数据存储系统；<br><strong>导出数据</strong>：从Hadoop的文件系统中导出数据到关系数据库</p>
-<p>将导入或导出命令翻译成mapreduce程序来实现,在翻译出的mapreduce中主要是对inputformat和outputformat进行定制.</p>
+<p>将导入或导出命令翻译成mapreduce程序来实现,在翻译出的mapreduce中主要是对inputformat和outputformat进行定制.<br> <a id="more"></a></p>
 <p>1 sqoop安装<br>安装sqoop的前提是已经具备java和hadoop的环境</p>
 <p>2 修改配置文件<br>$ cd $SQOOP_HOME/conf<br>$ mv sqoop-env-template.sh sqoop-env.sh<br>打开sqoop-env.sh并编辑下面几行：<br>export HADOOP_COMMON_HOME=/home/hadoop/hadoop-2.7.3/<br>export HADOOP_MAPRED_HOME=/home/hadoop/hadoop-2.7.3/<br>export HIVE_HOME=/home/work/hive/<br>这里没用HBASE，用的时候再配。</p>
 <p>3 将jdbc数据包mysql-connector-java-5.1.44.jar 拷贝到 $SQOOP_HOME/lib下</p>
